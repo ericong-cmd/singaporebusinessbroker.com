@@ -70,7 +70,16 @@ test and replacing sample data with real TFA figures are all owner tasks.
 4. **A skip link was added.** Not in the prototype. The nav is a fixed pill
    with no in-page landmark before it, so keyboard users had no way past it.
 
-5. **Reveal animations are gated on `html.js`.** An inline script sets the
+5. **The booking script is bundled, not inlined.** `book-a-call.astro` first
+   used `define:vars` to pass the Cal.com URL into its script. `define:vars`
+   forces `is:inline`, which the production CSP blocked, so the booking button
+   was dead on the deployed site. The URL now rides on a `data-booking-url`
+   attribute and the script is a normal bundled module covered by
+   `script-src 'self'`. Only one inline script remains site-wide, and its hash
+   is pinned in `vercel.json`. Adding another inline script means adding
+   another hash, so prefer a data attribute.
+
+6. **Reveal animations are gated on `html.js`.** An inline script sets the
    class before first paint. Without it, a JavaScript error anywhere would
    leave every `.reveal` element at `opacity: 0` and the page would render
    blank. With the gate, a JS failure shows everything unanimated.
@@ -106,7 +115,10 @@ Everything marked `(sample)` on the site, plus:
 - `src/data/stats.json`, `src/data/buyers.json` — proof strip and buyer board.
 - `src/content/cases/*.mdx` — four illustrative deals. Real anonymised
   transactions should replace them, keeping `sample: false`.
-- `src/data/site.json` — `bookingUrl` points at a placeholder Cal.com handle.
+- `src/data/site.json` — `bookingUrl` points at a placeholder Cal.com handle
+  (`cal.com/singaporebusinessbroker/30min`). Until it is a real booking link
+  the button on `/book-a-call` opens a dead calendar. `frame-src` in
+  `vercel.json` already allows cal.com; change it if you use another scheduler.
 - All 20 sector files and 10 guides carry `reviewed: false` in frontmatter.
   They are drafts written to be publishable but they have not been read by a
   person who does these deals. Flip to `true` as they are reviewed.
@@ -132,7 +144,15 @@ Against the built output, not the dev server:
   upper multiple capped, and shows the warm panel; `?sector=childcare`
   pre-selects the sector; with the API unreachable the estimate still renders
   and a fallback contact line appears.
-- CSP from `vercel.json` applied to the pages: no violations, tool still works.
+- CSP from `vercel.json` applied to the pages: no violations; the estimator,
+  the reveal observer, the mobile menu and the booking button all still work.
+  The single inline script's hash was checked against the deployed HTML.
+- Against the live deployment: all 16 routes 200 (404 for an unknown path),
+  fonts, images, CSV, sitemap and robots served, security headers and
+  immutable caching present, all five vanity redirects 308 correctly, and both
+  endpoints exercised: GET 405, malformed body 400, consent false 400, a hot
+  lead scored `hot`, a cold lead scored `cold`, contact accepted. With no
+  integration env vars set every delivery reports `skipped`, as designed.
 
 Lighthouse itself was not run: no Chrome measurement harness is available in
 this environment. The proxies for it are the payload numbers above, the

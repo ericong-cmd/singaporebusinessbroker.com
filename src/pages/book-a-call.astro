@@ -42,6 +42,7 @@ const covers = [
               </p>
               <button
                 id="cal-load"
+                data-booking-url={site.bookingUrl}
                 class="group mt-7 inline-flex items-center gap-3 rounded-full bg-ink dark:bg-paper-2 text-paper dark:text-night font-medium pl-6 pr-1.5 py-1.5 transition-transform duration-500 ease active:scale-[0.98]"
               >
                 <span class="py-1.5">Show available times</span>
@@ -84,12 +85,14 @@ const covers = [
     </div>
   </section>
 
-  <script define:vars={{ bookingUrl: site.bookingUrl }}>
-    document.getElementById('cal-load')?.addEventListener('click', () => {
+  <script>
+    const btn = document.getElementById('cal-load');
+    btn?.addEventListener('click', () => {
       const slot = document.getElementById('cal-slot');
-      if (!slot) return;
+      const url = btn.dataset.bookingUrl;
+      if (!slot || !url) return;
       const frame = document.createElement('iframe');
-      frame.src = bookingUrl;
+      frame.src = url;
       frame.title = 'Booking calendar';
       frame.loading = 'lazy';
       frame.className = 'w-full rounded-[calc(2rem-0.5rem)]';

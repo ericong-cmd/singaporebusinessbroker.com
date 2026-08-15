@@ -5,12 +5,15 @@
  * the client's score), pushes it to the CRM, emails the report to the owner,
  * and alerts the team when the lead is hot.
  *
- * Runs on the Vercel Node runtime alongside the static Astro build.
+ * Runs on the Vercel Node runtime alongside the static Astro build, using the
+ * Node-style (req, res) signature rather than a web handler.
  */
 import { z } from 'zod';
-import { json, rateLimited, clientIp, esc, sendEmail, alertSlack, crmUpsert } from './_lib';
-
-export const config = { runtime: 'nodejs' };
+// .js extension required: Vercel compiles functions with moduleResolution nodenext
+import {
+  json, readBody, rateLimited, clientIp, esc, sendEmail, alertSlack, crmUpsert,
+  type ApiRequest, type ApiResponse,
+} from './_lib.js';
 
 const Body = z.object({
   sector: z.string().min(2).max(120),
@@ -43,15 +46,15 @@ function score(b: z.infer<typeof Body>): 'hot' | 'warm' | 'cold' {
 
 const sgd = (v: number) => (v >= 1e6 ? `S$${(v / 1e6).toFixed(1)}m` : `S$${Math.round(v / 1e3)}k`);
 
-export default async function handler(req: Request): Promise<Response> {
-  if (req.method !== 'POST') return json({ error: 'method_not_allowed' }, 405);
-  if (rateLimited(clientIp(req))) return json({ error: 'rate_limited' }, 429);
+export default async function handler(req: ApiRequest, res: ApiResponse): Promise<void> {
+  if (req.method !== 'POST') return json(res, { error: 'method_not_allowed' }, 405);
+  if (rateLimited(clientIp(req))) return json(res, { error: 'rate_limited' }, 429);
 
   let parsed: z.infer<typeof Body>;
   try {
-    parsed = Body.parse(await req.json());
+    parsed = Body.parse(readBody(req));
   } catch {
-    return json({ error: 'invalid_request' }, 400);
+    return json(res, { error: 'invalid_request' }, 400);
   }
 
   const lead = parsed;
@@ -140,5 +143,5 @@ export default async function handler(req: Request): Promise<Response> {
     console.error('valuation delivery partial failure', { crm, ownerMail, teamMail, slack, email: lead.email });
   }
 
-  return json({ ok: true, score: band, delivery: { crm, ownerMail, teamMail, slack } });
+  return json(res, { ok: true, score: band, delivery: { crm, ownerMail, teamMail, slack } });
 }

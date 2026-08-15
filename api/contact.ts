@@ -3,9 +3,11 @@
  * Validates a contact enquiry, records it in the CRM and notifies the team.
  */
 import { z } from 'zod';
-import { json, rateLimited, clientIp, esc, sendEmail, alertSlack, crmUpsert } from './_lib';
-
-export const config = { runtime: 'nodejs' };
+// .js extension required: Vercel compiles functions with moduleResolution nodenext
+import {
+  json, readBody, rateLimited, clientIp, esc, sendEmail, alertSlack, crmUpsert,
+  type ApiRequest, type ApiResponse,
+} from './_lib.js';
 
 const Body = z.object({
   enquiry: z.enum(['seller', 'buyer', 'adviser', 'other']),
@@ -17,15 +19,15 @@ const Body = z.object({
   page: z.string().max(200).optional(),
 });
 
-export default async function handler(req: Request): Promise<Response> {
-  if (req.method !== 'POST') return json({ error: 'method_not_allowed' }, 405);
-  if (rateLimited(clientIp(req))) return json({ error: 'rate_limited' }, 429);
+export default async function handler(req: ApiRequest, res: ApiResponse): Promise<void> {
+  if (req.method !== 'POST') return json(res, { error: 'method_not_allowed' }, 405);
+  if (rateLimited(clientIp(req))) return json(res, { error: 'rate_limited' }, 429);
 
   let body: z.infer<typeof Body>;
   try {
-    body = Body.parse(await req.json());
+    body = Body.parse(readBody(req));
   } catch {
-    return json({ error: 'invalid_request' }, 400);
+    return json(res, { error: 'invalid_request' }, 400);
   }
 
   const team = process.env.TEAM_EMAIL;
@@ -59,5 +61,5 @@ export default async function handler(req: Request): Promise<Response> {
   if ([crm, mail, slack].includes('failed')) {
     console.error('contact delivery partial failure', { crm, mail, slack, email: body.email });
   }
-  return json({ ok: true, delivery: { crm, mail, slack } });
+  return json(res, { ok: true, delivery: { crm, mail, slack } });
 }

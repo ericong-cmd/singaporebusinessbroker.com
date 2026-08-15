@@ -8,11 +8,39 @@
 
 export type Json = Record<string, unknown>;
 
-export function json(body: Json, status = 200): Response {
-  return new Response(JSON.stringify(body), {
-    status,
-    headers: { 'content-type': 'application/json', 'cache-control': 'no-store' },
-  });
+/**
+ * Minimal shapes for Vercel's Node runtime handler arguments. Typed here
+ * rather than pulling in @vercel/node, which would add a dependency for two
+ * interfaces. The web-standard (Request) => Response signature is NOT used:
+ * this runtime passes Node-style objects and a web handler fails at
+ * invocation.
+ */
+export interface ApiRequest {
+  method?: string;
+  headers: Record<string, string | string[] | undefined>;
+  body?: unknown;
+}
+export interface ApiResponse {
+  status(code: number): ApiResponse;
+  setHeader(name: string, value: string): void;
+  json(body: unknown): void;
+}
+
+export function json(res: ApiResponse, body: Json, status = 200): void {
+  res.setHeader('cache-control', 'no-store');
+  res.status(status).json(body);
+}
+
+/** Vercel parses JSON bodies, but be tolerant of a raw string. */
+export function readBody(req: ApiRequest): unknown {
+  if (typeof req.body === 'string') {
+    try {
+      return JSON.parse(req.body);
+    } catch {
+      return undefined;
+    }
+  }
+  return req.body;
 }
 
 /** Small fixed-window limiter. Per-instance only, so it blunts casual abuse
@@ -30,12 +58,12 @@ export function rateLimited(ip: string, limit = 8, windowMs = 60_000): boolean {
   return rec.n > limit;
 }
 
-export function clientIp(req: Request): string {
-  return (
-    req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ??
-    req.headers.get('x-real-ip') ??
-    'unknown'
-  );
+export function clientIp(req: ApiRequest): string {
+  const h = (name: string): string => {
+    const v = req.headers[name];
+    return Array.isArray(v) ? (v[0] ?? '') : (v ?? '');
+  };
+  return h('x-forwarded-for').split(',')[0]?.trim() || h('x-real-ip') || 'unknown';
 }
 
 export const esc = (s: unknown): string =>
