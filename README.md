@@ -105,7 +105,14 @@ Vercel project: `singaporebusinessbroker`. DNS at the registrar:
 | A | @ | 76.76.21.21 |
 | CNAME | www | cname.vercel-dns.com |
 
-The apex redirects to `www` with a 308.
+The apex redirects to `www` with a 308. Both domains are already attached and
+verified in the Vercel project — only the registrar DNS above is outstanding.
+
+Vercel gotcha worth remembering: with `trailingSlash: true`, Vercel normalises the
+path *before* matching `redirects`, so a `source` written without a trailing slash
+never fires. The vanity redirects in `vercel.json` all carry the slash for that
+reason; a slashless request simply takes one extra 308 hop through the
+normalisation.
 
 ## Checks worth re-running after changes
 

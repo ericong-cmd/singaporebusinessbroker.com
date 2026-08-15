@@ -24,9 +24,9 @@
     }
   ],
   "redirects": [
-    { "source": "/sell-your-business-singapore", "destination": "/sell-a-business-singapore/", "permanent": true },
-    { "source": "/valuation", "destination": "/business-valuation-singapore/", "permanent": true },
-    { "source": "/how-it-works", "destination": "/process/", "permanent": true },
-    { "source": "/scorecard", "destination": "/sale-readiness/", "permanent": true }
+    { "source": "/sell-your-business-singapore/", "destination": "/sell-a-business-singapore/", "permanent": true },
+    { "source": "/valuation/", "destination": "/business-valuation-singapore/", "permanent": true },
+    { "source": "/how-it-works/", "destination": "/process/", "permanent": true },
+    { "source": "/scorecard/", "destination": "/sale-readiness/", "permanent": true }
   ]
 }
