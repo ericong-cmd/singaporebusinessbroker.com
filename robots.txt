@@ -1,0 +1,14 @@
+User-agent: *
+Allow: /
+
+# AI answer engines are welcome — this content is written to be quoted.
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+Sitemap: https://www.singaporebusinessbroker.com/sitemap.xml
