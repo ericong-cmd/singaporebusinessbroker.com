@@ -1,0 +1,184 @@
+---
+import Shell from './Shell.astro';
+import Icon from './Icon.astro';
+import multiples from '../data/multiples.json';
+import site from '../data/site.json';
+
+const field =
+  'rounded-2xl border border-black/10 dark:border-white/10 bg-paper dark:bg-night dark:text-[#e9ecef] px-4 py-3.5 text-sm focus:outline-none focus:ring-2 focus:ring-accent/60 transition-shadow duration-500 ease';
+const chip =
+  'block text-center text-sm rounded-2xl border border-black/10 dark:border-white/10 px-3 py-3.5 cursor-pointer transition-colors duration-500 ease peer-checked:border-accent peer-checked:bg-accent-soft peer-checked:text-accent-2 dark:peer-checked:bg-night-soft dark:peer-checked:text-[#7fd1b3] peer-focus-visible:ring-2 peer-focus-visible:ring-accent';
+---
+
+<Shell radius="2rem" pad="2" shadow="frame">
+  <form id="valform" class="p-6 md:p-10" novalidate>
+    <div class="flex items-center justify-between text-xs text-ink-3 dark:text-[#a9b4c2] mb-6">
+      <span data-v="stepLabel">Step 1 of 3: Your business</span>
+      <span class="font-mono" data-v="stepCount">1 / 3</span>
+    </div>
+    <div class="h-1 bg-black/5 dark:bg-white/10 rounded-full mb-10 overflow-hidden">
+      <div data-v="progress" class="h-1 bg-accent rounded-full transition-[width] duration-700 ease" style="width:33%"></div>
+    </div>
+
+    <fieldset data-step="1" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <legend class="sr-only">Your business</legend>
+      <div class="md:col-span-2 grid gap-2">
+        <label for="sector" class="text-sm font-medium">Sector</label>
+        <select id="sector" name="sector" required class={field}>
+          <option value="">Select sector</option>
+          {multiples.sectors.map((s) => <option value={s.name}>{s.name}</option>)}
+        </select>
+        <p class="err hidden text-xs text-red-700 dark:text-red-400">Choose the closest sector.</p>
+      </div>
+      <div class="grid gap-2">
+        <label for="revenue" class="text-sm font-medium">Annual revenue (S$)</label>
+        <select id="revenue" name="revenue" required class={field}>
+          <option value="">Select band</option>
+          <option value="0.5">Under S$1m</option>
+          <option value="2">S$1m to S$3m</option>
+          <option value="4">S$3m to S$5m</option>
+          <option value="7.5">S$5m to S$10m</option>
+          <option value="20">S$10m to S$30m</option>
+          <option value="40">Over S$30m</option>
+        </select>
+        <p class="err hidden text-xs text-red-700 dark:text-red-400">Select a revenue band.</p>
+      </div>
+      <div class="grid gap-2">
+        <label for="ebitda" class="text-sm font-medium">Annual profit, owner salary added back (S$)</label>
+        <input id="ebitda" name="ebitda" type="number" inputmode="numeric" min="0" step="10000" placeholder="e.g. 850000" required class={field} />
+        <p class="text-xs text-ink-3 dark:text-[#a9b4c2]">Last full financial year. Rough figure is fine.</p>
+        <p class="err hidden text-xs text-red-700 dark:text-red-400">Enter a profit figure (0 if loss-making).</p>
+      </div>
+    </fieldset>
+
+    <fieldset data-step="2" class="hidden grid-cols-1 md:grid-cols-2 gap-6">
+      <legend class="sr-only">Ownership and timing</legend>
+      <div class="grid gap-2">
+        <label for="years" class="text-sm font-medium">Years operating</label>
+        <input id="years" name="years" type="number" min="0" max="80" placeholder="e.g. 12" required class={field} />
+        <p class="err hidden text-xs text-red-700 dark:text-red-400">Enter a number of years.</p>
+      </div>
+      <div class="grid gap-2">
+        <label for="ownership" class="text-sm font-medium">Your ownership stake</label>
+        <select id="ownership" name="ownership" required class={field}>
+          <option value="">Select</option>
+          <option value="100">100%</option>
+          <option value="75">50% to 99%</option>
+          <option value="25">Under 50%</option>
+        </select>
+        <p class="err hidden text-xs text-red-700 dark:text-red-400">Select your stake.</p>
+      </div>
+      <fieldset class="md:col-span-2 grid gap-2">
+        <legend class="text-sm font-medium mb-2">How dependent is the business on you day to day?</legend>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
+          <label><input type="radio" name="dependency" value="low" class="peer sr-only" /><span class={chip}>Low. Runs without me</span></label>
+          <label><input type="radio" name="dependency" value="med" class="peer sr-only" checked /><span class={chip}>Medium</span></label>
+          <label><input type="radio" name="dependency" value="high" class="peer sr-only" /><span class={chip}>High. I am the business</span></label>
+        </div>
+      </fieldset>
+      <div class="md:col-span-2 grid gap-2">
+        <label for="timeline" class="text-sm font-medium">When would you like to sell?</label>
+        <select id="timeline" name="timeline" required class={field}>
+          <option value="">Select</option>
+          <option value="6">Within 6 months</option>
+          <option value="12">6 to 12 months</option>
+          <option value="18">12 to 18 months</option>
+          <option value="36">Over 18 months</option>
+          <option value="0">Just exploring</option>
+        </select>
+        <p class="err hidden text-xs text-red-700 dark:text-red-400">Select a timeline.</p>
+      </div>
+    </fieldset>
+
+    <fieldset data-step="3" class="hidden grid-cols-1 md:grid-cols-2 gap-6">
+      <legend class="sr-only">Where to send your report</legend>
+      <div class="grid gap-2">
+        <label for="name" class="text-sm font-medium">Your name</label>
+        <input id="name" name="name" type="text" required autocomplete="name" class={field} />
+        <p class="err hidden text-xs text-red-700 dark:text-red-400">Enter your name.</p>
+      </div>
+      <div class="grid gap-2">
+        <label for="phone" class="text-sm font-medium">Mobile</label>
+        <input id="phone" name="phone" type="tel" required autocomplete="tel" placeholder="+65" class={field} />
+        <p class="err hidden text-xs text-red-700 dark:text-red-400">Enter a contactable mobile number.</p>
+      </div>
+      <div class="md:col-span-2 grid gap-2">
+        <label for="email" class="text-sm font-medium">Email for your report</label>
+        <input id="email" name="email" type="email" required autocomplete="email" class={field} />
+        <p class="err hidden text-xs text-red-700 dark:text-red-400">Enter a valid email.</p>
+      </div>
+      <div class="md:col-span-2 grid gap-2">
+        <label class="flex gap-3 text-xs text-ink-3 dark:text-[#a9b4c2] leading-relaxed">
+          <input type="checkbox" name="consent" required class="mt-0.5 accent-accent" />
+          <span>
+            I consent to {site.name} contacting me about my valuation under the PDPA. No spam, unsubscribe anytime.
+            See our <a class="underline" href="/privacy">privacy notice</a>.
+          </span>
+        </label>
+        <p class="err hidden text-xs text-red-700 dark:text-red-400">Please tick to continue.</p>
+      </div>
+    </fieldset>
+
+    <div data-v="result" class="hidden" aria-live="polite">
+      <p class="text-[10px] uppercase tracking-[0.18em] text-ink-3 dark:text-[#a9b4c2]">Estimated enterprise value range</p>
+      <p data-v="range" class="mt-3 font-mono text-4xl md:text-5xl tracking-tight">S$0 to S$0</p>
+      <p data-v="basis" class="mt-4 text-sm text-ink-2 dark:text-[#a9b4c2] leading-relaxed font-light"></p>
+
+      <div data-v="hot" class="hidden mt-8 rounded-[1.5rem] bg-accent-soft dark:bg-night-soft p-6">
+        <p class="font-medium">Your business is in the range we advise on. Book a 30 minute confidential call.</p>
+        <a
+          href="/book-a-call"
+          class="group mt-5 inline-flex items-center gap-3 rounded-full bg-accent text-white text-sm font-medium pl-5 pr-1.5 py-1.5 transition-transform duration-500 ease active:scale-[0.98]"
+        >
+          Book a confidential call
+          <span class="grid place-items-center w-8 h-8 rounded-full bg-white/15 transition-transform duration-500 ease group-hover:translate-x-0.5 group-hover:-translate-y-px">
+            <Icon name="arrow-up-right" />
+          </span>
+        </a>
+      </div>
+
+      <div data-v="warm" class="hidden mt-8 rounded-[1.5rem] bg-black/5 dark:bg-white/5 p-6 text-sm text-ink-2 dark:text-[#a9b4c2] font-light">
+        Your full report and a preparation guide are on the way. Most owners in your position add 20 to 40 percent to
+        value with 12 to 18 months of preparation.
+      </div>
+
+      <p data-v="sendfail" class="hidden mt-6 text-xs text-red-700 dark:text-red-400">
+        Your estimate is above, but we could not send the report just now. Email
+        <a class="underline" href={`mailto:${site.email}`}>{site.email}</a> or call {site.phoneDisplay} and we will send it over.
+      </p>
+
+      <p class="mt-6 text-xs text-ink-3 dark:text-[#a9b4c2]">
+        Indicative only. Final valuation depends on financial review, buyer appetite and deal structure.
+      </p>
+    </div>
+
+    <div data-v="navbtns" class="mt-10 flex items-center justify-between gap-3">
+      <button type="button" data-v="back" class="text-sm text-ink-3 dark:text-[#a9b4c2] hover:text-ink dark:hover:text-paper invisible transition-colors duration-500 ease">
+        Back
+      </button>
+      <button
+        type="button"
+        data-v="next"
+        class="group inline-flex items-center gap-3 rounded-full bg-ink dark:bg-paper-2 text-paper dark:text-night font-medium pl-6 pr-1.5 py-1.5 transition-transform duration-500 ease active:scale-[0.98]"
+      >
+        <span class="py-1.5" data-v="nextLabel">Continue</span>
+        <span class="grid place-items-center w-9 h-9 rounded-full bg-white/15 dark:bg-black/10 transition-transform duration-500 ease group-hover:translate-x-0.5 group-hover:-translate-y-px group-hover:scale-105">
+          <Icon name="arrow-right" class="text-lg" />
+        </span>
+      </button>
+    </div>
+
+    <noscript>
+      <p class="mt-8 rounded-2xl bg-black/5 dark:bg-white/5 p-5 text-sm font-light">
+        The estimator needs JavaScript. Email <a class="underline" href={`mailto:${site.email}`}>{site.email}</a> with your
+        sector, revenue and last year's profit and we will send a range back the same working day.
+      </p>
+    </noscript>
+  </form>
+</Shell>
+
+<script>
+  import { initValuation } from '../scripts/valuation';
+  const form = document.getElementById('valform');
+  if (form instanceof HTMLFormElement) initValuation(form);
+</script>

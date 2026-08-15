@@ -1,0 +1,35 @@
+{
+  "name": "singaporebusinessbroker",
+  "version": "1.0.0",
+  "description": "Sell-side M&A advisory site for Singapore SME owners.",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "images": "node assets/build-images.mjs",
+    "og": "node tools/make-og.mjs",
+    "check": "astro check",
+    "lint:copy": "node tools/lint-copy.mjs"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.4",
+    "@phosphor-icons/core": "^2.1.1",
+    "sharp": "^0.33.5",
+    "typescript": "^5.6.3"
+  },
+  "dependencies": {
+    "@astrojs/mdx": "^3.1.9",
+    "@astrojs/sitemap": "^3.2.1",
+    "@astrojs/tailwind": "^5.1.5",
+    "astro": "^4.16.19",
+    "tailwindcss": "^3.4.19",
+    "zod": "^3.25.76"
+  },
+  "private": true,
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ericong-cmd/singaporebusinessbroker.com.git"
+  }
+}

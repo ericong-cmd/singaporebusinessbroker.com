@@ -1,0 +1,48 @@
+---
+/**
+ * The double-bezel wrapper the whole design is built on: a soft outer shell
+ * with a hairline ring, and an inner core inset by the shell's padding.
+ * Core radius is always outer radius minus padding, which is what keeps the
+ * two curves concentric.
+ */
+interface Props {
+  radius?: '1.5rem' | '2rem' | '2.5rem';
+  pad?: '1.5' | '2';
+  tone?: 'core' | 'accent-soft' | 'bare';
+  class?: string;
+  coreClass?: string;
+  shadow?: 'none' | 'soft' | 'frame';
+  as?: keyof astroHTML.JSX.DefinedIntrinsicElements;
+}
+
+const {
+  radius = '2rem',
+  pad = '1.5',
+  tone = 'core',
+  class: className = '',
+  coreClass = '',
+  shadow = 'none',
+  as: Tag = 'div',
+} = Astro.props as Required<Pick<Props, 'radius' | 'pad' | 'tone' | 'shadow' | 'as'>> & Props;
+
+const padClass = pad === '2' ? 'p-2' : 'p-1.5';
+const padRem = pad === '2' ? '0.5rem' : '0.375rem';
+const coreRadius = `calc(${radius} - ${padRem})`;
+
+const shadowClass: string = { none: '', soft: 'shadow-soft', frame: 'shadow-frame' }[shadow];
+
+const toneClass = {
+  core: 'bg-white dark:bg-night-core shadow-bezel',
+  'accent-soft': 'bg-accent-soft dark:bg-night-soft shadow-bezel',
+  bare: '',
+}[tone];
+---
+
+<Tag
+  class={`bg-black/5 dark:bg-white/[0.04] ring-1 ring-black/5 dark:ring-white/[0.08] ${padClass} ${shadowClass} ${className}`}
+  style={`border-radius:${radius}`}
+>
+  <div class={`${toneClass} ${coreClass}`} style={`border-radius:${coreRadius}`}>
+    <slot />
+  </div>
+</Tag>

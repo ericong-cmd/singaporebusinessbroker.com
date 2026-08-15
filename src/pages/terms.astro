@@ -1,0 +1,63 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHeader from '../components/PageHeader.astro';
+import site from '../data/site.json';
+---
+
+<Base
+  title="Terms of use | Singapore Business Broker"
+  description="Terms of use for the Singapore Business Broker website, including the basis on which valuation estimates are provided."
+  noindex
+>
+  <PageHeader eyebrow="Terms" title="Terms of use" crumbs={[{ href: '/terms', label: 'Terms' }]} />
+  <section class="max-w-wrap mx-auto px-5 lg:px-8 pb-28 lg:pb-40">
+    <div class="prose-sbb reveal">
+      <p class="font-mono text-xs">
+        Template terms, accurate to how the site currently works. Have them reviewed by your own counsel before launch.
+      </p>
+
+      <h2>The site</h2>
+      <p>
+        This site is operated by {site.parentLegal} under the brand {site.name}. By using it you accept these terms.
+      </p>
+
+      <h2>Valuation estimates are indicative</h2>
+      <p>
+        The estimator applies sector multiples to figures you supply. It is an indicative range for orientation, not a
+        valuation, not an offer, and not a promise of price. It cannot assess your contracts, customer concentration,
+        management depth or the condition of your records, which are what actually determine value.
+      </p>
+      <p>
+        Nothing on this site is financial, legal, tax or investment advice. Take advice specific to your circumstances
+        before acting.
+      </p>
+
+      <h2>Sample data</h2>
+      <p>
+        Figures, transactions and buyer mandates marked as samples are illustrative and do not describe specific
+        clients or live mandates.
+      </p>
+
+      <h2>Confidentiality of enquiries</h2>
+      <p>
+        We treat enquiries as confidential. Submitting an enquiry does not create an advisory relationship. An
+        engagement begins only under a signed written agreement.
+      </p>
+
+      <h2>Liability</h2>
+      <p>
+        The site is provided as is. To the extent permitted by law we exclude liability for loss arising from reliance
+        on its content, including any valuation estimate.
+      </p>
+
+      <h2>Intellectual property</h2>
+      <p>
+        Content on this site belongs to {site.parentLegal}, except where stated. The sector multiples table may be
+        reproduced with attribution and a link.
+      </p>
+
+      <h2>Governing law</h2>
+      <p>These terms are governed by the laws of Singapore.</p>
+    </div>
+  </section>
+</Base>

@@ -1,0 +1,456 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Singapore Business Broker | Sell your business confidentially, at the right price</title>
+<meta name="description" content="Sell-side M&A advisors for Singapore SME owners with S$3m to S$30m businesses. Free valuation estimate, confidential process, vetted buyer network." />
+<meta property="og:title" content="Sell your business confidentially, at the right price | Singapore Business Broker" />
+<meta property="og:description" content="Sell-side M&A advisors for Singapore SMEs worth S$3m to S$30m. Free valuation estimate." />
+<meta property="og:image" content="https://d8j0ntlcm91z4.cloudfront.net/user_3HNpLbN69Fx4dro0Vj44SWm4eKA/hf_20260815_093925_aef7741d-2e4b-4d0e-9700-3a06b9b6cea6.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<!-- Prototype: Google Fonts link. Production: self-host via @font-face. -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/light/style.css" />
+<!--TAILWIND-->
+<style>
+  :root { color-scheme: light dark; --ease: cubic-bezier(0.32,0.72,0,1); }
+  html { -webkit-font-smoothing: antialiased; }
+  body { background:#f6f7f4; color:#0e1a2b; }
+  @media (prefers-color-scheme: dark) {
+    body { background:#0b121c; color:#e9ecef; }
+    .dk-bg { background:#0b121c !important; }
+    .dk-bg2 { background:#111a27 !important; }
+    .dk-text { color:#e9ecef !important; }
+    .dk-text2 { color:#a9b4c2 !important; }
+    .dk-line { border-color:rgba(255,255,255,.08) !important; }
+    .dk-shell { background:rgba(255,255,255,.04) !important; --tw-ring-color:rgba(255,255,255,.08) !important; }
+    .dk-core { background:#121c2a !important; }
+    .dk-input { background:#0b121c !important; color:#e9ecef !important; border-color:rgba(255,255,255,.1) !important; }
+    .dk-invert { background:#e9ecef !important; color:#0b121c !important; }
+    .dk-glass { background:rgba(11,18,28,.7) !important; --tw-ring-color:rgba(255,255,255,.08) !important; }
+    .dk-orb { opacity:.35 !important; }
+  }
+  /* film grain, fixed, non-scrolling */
+  .grain { position:fixed; inset:0; z-index:60; pointer-events:none; opacity:.035; mix-blend-mode:multiply;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+  @media (prefers-color-scheme: dark) { .grain { mix-blend-mode:screen; opacity:.05; } }
+  .reveal { opacity:0; transform:translateY(40px); filter:blur(8px); transition:opacity .9s var(--ease), transform .9s var(--ease), filter .9s var(--ease); }
+  .reveal.in { opacity:1; transform:none; filter:blur(0); }
+  .reveal[data-d="1"]{transition-delay:.08s}.reveal[data-d="2"]{transition-delay:.16s}.reveal[data-d="3"]{transition-delay:.24s}.reveal[data-d="4"]{transition-delay:.32s}
+  @media (prefers-reduced-motion: reduce) { .reveal { opacity:1; transform:none; filter:none; transition:none; } * { scroll-behavior:auto !important; animation:none !important; } }
+  .ease { transition-timing-function: var(--ease); }
+  details summary::-webkit-details-marker { display:none; }
+  details[open] .chev { transform: rotate(45deg); }
+  .chev { transition: transform .5s var(--ease); }
+  .step-dot { width:10px;height:10px;border-radius:9999px;background:#0f6b4f; box-shadow:0 0 0 4px rgba(15,107,79,.15); }
+  /* hamburger morph */
+  #burger span { position:absolute; left:10px; width:20px; height:1.5px; background:currentColor; transition: transform .5s var(--ease), opacity .3s var(--ease); }
+  #burger span:nth-child(1){ top:14px } #burger span:nth-child(2){ top:20px } #burger span:nth-child(3){ top:26px }
+  #burger.open span:nth-child(1){ transform:translateY(6px) rotate(45deg) } #burger.open span:nth-child(2){ opacity:0 } #burger.open span:nth-child(3){ transform:translateY(-6px) rotate(-45deg) }
+  #menu a { opacity:0; transform:translateY(24px); transition:opacity .6s var(--ease), transform .6s var(--ease); }
+  #menu.open a { opacity:1; transform:none; }
+  #menu.open a:nth-child(1){transition-delay:.1s}#menu.open a:nth-child(2){transition-delay:.15s}#menu.open a:nth-child(3){transition-delay:.2s}#menu.open a:nth-child(4){transition-delay:.25s}#menu.open a:nth-child(5){transition-delay:.3s}#menu.open a:nth-child(6){transition-delay:.35s}
+  .hero-img { transform: scale(1.06); transition: transform 1.6s var(--ease); }
+  .in .hero-img { transform: scale(1); }
+  @keyframes drift { 0%{transform:translate3d(0,0,0)} 50%{transform:translate3d(30px,-20px,0)} 100%{transform:translate3d(0,0,0)} }
+  .orb { animation: drift 18s var(--ease) infinite; }
+  .orb2 { animation-duration: 24s; animation-direction: reverse; }
+</style>
+</head>
+<body class="font-sans">
+<div class="grain" aria-hidden="true"></div>
+
+<!-- FLOATING ISLAND NAV -->
+<header class="fixed inset-x-0 top-0 z-40 pointer-events-none">
+  <div class="mx-auto mt-5 px-4 flex justify-center">
+    <div class="pointer-events-auto flex items-center gap-1 rounded-full bg-white/70 dk-glass backdrop-blur-xl ring-1 ring-black/5 shadow-[0_8px_40px_-12px_rgba(14,26,43,0.18)] pl-4 pr-1.5 py-1.5">
+      <a href="#" class="flex items-center gap-2.5 pr-3">
+        <span class="grid place-items-center w-7 h-7 rounded-full bg-ink dk-invert text-paper text-[11px] font-medium">SB</span>
+        <span class="text-sm font-medium tracking-tight hidden sm:block">Singapore Business Broker</span>
+      </a>
+      <nav class="hidden lg:flex items-center text-[13px] text-ink-2 dk-text2">
+        <a href="#sell" class="px-3 py-2 rounded-full hover:bg-black/5 dark:hover:bg-white/10 transition-colors duration-500 ease">Sell</a>
+        <a href="#valuation" class="px-3 py-2 rounded-full hover:bg-black/5 dark:hover:bg-white/10 transition-colors duration-500 ease">Valuation</a>
+        <a href="#process" class="px-3 py-2 rounded-full hover:bg-black/5 dark:hover:bg-white/10 transition-colors duration-500 ease">Process</a>
+        <a href="#cases" class="px-3 py-2 rounded-full hover:bg-black/5 dark:hover:bg-white/10 transition-colors duration-500 ease">Transactions</a>
+        <a href="#buyers" class="px-3 py-2 rounded-full hover:bg-black/5 dark:hover:bg-white/10 transition-colors duration-500 ease">Buyers</a>
+        <a href="#faq" class="px-3 py-2 rounded-full hover:bg-black/5 dark:hover:bg-white/10 transition-colors duration-500 ease">FAQ</a>
+      </nav>
+      <a href="#valuation" class="group ml-1 hidden sm:inline-flex items-center gap-2 rounded-full bg-accent text-white text-[13px] font-medium pl-4 pr-1.5 py-1.5 transition-transform duration-500 ease active:scale-[0.98]">
+        Free valuation
+        <span class="grid place-items-center w-7 h-7 rounded-full bg-white/15 transition-transform duration-500 ease group-hover:translate-x-0.5 group-hover:-translate-y-px group-hover:scale-105"><i class="ph-light ph-arrow-up-right text-base"></i></span>
+      </a>
+      <button id="burger" class="lg:hidden relative w-10 h-10 rounded-full hover:bg-black/5 dark:hover:bg-white/10" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+<!-- Full-screen menu -->
+<div id="menu" class="fixed inset-0 z-30 hidden bg-paper/85 dk-glass backdrop-blur-3xl">
+  <nav class="h-full flex flex-col justify-center px-8 gap-2 text-4xl font-medium tracking-tight">
+    <a href="#sell">Sell your business</a><a href="#valuation">Valuation</a><a href="#process">Process</a><a href="#cases">Transactions</a><a href="#buyers">Buyers</a><a href="#faq">FAQ</a>
+  </nav>
+</div>
+
+<!-- HERO: editorial split, image-as-canvas right, ambient orbs -->
+<section class="relative overflow-hidden min-h-[100dvh] flex items-center">
+  <div class="orb dk-orb absolute -top-40 -left-40 w-[640px] h-[640px] rounded-full bg-accent/10 blur-3xl pointer-events-none" aria-hidden="true"></div>
+  <div class="orb orb2 dk-orb absolute top-1/2 -right-56 w-[720px] h-[720px] rounded-full bg-[#c9d8cf]/40 blur-3xl pointer-events-none" aria-hidden="true"></div>
+  <div class="relative max-w-wrap mx-auto px-5 lg:px-8 pt-32 pb-20 lg:pt-36 lg:pb-28 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-6 items-center w-full">
+    <div class="lg:col-span-6 reveal">
+      <span class="inline-flex items-center gap-2 rounded-full ring-1 ring-black/10 dk-line bg-white/60 dk-shell px-3 py-1 text-[10px] uppercase tracking-[0.2em] font-medium text-ink-2 dk-text2"><span class="w-1.5 h-1.5 rounded-full bg-accent"></span>Sell-side M&amp;A, Singapore SMEs</span>
+      <h1 class="mt-7 text-[2.6rem] leading-[1.02] md:text-6xl xl:text-[4rem] font-medium tracking-[-0.03em]">Sell your business confidentially, at the right price.</h1>
+      <p class="mt-7 text-lg md:text-xl text-ink-2 dk-text2 leading-relaxed max-w-[46ch] font-light">We run the sale for Singapore businesses worth S$3m to S$30m. Valuation, buyer search, negotiation, close.</p>
+      <div class="mt-10 flex flex-col sm:flex-row gap-3">
+        <a href="#valuation" class="group inline-flex items-center justify-between gap-4 rounded-full bg-ink dk-invert text-paper font-medium pl-6 pr-1.5 py-1.5 transition-transform duration-500 ease active:scale-[0.98]">
+          <span class="py-1.5">Get free valuation</span>
+          <span class="grid place-items-center w-9 h-9 rounded-full bg-white/15 dark:bg-black/10 transition-transform duration-500 ease group-hover:translate-x-0.5 group-hover:-translate-y-px group-hover:scale-105"><i class="ph-light ph-arrow-up-right text-lg"></i></span>
+        </a>
+        <a href="#book" class="group inline-flex items-center justify-between gap-4 rounded-full ring-1 ring-black/10 dk-line bg-white/50 dk-shell font-medium pl-6 pr-1.5 py-1.5 transition-transform duration-500 ease active:scale-[0.98]">
+          <span class="py-1.5">Book a confidential call</span>
+          <span class="grid place-items-center w-9 h-9 rounded-full bg-black/5 dark:bg-white/10 transition-transform duration-500 ease group-hover:translate-x-0.5 group-hover:-translate-y-px group-hover:scale-105"><i class="ph-light ph-phone text-lg"></i></span>
+        </a>
+      </div>
+    </div>
+    <div class="lg:col-span-6 relative reveal" data-d="1">
+      <!-- double bezel image frame -->
+      <div class="rounded-[2rem] bg-black/5 dk-shell ring-1 ring-black/5 p-2 shadow-[0_40px_80px_-40px_rgba(14,26,43,0.35)]">
+        <div class="rounded-[calc(2rem-0.5rem)] overflow-hidden aspect-[5/4] shadow-[inset_0_1px_1px_rgba(255,255,255,0.4)]">
+          <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3HNpLbN69Fx4dro0Vj44SWm4eKA/hf_20260815_093925_ae1a4d5c-7461-497f-a0af-3cea9d95fc75.png" alt="Business owner in a Singapore office" class="hero-img w-full h-full object-cover" loading="eager" fetchpriority="high" />
+        </div>
+      </div>
+      <div class="absolute -bottom-8 -left-3 lg:-left-12 rounded-[1.5rem] bg-white/70 dk-glass backdrop-blur-xl ring-1 ring-black/5 p-1.5 shadow-[0_24px_60px_-24px_rgba(14,26,43,0.3)] max-w-[300px] reveal" data-d="3">
+        <div class="rounded-[calc(1.5rem-0.375rem)] bg-white dk-core p-5 shadow-[inset_0_1px_1px_rgba(255,255,255,0.6)]">
+          <p class="text-[10px] uppercase tracking-[0.18em] text-ink-3 dk-text2">Estimated value <span class="font-mono normal-case tracking-normal">(sample)</span></p>
+          <p class="mt-2 font-mono text-2xl tracking-tight">S$4.2m to S$6.1m</p>
+          <p class="mt-2 text-xs text-ink-3 dk-text2">Logistics, S$7.8m revenue, 12 years operating</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROOF STRIP -->
+<section class="max-w-wrap mx-auto px-5 lg:px-8 pt-24 lg:pt-32">
+  <div class="rounded-[2rem] bg-black/5 dk-shell ring-1 ring-black/5 p-1.5 reveal">
+    <div class="rounded-[calc(2rem-0.375rem)] bg-white dk-core shadow-[inset_0_1px_1px_rgba(255,255,255,0.6)] px-6 md:px-10 py-10 grid grid-cols-2 md:grid-cols-4 gap-8 md:divide-x divide-black/5 dk-line">
+      <div class="md:pl-0"><p class="font-mono text-2xl md:text-3xl tracking-tight">S$1m to S$30m</p><p class="mt-2 text-sm text-ink-3 dk-text2 font-light">Deal range we advise on</p></div>
+      <div class="md:pl-8"><p class="font-mono text-2xl md:text-3xl tracking-tight">6 to 9 months</p><p class="mt-2 text-sm text-ink-3 dk-text2 font-light">Mandate to completion</p></div>
+      <div class="md:pl-8"><p class="font-mono text-2xl md:text-3xl tracking-tight">Vetted buyers</p><p class="mt-2 text-sm text-ink-3 dk-text2 font-light">Strategics, PE, search funds, family offices</p></div>
+      <div class="md:pl-8"><p class="font-mono text-2xl md:text-3xl tracking-tight">Success fee</p><p class="mt-2 text-sm text-ink-3 dk-text2 font-light">Aligned with your outcome</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US: asymmetrical bento -->
+<section id="sell" class="max-w-wrap mx-auto px-5 lg:px-8 py-28 lg:py-40">
+  <div class="max-w-[60ch] reveal">
+    <h2 class="text-3xl md:text-5xl font-medium tracking-[-0.03em] leading-[1.05]">Most owners sell once. We do it every month.</h2>
+    <p class="mt-6 text-lg text-ink-2 dk-text2 leading-relaxed font-light">A well-run process brings more buyers, protects your confidentiality and closes at a better price than a direct approach.</p>
+  </div>
+  <div class="mt-16 grid grid-cols-1 md:grid-cols-12 gap-4">
+    <!-- big image cell -->
+    <div class="md:col-span-8 md:row-span-2 rounded-[2rem] bg-black/5 dk-shell ring-1 ring-black/5 p-1.5 reveal">
+      <div class="group relative rounded-[calc(2rem-0.375rem)] overflow-hidden min-h-[380px] h-full">
+        <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3HNpLbN69Fx4dro0Vj44SWm4eKA/hf_20260815_093925_4c650d10-7fe8-4075-8fb0-fb0f471bcfe7.png" alt="" class="absolute inset-0 w-full h-full object-cover transition-transform duration-[1600ms] ease group-hover:scale-[1.04]" loading="lazy" />
+        <div class="absolute inset-0 bg-gradient-to-t from-ink/90 via-ink/30 to-transparent"></div>
+        <div class="relative p-8 md:p-10 flex flex-col justify-end h-full min-h-[380px] text-white">
+          <h3 class="text-2xl md:text-3xl font-medium tracking-tight">Competitive tension, not one buyer</h3>
+          <p class="mt-3 text-white/75 max-w-[48ch] font-light">We approach 30 to 80 qualified buyers under NDA and run parallel conversations, so you negotiate from strength.</p>
+        </div>
+      </div>
+    </div>
+    <div class="md:col-span-4 rounded-[2rem] bg-black/5 dk-shell ring-1 ring-black/5 p-1.5 reveal" data-d="1">
+      <div class="rounded-[calc(2rem-0.375rem)] bg-accent-soft dark:bg-[#12261f] shadow-[inset_0_1px_1px_rgba(255,255,255,0.6)] p-8 h-full flex flex-col justify-between gap-10">
+        <i class="ph-light ph-lock-key text-4xl text-accent"></i>
+        <div><h3 class="text-xl font-medium tracking-tight">Staff and customers hear from you, not the market</h3><p class="mt-3 text-sm text-ink-2 dk-text2 font-light">Blind teasers, staged disclosure, NDAs before any name is shared.</p></div>
+      </div>
+    </div>
+    <div class="md:col-span-4 rounded-[2rem] bg-black/5 dk-shell ring-1 ring-black/5 p-1.5 reveal" data-d="2">
+      <div class="rounded-[calc(2rem-0.375rem)] bg-white dk-core shadow-[inset_0_1px_1px_rgba(255,255,255,0.6)] p-8 h-full flex flex-col justify-between gap-10">
+        <i class="ph-light ph-chart-line-up text-4xl text-accent"></i>
+        <div><h3 class="text-xl font-medium tracking-tight">Priced on evidence</h3><p class="mt-3 text-sm text-ink-2 dk-text2 font-light">Sector multiples, normalised earnings and buyer appetite, not a hopeful number.</p></div>
+      </div>
+    </div>
+    <div class="md:col-span-5 rounded-[2rem] bg-black/5 dk-shell ring-1 ring-black/5 p-1.5 reveal" data-d="1">
+      <div class="rounded-[calc(2rem-0.375rem)] bg-white dk-core shadow-[inset_0_1px_1px_rgba(255,255,255,0.6)] p-8 h-full flex flex-col justify-between gap-10">
+        <i class="ph-light ph-handshake text-4xl text-accent"></i>
+        <div><h3 class="text-xl font-medium tracking-tight">Deal structure that protects you</h3><p class="mt-3 text-sm text-ink-2 dk-text2 font-light">Earn-outs, vendor loans, handover terms. We negotiate the whole deal, not only the headline.</p></div>
+      </div>
+    </div>
+    <div class="md:col-span-7 rounded-[2rem] bg-black/5 dk-shell ring-1 ring-black/5 p-1.5 reveal" data-d="2">
+      <div class="group relative rounded-[calc(2rem-0.375rem)] overflow-hidden min-h-[260px] h-full">
+        <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3HNpLbN69Fx4dro0Vj44SWm4eKA/hf_20260815_093925_01e15fb2-9ea4-4ec8-a0ab-2723bc2940e6.png" alt="" class="absolute inset-0 w-full h-full object-cover transition-transform duration-[1600ms] ease group-hover:scale-[1.04]" loading="lazy" />
+        <div class="absolute inset-0 bg-ink/55"></div>
+        <div class="relative p-8 h-full min-h-[260px] flex flex-col justify-end text-white"><h3 class="text-xl md:text-2xl font-medium tracking-tight">Singapore based, regional buyers</h3><p class="mt-2 text-sm text-white/75 font-light">Buyers from Singapore, Malaysia, Indonesia, Japan and beyond.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS: dark band -->
+<section id="process" class="max-w-wrap mx-auto px-5 lg:px-8">
+  <div class="rounded-[2.5rem] bg-ink dk-bg2 text-paper px-6 md:px-14 py-20 lg:py-28 relative overflow-hidden">
+    <div class="absolute -top-32 -right-32 w-[520px] h-[520px] rounded-full bg-accent/20 blur-3xl pointer-events-none" aria-hidden="true"></div>
+    <div class="relative max-w-[60ch] reveal">
+      <h2 class="text-3xl md:text-5xl font-medium tracking-[-0.03em] leading-[1.05]">How a sale runs</h2>
+      <p class="mt-6 text-lg text-paper/65 leading-relaxed font-light">Six to nine months, start to close. You keep running the business. We run the process.</p>
+    </div>
+    <ol class="relative mt-16 grid grid-cols-1 md:grid-cols-5 gap-10 md:gap-6">
+      <li class="relative md:pt-8 md:border-t border-white/15 reveal" data-d="0"><span class="hidden md:block step-dot absolute -top-[5px] left-0"></span><p class="font-mono text-xs text-paper/50 mb-2">01</p><h3 class="font-medium">Valuation and readiness</h3><p class="mt-2 text-sm text-paper/65 font-light">Normalise financials, agree a price range, fix what buyers will flag.</p></li>
+      <li class="relative md:pt-8 md:border-t border-white/15 reveal" data-d="1"><span class="hidden md:block step-dot absolute -top-[5px] left-0"></span><p class="font-mono text-xs text-paper/50 mb-2">02</p><h3 class="font-medium">Teaser and info memo</h3><p class="mt-2 text-sm text-paper/65 font-light">Anonymous teaser first, full memorandum after NDA.</p></li>
+      <li class="relative md:pt-8 md:border-t border-white/15 reveal" data-d="2"><span class="hidden md:block step-dot absolute -top-[5px] left-0"></span><p class="font-mono text-xs text-paper/50 mb-2">03</p><h3 class="font-medium">Buyer outreach</h3><p class="mt-2 text-sm text-paper/65 font-light">Curated list of strategics, PE and private buyers, approached in parallel.</p></li>
+      <li class="relative md:pt-8 md:border-t border-white/15 reveal" data-d="3"><span class="hidden md:block step-dot absolute -top-[5px] left-0"></span><p class="font-mono text-xs text-paper/50 mb-2">04</p><h3 class="font-medium">Offers and negotiation</h3><p class="mt-2 text-sm text-paper/65 font-light">Compare offers on price, structure and certainty. Sign a term sheet.</p></li>
+      <li class="relative md:pt-8 md:border-t border-white/15 reveal" data-d="4"><span class="hidden md:block step-dot absolute -top-[5px] left-0"></span><p class="font-mono text-xs text-paper/50 mb-2">05</p><h3 class="font-medium">Due diligence and close</h3><p class="mt-2 text-sm text-paper/65 font-light">Manage the data room, lawyers and SPA through to completion.</p></li>
+    </ol>
+  </div>
+</section>
+
+<!-- VALUATION TOOL -->
+<section id="valuation" class="max-w-wrap mx-auto px-5 lg:px-8 py-28 lg:py-40">
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+    <div class="lg:col-span-5 lg:sticky lg:top-28 reveal">
+      <span class="inline-flex items-center rounded-full ring-1 ring-black/10 dk-line bg-white/60 dk-shell px-3 py-1 text-[10px] uppercase tracking-[0.2em] font-medium text-ink-2 dk-text2">Free valuation estimate</span>
+      <h2 class="mt-6 text-3xl md:text-5xl font-medium tracking-[-0.03em] leading-[1.05]">How much is your business worth?</h2>
+      <p class="mt-6 text-lg text-ink-2 dk-text2 leading-relaxed font-light">Two minutes. Instant range on screen, full report by email. Confidential, no obligation.</p>
+      <ul class="mt-10 space-y-4 text-sm text-ink-2 dk-text2 font-light">
+        <li class="flex gap-3"><i class="ph-light ph-check-circle text-accent text-xl"></i>Based on current Singapore SME transaction multiples</li>
+        <li class="flex gap-3"><i class="ph-light ph-check-circle text-accent text-xl"></i>Adjusted for owner dependency, size and track record</li>
+        <li class="flex gap-3"><i class="ph-light ph-check-circle text-accent text-xl"></i>Reviewed by an advisor before your report is sent</li>
+      </ul>
+    </div>
+
+    <div class="lg:col-span-7 reveal" data-d="1">
+      <div class="rounded-[2rem] bg-black/5 dk-shell ring-1 ring-black/5 p-2 shadow-[0_40px_80px_-40px_rgba(14,26,43,0.35)]">
+      <form id="valform" class="rounded-[calc(2rem-0.5rem)] bg-white dk-core shadow-[inset_0_1px_1px_rgba(255,255,255,0.6)] p-6 md:p-10" novalidate>
+        <div class="flex items-center justify-between text-xs text-ink-3 dk-text2 mb-6"><span id="stepLabel">Step 1 of 3: Your business</span><span class="font-mono" id="stepCount">1 / 3</span></div>
+        <div class="h-1 bg-black/5 dark:bg-white/10 rounded-full mb-10 overflow-hidden"><div id="progress" class="h-1 bg-accent rounded-full transition-[width] duration-700 ease" style="width:33%"></div></div>
+
+        <fieldset data-step="1" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="md:col-span-2 grid gap-2">
+            <label for="sector" class="text-sm font-medium">Sector</label>
+            <select id="sector" name="sector" required class="dk-input rounded-2xl border border-black/10 bg-paper px-4 py-3.5 text-sm focus:outline-none focus:ring-2 focus:ring-accent/60 transition-shadow duration-500 ease"><option value="">Select sector</option></select>
+          </div>
+          <div class="grid gap-2">
+            <label for="revenue" class="text-sm font-medium">Annual revenue (S$)</label>
+            <select id="revenue" name="revenue" required class="dk-input rounded-2xl border border-black/10 bg-paper px-4 py-3.5 text-sm focus:outline-none focus:ring-2 focus:ring-accent/60 transition-shadow duration-500 ease">
+              <option value="">Select band</option><option value="0.5">Under S$1m</option><option value="2">S$1m to S$3m</option><option value="4">S$3m to S$5m</option><option value="7.5">S$5m to S$10m</option><option value="20">S$10m to S$30m</option><option value="40">Over S$30m</option>
+            </select>
+          </div>
+          <div class="grid gap-2">
+            <label for="ebitda" class="text-sm font-medium">Annual profit, owner salary added back (S$)</label>
+            <input id="ebitda" name="ebitda" type="number" inputmode="numeric" min="0" step="10000" placeholder="e.g. 850000" required class="dk-input rounded-2xl border border-black/10 bg-paper px-4 py-3.5 text-sm focus:outline-none focus:ring-2 focus:ring-accent/60 transition-shadow duration-500 ease" />
+            <p class="text-xs text-ink-3 dk-text2">Last full financial year. Rough figure is fine.</p>
+            <p class="err hidden text-xs text-red-700">Enter a profit figure (0 if loss-making).</p>
+          </div>
+        </fieldset>
+
+        <fieldset data-step="2" class="hidden grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="grid gap-2"><label for="years" class="text-sm font-medium">Years operating</label><input id="years" name="years" type="number" min="0" max="80" placeholder="e.g. 12" required class="dk-input rounded-2xl border border-black/10 bg-paper px-4 py-3.5 text-sm focus:outline-none focus:ring-2 focus:ring-accent/60" /></div>
+          <div class="grid gap-2"><label for="ownership" class="text-sm font-medium">Your ownership stake</label><select id="ownership" name="ownership" required class="dk-input rounded-2xl border border-black/10 bg-paper px-4 py-3.5 text-sm focus:outline-none focus:ring-2 focus:ring-accent/60"><option value="">Select</option><option value="100">100%</option><option value="75">50% to 99%</option><option value="25">Under 50%</option></select></div>
+          <div class="md:col-span-2 grid gap-2">
+            <span class="text-sm font-medium">How dependent is the business on you day to day?</span>
+            <div class="grid grid-cols-3 gap-2" role="radiogroup">
+              <label class="cursor-pointer"><input type="radio" name="dependency" value="low" class="peer sr-only" /><span class="block text-center text-sm rounded-2xl border border-black/10 dk-line px-3 py-3.5 transition-colors duration-500 ease peer-checked:border-accent peer-checked:bg-accent-soft peer-checked:text-accent dark:peer-checked:bg-[#12261f]">Low. Runs without me</span></label>
+              <label class="cursor-pointer"><input type="radio" name="dependency" value="med" class="peer sr-only" checked /><span class="block text-center text-sm rounded-2xl border border-black/10 dk-line px-3 py-3.5 transition-colors duration-500 ease peer-checked:border-accent peer-checked:bg-accent-soft peer-checked:text-accent dark:peer-checked:bg-[#12261f]">Medium</span></label>
+              <label class="cursor-pointer"><input type="radio" name="dependency" value="high" class="peer sr-only" /><span class="block text-center text-sm rounded-2xl border border-black/10 dk-line px-3 py-3.5 transition-colors duration-500 ease peer-checked:border-accent peer-checked:bg-accent-soft peer-checked:text-accent dark:peer-checked:bg-[#12261f]">High. I am the business</span></label>
+            </div>
+          </div>
+          <div class="md:col-span-2 grid gap-2"><label for="timeline" class="text-sm font-medium">When would you like to sell?</label><select id="timeline" name="timeline" required class="dk-input rounded-2xl border border-black/10 bg-paper px-4 py-3.5 text-sm focus:outline-none focus:ring-2 focus:ring-accent/60"><option value="">Select</option><option value="6">Within 6 months</option><option value="12">6 to 12 months</option><option value="18">12 to 18 months</option><option value="36">Over 18 months</option><option value="0">Just exploring</option></select></div>
+        </fieldset>
+
+        <fieldset data-step="3" class="hidden grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="grid gap-2"><label for="name" class="text-sm font-medium">Your name</label><input id="name" name="name" type="text" required autocomplete="name" class="dk-input rounded-2xl border border-black/10 bg-paper px-4 py-3.5 text-sm focus:outline-none focus:ring-2 focus:ring-accent/60" /></div>
+          <div class="grid gap-2"><label for="phone" class="text-sm font-medium">Mobile</label><input id="phone" name="phone" type="tel" required autocomplete="tel" placeholder="+65" class="dk-input rounded-2xl border border-black/10 bg-paper px-4 py-3.5 text-sm focus:outline-none focus:ring-2 focus:ring-accent/60" /></div>
+          <div class="md:col-span-2 grid gap-2"><label for="email" class="text-sm font-medium">Email for your report</label><input id="email" name="email" type="email" required autocomplete="email" class="dk-input rounded-2xl border border-black/10 bg-paper px-4 py-3.5 text-sm focus:outline-none focus:ring-2 focus:ring-accent/60" /><p class="err hidden text-xs text-red-700">Enter a valid email.</p></div>
+          <label class="md:col-span-2 flex gap-3 text-xs text-ink-3 dk-text2 leading-relaxed"><input type="checkbox" name="consent" required class="mt-0.5 accent-accent" /><span>I consent to Singapore Business Broker contacting me about my valuation under the PDPA. No spam, unsubscribe anytime.</span></label>
+        </fieldset>
+
+        <div id="result" class="hidden">
+          <p class="text-[10px] uppercase tracking-[0.18em] text-ink-3 dk-text2">Estimated enterprise value range</p>
+          <p id="range" class="mt-3 font-mono text-4xl md:text-5xl tracking-tight">S$0 to S$0</p>
+          <p id="basis" class="mt-4 text-sm text-ink-2 dk-text2 leading-relaxed font-light"></p>
+          <div id="hot" class="hidden mt-8 rounded-[1.5rem] bg-accent-soft dark:bg-[#12261f] p-6">
+            <p class="font-medium">Your business is in the range we advise on. Book a 30 minute confidential call.</p>
+            <a href="#book" class="group mt-5 inline-flex items-center gap-3 rounded-full bg-accent text-white text-sm font-medium pl-5 pr-1.5 py-1.5 transition-transform duration-500 ease active:scale-[0.98]">Book a confidential call <span class="grid place-items-center w-8 h-8 rounded-full bg-white/15 transition-transform duration-500 ease group-hover:translate-x-0.5 group-hover:-translate-y-px"><i class="ph-light ph-arrow-up-right"></i></span></a>
+          </div>
+          <div id="warm" class="hidden mt-8 rounded-[1.5rem] bg-black/5 dark:bg-white/5 p-6 text-sm text-ink-2 dk-text2 font-light">Your full report and a preparation guide are on the way. Most owners in your position add 20 to 40 percent to value with 12 to 18 months of preparation.</div>
+          <p class="mt-6 text-xs text-ink-3 dk-text2">Indicative only. Final valuation depends on financial review, buyer appetite and deal structure.</p>
+        </div>
+
+        <div id="navbtns" class="mt-10 flex items-center justify-between gap-3">
+          <button type="button" id="back" class="text-sm text-ink-3 dk-text2 hover:text-ink invisible transition-colors duration-500 ease">Back</button>
+          <button type="button" id="next" class="group inline-flex items-center gap-3 rounded-full bg-ink dk-invert text-paper font-medium pl-6 pr-1.5 py-1.5 transition-transform duration-500 ease active:scale-[0.98]"><span class="py-1.5" id="nextLabel">Continue</span><span class="grid place-items-center w-9 h-9 rounded-full bg-white/15 dark:bg-black/10 transition-transform duration-500 ease group-hover:translate-x-0.5 group-hover:-translate-y-px group-hover:scale-105"><i class="ph-light ph-arrow-right text-lg"></i></span></button>
+        </div>
+      </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CASE STUDIES: z-axis cascade -->
+<section id="cases" class="max-w-wrap mx-auto px-5 lg:px-8 pb-28 lg:pb-40">
+  <div class="max-w-[60ch] reveal"><h2 class="text-3xl md:text-5xl font-medium tracking-[-0.03em] leading-[1.05]">Recent transactions</h2><p class="mt-6 text-lg text-ink-2 dk-text2 font-light">Anonymised. Sector, size and outcome only. <span class="font-mono text-xs">(sample entries)</span></p></div>
+  <div class="mt-16 grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-0 items-center">
+    <article class="lg:col-span-7 rounded-[2rem] bg-black/5 dk-shell ring-1 ring-black/5 p-1.5 shadow-[0_40px_80px_-40px_rgba(14,26,43,0.35)] reveal lg:relative lg:z-10">
+      <div class="group rounded-[calc(2rem-0.375rem)] overflow-hidden bg-white dk-core grid md:grid-cols-2">
+        <div class="overflow-hidden h-64 md:h-full"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3HNpLbN69Fx4dro0Vj44SWm4eKA/hf_20260815_093925_c90f253e-0d4b-4ef9-849e-cae2a5089151.png" alt="" class="w-full h-full object-cover transition-transform duration-[1600ms] ease group-hover:scale-[1.04]" loading="lazy" /></div>
+        <div class="p-8 flex flex-col justify-between">
+          <div><p class="text-[10px] uppercase tracking-[0.18em] text-ink-3 dk-text2">Third-party logistics</p><h3 class="mt-3 text-2xl font-medium tracking-tight">Founder exit to a regional strategic</h3><p class="mt-4 text-sm text-ink-2 dk-text2 leading-relaxed font-light">Two founders, both retiring. Four indicative offers in eight weeks. Closed with a 12 month handover and no earn-out.</p></div>
+          <dl class="mt-8 grid grid-cols-2 gap-4 text-sm"><div><dt class="text-ink-3 dk-text2 text-xs">Revenue</dt><dd class="font-mono mt-1">S$14m</dd></div><div><dt class="text-ink-3 dk-text2 text-xs">Time to close</dt><dd class="font-mono mt-1">7 months</dd></div></dl>
+        </div>
+      </div>
+    </article>
+    <div class="lg:col-span-5 grid gap-6 lg:-ml-10 lg:pl-0">
+      <article class="rounded-[2rem] bg-black/5 dk-shell ring-1 ring-black/5 p-1.5 reveal lg:rotate-[1.5deg] lg:translate-x-6 transition-transform duration-700 ease hover:rotate-0 hover:translate-x-0" data-d="1"><div class="rounded-[calc(2rem-0.375rem)] bg-white dk-core p-8 shadow-[inset_0_1px_1px_rgba(255,255,255,0.6)]"><p class="text-[10px] uppercase tracking-[0.18em] text-ink-3 dk-text2">Enrichment education, 6 centres</p><h3 class="mt-3 text-xl font-medium tracking-tight">Sold to a private equity backed platform</h3><p class="mt-3 text-sm text-ink-2 dk-text2 font-light">Owner stayed 18 months as CEO with a minority stake and second exit upside.</p><p class="mt-5 font-mono text-sm">S$6m revenue, S$5.4m EV</p></div></article>
+      <article class="rounded-[2rem] bg-black/5 dk-shell ring-1 ring-black/5 p-1.5 reveal lg:-rotate-[1.5deg] lg:translate-x-12 transition-transform duration-700 ease hover:rotate-0 hover:translate-x-6" data-d="2"><div class="rounded-[calc(2rem-0.375rem)] bg-white dk-core p-8 shadow-[inset_0_1px_1px_rgba(255,255,255,0.6)]"><p class="text-[10px] uppercase tracking-[0.18em] text-ink-3 dk-text2">Precision engineering</p><h3 class="mt-3 text-xl font-medium tracking-tight">Trade sale to a Japanese acquirer</h3><p class="mt-3 text-sm text-ink-2 dk-text2 font-light">Buyer needed a Singapore base. Premium paid for certified processes and long-tenure staff.</p><p class="mt-5 font-mono text-sm">S$9m revenue, S$8.2m EV</p></div></article>
+    </div>
+  </div>
+</section>
+
+<!-- SECTORS -->
+<section class="max-w-wrap mx-auto px-5 lg:px-8 pb-28 lg:pb-40">
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+    <div class="lg:col-span-4 reveal"><h2 class="text-3xl md:text-5xl font-medium tracking-[-0.03em] leading-[1.05]">Sectors we sell</h2><p class="mt-6 text-lg text-ink-2 dk-text2 font-light">Each sector has its own buyers, multiples and pitfalls. See the guide for yours.</p></div>
+    <div class="lg:col-span-8 flex flex-wrap gap-2.5 reveal" id="sectorPills" data-d="1"></div>
+  </div>
+</section>
+
+<!-- BUYER DEMAND -->
+<section id="buyers" class="max-w-wrap mx-auto px-5 lg:px-8">
+  <div class="rounded-[2.5rem] bg-ink dk-bg2 text-paper px-6 md:px-14 py-20 lg:py-28 relative overflow-hidden grid grid-cols-1 lg:grid-cols-12 gap-12">
+    <div class="absolute -bottom-40 -left-32 w-[560px] h-[560px] rounded-full bg-accent/20 blur-3xl pointer-events-none" aria-hidden="true"></div>
+    <div class="relative lg:col-span-5 reveal">
+      <h2 class="text-3xl md:text-5xl font-medium tracking-[-0.03em] leading-[1.05]">Buyers currently looking</h2>
+      <p class="mt-6 text-lg text-paper/65 leading-relaxed font-light">Live mandates from our buyer network. If your business fits, we can make an introduction quickly. <span class="font-mono text-xs">(sample rows)</span></p>
+      <a href="#book" class="group mt-10 inline-flex items-center gap-3 rounded-full bg-paper text-ink font-medium pl-6 pr-1.5 py-1.5 transition-transform duration-500 ease active:scale-[0.98]"><span class="py-1.5">Book a confidential call</span><span class="grid place-items-center w-9 h-9 rounded-full bg-black/5 transition-transform duration-500 ease group-hover:translate-x-0.5 group-hover:-translate-y-px group-hover:scale-105"><i class="ph-light ph-arrow-up-right text-lg"></i></span></a>
+    </div>
+    <div class="relative lg:col-span-7 grid gap-3">
+      <div class="rounded-[1.5rem] bg-white/5 ring-1 ring-white/10 p-1.5 reveal transition-transform duration-700 ease hover:-translate-y-0.5" data-d="0"><div class="rounded-[calc(1.5rem-0.375rem)] bg-white/5 p-5 grid grid-cols-[1fr_auto] gap-4 items-center"><div><p class="font-medium">Regional strategic seeks F&amp;B group with 5+ outlets</p><p class="mt-1 text-sm text-paper/55 font-light">Central kitchen preferred. Singapore or Malaysia.</p></div><p class="font-mono text-sm whitespace-nowrap">S$5m to S$15m</p></div></div>
+      <div class="rounded-[1.5rem] bg-white/5 ring-1 ring-white/10 p-1.5 reveal transition-transform duration-700 ease hover:-translate-y-0.5" data-d="1"><div class="rounded-[calc(1.5rem-0.375rem)] bg-white/5 p-5 grid grid-cols-[1fr_auto] gap-4 items-center"><div><p class="font-medium">PE platform seeks facilities, cleaning or security services</p><p class="mt-1 text-sm text-paper/55 font-light">Recurring contracts, government or MCST clients.</p></div><p class="font-mono text-sm whitespace-nowrap">S$3m to S$20m</p></div></div>
+      <div class="rounded-[1.5rem] bg-white/5 ring-1 ring-white/10 p-1.5 reveal transition-transform duration-700 ease hover:-translate-y-0.5" data-d="2"><div class="rounded-[calc(1.5rem-0.375rem)] bg-white/5 p-5 grid grid-cols-[1fr_auto] gap-4 items-center"><div><p class="font-medium">Search fund seeks B2B services or distribution</p><p class="mt-1 text-sm text-paper/55 font-light">Owner willing to hand over within 12 months.</p></div><p class="font-mono text-sm whitespace-nowrap">S$2m to S$8m</p></div></div>
+      <div class="rounded-[1.5rem] bg-white/5 ring-1 ring-white/10 p-1.5 reveal transition-transform duration-700 ease hover:-translate-y-0.5" data-d="3"><div class="rounded-[calc(1.5rem-0.375rem)] bg-white/5 p-5 grid grid-cols-[1fr_auto] gap-4 items-center"><div><p class="font-medium">Japanese acquirer seeks engineering or precision manufacturing</p><p class="mt-1 text-sm text-paper/55 font-light">ISO certified, existing MNC customers.</p></div><p class="font-mono text-sm whitespace-nowrap">S$5m to S$30m</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq" class="max-w-wrap mx-auto px-5 lg:px-8 py-28 lg:py-40 grid grid-cols-1 lg:grid-cols-12 gap-12">
+  <div class="lg:col-span-4 reveal"><h2 class="text-3xl md:text-5xl font-medium tracking-[-0.03em] leading-[1.05]">Questions owners ask first</h2></div>
+  <div class="lg:col-span-8 rounded-[2rem] bg-black/5 dk-shell ring-1 ring-black/5 p-1.5 reveal" data-d="1">
+    <div class="rounded-[calc(2rem-0.375rem)] bg-white dk-core px-6 md:px-8 divide-y divide-black/5 dk-line shadow-[inset_0_1px_1px_rgba(255,255,255,0.6)]">
+      <details class="group py-6"><summary class="flex justify-between items-center cursor-pointer font-medium gap-6">What does it cost to sell through you?<span class="grid place-items-center w-8 h-8 rounded-full bg-black/5 dark:bg-white/10 shrink-0"><i class="ph-light ph-plus chev"></i></span></summary><p class="mt-4 text-sm text-ink-2 dk-text2 leading-relaxed max-w-[65ch] font-light">A modest engagement fee to prepare the materials, then a success fee as a percentage of the sale price, paid at completion. No sale, no success fee. We set out fees in writing before you commit.</p></details>
+      <details class="group py-6"><summary class="flex justify-between items-center cursor-pointer font-medium gap-6">Will my staff, customers or competitors find out?<span class="grid place-items-center w-8 h-8 rounded-full bg-black/5 dark:bg-white/10 shrink-0"><i class="ph-light ph-plus chev"></i></span></summary><p class="mt-4 text-sm text-ink-2 dk-text2 leading-relaxed max-w-[65ch] font-light">Not from us. Buyers first see an anonymous teaser. Your company name is only released after a signed NDA and your approval, buyer by buyer.</p></details>
+      <details class="group py-6"><summary class="flex justify-between items-center cursor-pointer font-medium gap-6">Is my business too small for you?<span class="grid place-items-center w-8 h-8 rounded-full bg-black/5 dark:bg-white/10 shrink-0"><i class="ph-light ph-plus chev"></i></span></summary><p class="mt-4 text-sm text-ink-2 dk-text2 leading-relaxed max-w-[65ch] font-light">We advise on businesses from about S$1m in value, with most work between S$3m and S$30m. If yours is smaller, the valuation tool still gives you a range and a preparation guide.</p></details>
+      <details class="group py-6"><summary class="flex justify-between items-center cursor-pointer font-medium gap-6">How long does a sale take?<span class="grid place-items-center w-8 h-8 rounded-full bg-black/5 dark:bg-white/10 shrink-0"><i class="ph-light ph-plus chev"></i></span></summary><p class="mt-4 text-sm text-ink-2 dk-text2 leading-relaxed max-w-[65ch] font-light">Typically six to nine months from mandate to completion. Preparation before going to market is what most affects the timeline and the price.</p></details>
+      <details class="group py-6"><summary class="flex justify-between items-center cursor-pointer font-medium gap-6">Do I need to stay after the sale?<span class="grid place-items-center w-8 h-8 rounded-full bg-black/5 dark:bg-white/10 shrink-0"><i class="ph-light ph-plus chev"></i></span></summary><p class="mt-4 text-sm text-ink-2 dk-text2 leading-relaxed max-w-[65ch] font-light">Usually a handover of 6 to 12 months. How long, and on what terms, is negotiated as part of the deal. Low owner dependency shortens it.</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section id="book" class="max-w-wrap mx-auto px-5 lg:px-8 pb-28 lg:pb-40">
+  <div class="rounded-[2.5rem] bg-black/5 dk-shell ring-1 ring-black/5 p-2 reveal">
+    <div class="relative overflow-hidden rounded-[calc(2.5rem-0.5rem)] bg-accent text-white p-10 md:p-16 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+      <div class="absolute -top-40 -right-20 w-[520px] h-[520px] rounded-full bg-white/10 blur-3xl pointer-events-none" aria-hidden="true"></div>
+      <div class="relative lg:col-span-8"><h2 class="text-3xl md:text-5xl font-medium tracking-[-0.03em] leading-[1.05]">Thinking about selling in the next two years?</h2><p class="mt-5 text-white/80 max-w-[50ch] text-lg font-light">A confidential 30 minute call. We tell you what your business is likely worth and what to fix first.</p></div>
+      <div class="relative lg:col-span-4 flex flex-col gap-3">
+        <a href="#" class="group inline-flex items-center justify-between gap-4 rounded-full bg-white text-accent-2 font-medium pl-6 pr-1.5 py-1.5 transition-transform duration-500 ease active:scale-[0.98]"><span class="py-1.5">Book a confidential call</span><span class="grid place-items-center w-9 h-9 rounded-full bg-accent/10 transition-transform duration-500 ease group-hover:translate-x-0.5 group-hover:-translate-y-px group-hover:scale-105"><i class="ph-light ph-calendar-blank text-lg"></i></span></a>
+        <a href="tel:+6500000000" class="group inline-flex items-center justify-between gap-4 rounded-full ring-1 ring-white/40 text-white font-medium pl-6 pr-1.5 py-1.5 transition-colors duration-500 ease hover:bg-white/10"><span class="py-1.5">+65 0000 0000</span><span class="grid place-items-center w-9 h-9 rounded-full bg-white/15"><i class="ph-light ph-phone text-lg"></i></span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="max-w-wrap mx-auto px-5 lg:px-8 pb-12">
+  <div class="border-t border-black/5 dk-line pt-12 grid grid-cols-1 md:grid-cols-4 gap-10 text-sm">
+    <div class="md:col-span-2"><p class="font-medium">Singapore Business Broker</p><p class="mt-3 text-ink-3 dk-text2 max-w-[40ch] font-light">Sell-side M&amp;A advisory for Singapore SMEs. A brand of The Funding Assembly.</p></div>
+    <div><p class="font-medium">Sellers</p><ul class="mt-4 space-y-2.5 text-ink-3 dk-text2 font-light"><li><a href="#sell" class="hover:text-ink dk-text transition-colors duration-500 ease">Sell your business</a></li><li><a href="#valuation" class="hover:text-ink transition-colors duration-500 ease">Valuation</a></li><li><a href="#" class="hover:text-ink transition-colors duration-500 ease">Guides</a></li><li><a href="#" class="hover:text-ink transition-colors duration-500 ease">SME multiples data</a></li></ul></div>
+    <div><p class="font-medium">Company</p><ul class="mt-4 space-y-2.5 text-ink-3 dk-text2 font-light"><li><a href="#" class="hover:text-ink transition-colors duration-500 ease">About</a></li><li><a href="#buyers" class="hover:text-ink transition-colors duration-500 ease">Buyers</a></li><li><a href="#" class="hover:text-ink transition-colors duration-500 ease">Contact</a></li><li><a href="#" class="hover:text-ink transition-colors duration-500 ease">Privacy (PDPA)</a></li></ul></div>
+  </div>
+  <p class="mt-12 text-xs text-ink-3 dk-text2">© 2026 The Funding Assembly Pte Ltd. Valuation estimates are indicative and not financial advice.</p>
+</footer>
+
+<script>
+const SECTORS = {
+  "F&B (restaurants, cafes, central kitchen)":[2.5,4],"Logistics and freight":[3.5,5.5],"Manufacturing and engineering":[4,6],"Education and enrichment":[4,6.5],"Healthcare and clinics":[5,8],"IT services and software":[5,9],"Construction and M&E":[2.5,4],"Trading and distribution":[3,5],"Retail":[2.5,4],"Cleaning, security, facilities":[3,5],"Marine and offshore":[3,5],"Professional services":[3.5,5.5],"E-commerce":[3,6],"Printing and packaging":[3,4.5],"Beauty and wellness":[2.5,4.5],"Childcare and preschool":[5,8],"Interior and renovation":[2.5,4],"Automotive":[3,4.5],"Events and media":[2.5,4.5],"Other":[3,5]
+};
+const sel = document.getElementById('sector'), pills = document.getElementById('sectorPills');
+Object.keys(SECTORS).forEach(s => {
+  const o = document.createElement('option'); o.value = s; o.textContent = s; sel.appendChild(o);
+  const a = document.createElement('a'); a.href = '#'; a.textContent = s;
+  a.className = 'text-sm rounded-full ring-1 ring-black/10 dk-line bg-white/60 dk-shell px-4 py-2.5 transition-all duration-500 ease hover:ring-accent hover:text-accent hover:-translate-y-0.5';
+  pills.appendChild(a);
+});
+
+// Menu
+const burger = document.getElementById('burger'), menu = document.getElementById('menu');
+burger.addEventListener('click', () => {
+  const open = burger.classList.toggle('open');
+  burger.setAttribute('aria-expanded', open);
+  if (open) { menu.classList.remove('hidden'); requestAnimationFrame(()=>requestAnimationFrame(()=>menu.classList.add('open'))); document.body.style.overflow='hidden'; }
+  else { menu.classList.remove('open'); setTimeout(()=>menu.classList.add('hidden'), 400); document.body.style.overflow=''; }
+});
+menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => burger.click()));
+
+// Multi-step form
+let step = 1; const total = 3;
+const form = document.getElementById('valform');
+const steps = [...form.querySelectorAll('fieldset[data-step]')];
+const labels = {1:'Step 1 of 3: Your business',2:'Step 2 of 3: Ownership and timing',3:'Step 3 of 3: Where to send your report'};
+function show(n){
+  steps.forEach(f => { const on = +f.dataset.step===n; f.classList.toggle('hidden',!on); f.classList.toggle('grid',on); });
+  document.getElementById('progress').style.width = (n/total*100)+'%';
+  document.getElementById('stepLabel').textContent = labels[n];
+  document.getElementById('stepCount').textContent = n+' / '+total;
+  document.getElementById('back').classList.toggle('invisible', n===1);
+  document.getElementById('nextLabel').textContent = n===total ? 'Show my valuation' : 'Continue';
+}
+function valid(n){
+  const f = steps[n-1]; let ok = true;
+  f.querySelectorAll('[required]').forEach(el => {
+    const bad = el.type==='checkbox' ? !el.checked : !el.value || (el.type==='email' && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(el.value));
+    el.classList.toggle('ring-2', bad); el.classList.toggle('ring-red-500', bad);
+    const err = el.parentElement.querySelector('.err'); if (err) err.classList.toggle('hidden', !bad);
+    if (bad) ok = false;
+  });
+  return ok;
+}
+document.getElementById('next').addEventListener('click', () => { if (!valid(step)) return; if (step < total) { step++; show(step); } else compute(); });
+document.getElementById('back').addEventListener('click', () => { if (step>1){ step--; show(step);} });
+function fmt(v){ return v >= 1e6 ? 'S$'+(v/1e6).toFixed(1)+'m' : 'S$'+Math.round(v/1e3)+'k'; }
+function compute(){
+  const d = Object.fromEntries(new FormData(form).entries());
+  const [lo,hi] = SECTORS[d.sector] || [3,5];
+  let ebitda = Math.max(0, +d.ebitda), rev = +d.revenue, yrs = +d.years, adj = 1;
+  if (d.dependency==='high') adj -= 0.15; if (d.dependency==='low') adj += 0.05; if (yrs < 3) adj -= 0.10;
+  let mLo = lo, mHi = hi; if (rev < 1) mHi = lo + (hi-lo)*0.4;
+  const evLo = ebitda*mLo*adj, evHi = ebitda*mHi*adj;
+  steps.forEach(f => f.classList.add('hidden')); document.getElementById('navbtns').classList.add('hidden');
+  document.getElementById('progress').style.width='100%'; document.getElementById('stepLabel').textContent='Your estimate'; document.getElementById('stepCount').textContent='';
+  const r = document.getElementById('result'); r.classList.remove('hidden');
+  const rangeEl = document.getElementById('range');
+  document.getElementById('basis').textContent = ebitda>0
+    ? `Based on ${mLo.toFixed(1)}x to ${mHi.toFixed(1)}x normalised earnings for ${d.sector.toLowerCase()}, adjusted for owner dependency and track record. Full report sent to ${d.email}.`
+    : `Loss-making or breakeven businesses are valued on assets, contracts or strategic fit rather than earnings. An advisor will review and email you a view.`;
+  // count-up
+  if (ebitda>0 && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const t0 = performance.now(), dur = 1100;
+    (function tick(now){ const p = Math.min(1,(now-t0)/dur), e = 1-Math.pow(1-p,3); rangeEl.textContent = fmt(evLo*e)+' to '+fmt(evHi*e); if (p<1) requestAnimationFrame(tick); })(t0);
+  } else rangeEl.textContent = ebitda>0 ? fmt(evLo)+' to '+fmt(evHi) : 'Needs a closer look';
+  const hot = rev >= 4 && ebitda > 0 && +d.timeline > 0 && +d.timeline <= 18 && +d.ownership >= 75;
+  document.getElementById('hot').classList.toggle('hidden', !hot);
+  document.getElementById('warm').classList.toggle('hidden', hot);
+  console.log('lead', {...d, evLo, evHi, score: hot?'hot':(rev>=2?'warm':'cold')}); // production: POST /api/valuation
+  r.scrollIntoView({behavior:'smooth', block:'center'});
+}
+show(1);
+
+// Scroll reveal
+const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} }), {threshold:0.12, rootMargin:'0px 0px -6% 0px'});
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+</body>
+</html>

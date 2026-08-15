@@ -1,0 +1,21 @@
+sector,low_multiple,high_multiple,period
+"F&B (restaurants, cafes, central kitchen)",2.5,4,2026-Q3
+"Logistics and freight",3.5,5.5,2026-Q3
+"Manufacturing and engineering",4,6,2026-Q3
+"Education and enrichment",4,6.5,2026-Q3
+"Healthcare and clinics",5,8,2026-Q3
+"IT services and software",5,9,2026-Q3
+"Construction and M&E",2.5,4,2026-Q3
+"Trading and distribution",3,5,2026-Q3
+"Retail",2.5,4,2026-Q3
+"Cleaning, security, facilities",3,5,2026-Q3
+"Marine and offshore",3,5,2026-Q3
+"Professional services",3.5,5.5,2026-Q3
+"E-commerce",3,6,2026-Q3
+"Printing and packaging",3,4.5,2026-Q3
+"Beauty and wellness",2.5,4.5,2026-Q3
+"Childcare and preschool",5,8,2026-Q3
+"Interior and renovation",2.5,4,2026-Q3
+"Automotive",3,4.5,2026-Q3
+"Events and media",2.5,4.5,2026-Q3
+"Other",3,5,2026-Q3

@@ -1,0 +1,47 @@
+---
+import type { GetStaticPaths } from 'astro';
+import { getCollection, type CollectionEntry } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import Shell from '../../components/Shell.astro';
+import FinalCta from '../../components/home/FinalCta.astro';
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const entries = await getCollection('cases');
+  return entries.map((entry) => ({ params: { slug: entry.slug }, props: { entry } }));
+};
+
+interface Props { entry: CollectionEntry<'cases'> }
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+const d = entry.data;
+---
+
+<Base title={`${d.title} | Singapore Business Broker`} description={d.description}>
+  <PageHeader
+    eyebrow={d.sectorLabel}
+    title={d.title}
+    intro={d.description}
+    crumbs={[{ href: '/case-studies', label: 'Transactions' }, { href: `/case-studies/${entry.slug}`, label: d.title }]}
+  />
+
+  <section class="max-w-wrap mx-auto px-5 lg:px-8 pb-16">
+    <Shell radius="2rem" class="reveal" coreClass="px-6 md:px-10 py-8 grid grid-cols-2 md:grid-cols-4 gap-8 md:divide-x divide-black/5 dark:divide-white/[0.08]">
+      <div><p class="text-[10px] uppercase tracking-[0.18em] text-ink-3 dark:text-[#a9b4c2]">Size</p><p class="mt-2 font-mono text-lg">{d.revenue}</p></div>
+      <div class="md:pl-8"><p class="text-[10px] uppercase tracking-[0.18em] text-ink-3 dark:text-[#a9b4c2]">Buyer</p><p class="mt-2 font-mono text-lg">{d.buyerType}</p></div>
+      <div class="md:pl-8"><p class="text-[10px] uppercase tracking-[0.18em] text-ink-3 dark:text-[#a9b4c2]">Time to close</p><p class="mt-2 font-mono text-lg">{d.timeToClose}</p></div>
+      <div class="md:pl-8"><p class="text-[10px] uppercase tracking-[0.18em] text-ink-3 dark:text-[#a9b4c2]">Outcome</p><p class="mt-2 text-sm font-light">{d.outcome}</p></div>
+    </Shell>
+  </section>
+
+  <section class="max-w-wrap mx-auto px-5 lg:px-8 pb-28 lg:pb-40">
+    <div class="prose-sbb reveal"><Content /></div>
+    {d.sample && (
+      <p class="mt-10 font-mono text-xs text-ink-3 dark:text-[#a9b4c2] reveal">
+        (sample entry) Illustrative of the deals we work on, pending publication of live figures.
+      </p>
+    )}
+  </section>
+
+  <FinalCta />
+</Base>

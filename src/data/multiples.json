@@ -1,0 +1,26 @@
+{
+  "note": "Indicative EV / normalised EBITDA multiple ranges for Singapore SME transactions. Sample figures carried over from the approved prototype. Replace with TFA's own transaction data before launch.",
+  "updated": "2026-Q3",
+  "sectors": [
+    { "slug": "fnb", "name": "F&B (restaurants, cafes, central kitchen)", "short": "F&B", "low": 2.5, "high": 4 },
+    { "slug": "logistics", "name": "Logistics and freight", "short": "Logistics", "low": 3.5, "high": 5.5 },
+    { "slug": "manufacturing", "name": "Manufacturing and engineering", "short": "Manufacturing", "low": 4, "high": 6 },
+    { "slug": "education", "name": "Education and enrichment", "short": "Education", "low": 4, "high": 6.5 },
+    { "slug": "healthcare", "name": "Healthcare and clinics", "short": "Healthcare", "low": 5, "high": 8 },
+    { "slug": "it-services", "name": "IT services and software", "short": "IT and software", "low": 5, "high": 9 },
+    { "slug": "construction", "name": "Construction and M&E", "short": "Construction", "low": 2.5, "high": 4 },
+    { "slug": "trading", "name": "Trading and distribution", "short": "Trading", "low": 3, "high": 5 },
+    { "slug": "retail", "name": "Retail", "short": "Retail", "low": 2.5, "high": 4 },
+    { "slug": "facilities", "name": "Cleaning, security, facilities", "short": "Facilities", "low": 3, "high": 5 },
+    { "slug": "marine", "name": "Marine and offshore", "short": "Marine", "low": 3, "high": 5 },
+    { "slug": "professional-services", "name": "Professional services", "short": "Professional services", "low": 3.5, "high": 5.5 },
+    { "slug": "ecommerce", "name": "E-commerce", "short": "E-commerce", "low": 3, "high": 6 },
+    { "slug": "printing-packaging", "name": "Printing and packaging", "short": "Printing", "low": 3, "high": 4.5 },
+    { "slug": "beauty-wellness", "name": "Beauty and wellness", "short": "Beauty and wellness", "low": 2.5, "high": 4.5 },
+    { "slug": "childcare", "name": "Childcare and preschool", "short": "Childcare", "low": 5, "high": 8 },
+    { "slug": "interior-renovation", "name": "Interior and renovation", "short": "Interior fit-out", "low": 2.5, "high": 4 },
+    { "slug": "automotive", "name": "Automotive", "short": "Automotive", "low": 3, "high": 4.5 },
+    { "slug": "events-media", "name": "Events and media", "short": "Events and media", "low": 2.5, "high": 4.5 },
+    { "slug": "other", "name": "Other", "short": "Other", "low": 3, "high": 5 }
+  ]
+}

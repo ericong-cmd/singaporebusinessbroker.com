@@ -1,0 +1,76 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHeader from '../components/PageHeader.astro';
+import site from '../data/site.json';
+---
+
+<Base
+  title="Privacy notice (PDPA) | Singapore Business Broker"
+  description="How Singapore Business Broker collects, uses and protects personal data under Singapore's Personal Data Protection Act."
+  noindex
+>
+  <PageHeader eyebrow="PDPA" title="Privacy notice" crumbs={[{ href: '/privacy', label: 'Privacy' }]} />
+  <section class="max-w-wrap mx-auto px-5 lg:px-8 pb-28 lg:pb-40">
+    <div class="prose-sbb reveal">
+      <p class="font-mono text-xs">
+        Template notice, accurate to how the site currently works. Have it reviewed by your own counsel before launch.
+      </p>
+
+      <h2>Who we are</h2>
+      <p>
+        {site.name} is a brand of {site.parentLegal}, Singapore. For questions about personal data, contact
+        <a href={`mailto:${site.email}`}>{site.email}</a>.
+      </p>
+
+      <h2>What we collect</h2>
+      <ul>
+        <li>Details you submit through the valuation estimator: sector, revenue band, profit, years operating, ownership, owner dependency, timeline, and your name, email and mobile number.</li>
+        <li>Details you submit through the contact form: enquiry type, name, email, mobile number and your message.</li>
+        <li>The page you submitted from and any campaign parameters in the URL, so we know how you found us.</li>
+      </ul>
+      <p>
+        We do not collect payment details. The valuation calculation itself runs in your browser; only the submission
+        reaches us.
+      </p>
+
+      <h2>Why we use it</h2>
+      <ul>
+        <li>To send your valuation report and respond to your enquiry.</li>
+        <li>To follow up about selling or acquiring a business, where you have consented.</li>
+        <li>To keep records of our own communications.</li>
+      </ul>
+      <p>We do not sell personal data, and we do not share enquirer details with buyers or third parties for their own marketing.</p>
+
+      <h2>Consent and withdrawal</h2>
+      <p>
+        We ask for explicit consent before you submit. You can withdraw consent at any time by emailing
+        <a href={`mailto:${site.email}`}>{site.email}</a>. We will stop using your data for that purpose within a
+        reasonable period, subject to any records we must keep by law.
+      </p>
+
+      <h2>Access and correction</h2>
+      <p>
+        Under the PDPA you may request access to the personal data we hold about you and how it has been used, and ask
+        us to correct it. Write to the address above.
+      </p>
+
+      <h2>Retention and protection</h2>
+      <p>
+        We keep enquiry data only as long as it serves the purpose it was collected for, or as long as the law requires.
+        It is held in our customer records system with access limited to the people who need it.
+      </p>
+
+      <h2>Cookies and analytics</h2>
+      <p>
+        This site sets no advertising cookies. Where privacy-friendly analytics are enabled, they record aggregate page
+        views and events without cookies and without identifying you personally.
+      </p>
+
+      <h2>Third parties</h2>
+      <p>
+        We use service providers for scheduling, email delivery and customer records. They process data on our
+        instructions only. Booking is loaded from a third-party scheduler, and only when you choose to open it.
+      </p>
+    </div>
+  </section>
+</Base>

@@ -1,0 +1,13 @@
+{
+  "name": "Singapore Business Broker",
+  "shortName": "SBB",
+  "tagline": "Sell your business confidentially, at the right price.",
+  "parent": "The Funding Assembly",
+  "parentLegal": "The Funding Assembly Pte Ltd",
+  "parentUrl": "https://www.thefundingassembly.com",
+  "email": "eric.ong@thefundingassembly.com",
+  "phoneDisplay": "+65 8951 8821",
+  "phoneHref": "+6589518821",
+  "dealRange": "S$3m to S$30m",
+  "bookingUrl": "https://cal.com/singaporebusinessbroker/30min"
+}

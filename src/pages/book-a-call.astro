@@ -1,0 +1,101 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHeader from '../components/PageHeader.astro';
+import Shell from '../components/Shell.astro';
+import Icon from '../components/Icon.astro';
+import site from '../data/site.json';
+
+const covers = [
+  'What you have built, and what you want afterwards',
+  'A first view on what the business is likely to fetch today',
+  'What would change that number, and how long it would take',
+  'Whether selling now actually serves you, including when it does not',
+];
+---
+
+<Base
+  title="Book a confidential call | Singapore Business Broker"
+  description="Book a confidential 30 minute call about selling your Singapore business. No fee, no obligation, and nothing leaves the conversation."
+>
+  <PageHeader
+    eyebrow="30 minutes, confidential"
+    title="Book a confidential call"
+    intro="No fee and no obligation. You do not have to name your company to have the conversation."
+    crumbs={[{ href: '/book-a-call', label: 'Book a call' }]}
+  />
+
+  <section class="max-w-wrap mx-auto px-5 lg:px-8 pb-28 lg:pb-40">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+      <div class="lg:col-span-7 reveal">
+        <Shell radius="2rem" pad="2" shadow="frame" coreClass="p-2">
+          <!--
+            Cal.com embed. The inline booker is loaded on click rather than on
+            page load: it is a third-party origin, and loading it eagerly would
+            put a script on every visit to a page most visitors only read.
+          -->
+          <div id="cal-slot" class="min-h-[560px] grid place-items-center p-8 text-center">
+            <div>
+              <Icon name="calendar-blank" class="text-4xl text-accent dark:text-[#7fd1b3]" />
+              <p class="mt-5 font-medium">Open the booking calendar</p>
+              <p class="mt-2 text-sm text-ink-2 dark:text-[#a9b4c2] font-light max-w-[38ch] mx-auto">
+                Loads our scheduling tool. If you would rather not, call or WhatsApp {site.phoneDisplay} instead.
+              </p>
+              <button
+                id="cal-load"
+                class="group mt-7 inline-flex items-center gap-3 rounded-full bg-ink dark:bg-paper-2 text-paper dark:text-night font-medium pl-6 pr-1.5 py-1.5 transition-transform duration-500 ease active:scale-[0.98]"
+              >
+                <span class="py-1.5">Show available times</span>
+                <span class="grid place-items-center w-9 h-9 rounded-full bg-white/15 dark:bg-black/10 transition-transform duration-500 ease group-hover:translate-x-0.5">
+                  <Icon name="arrow-right" class="text-lg" />
+                </span>
+              </button>
+            </div>
+          </div>
+        </Shell>
+      </div>
+
+      <div class="lg:col-span-5 reveal" data-d="1">
+        <h2 class="text-2xl font-medium tracking-tight">What the call covers</h2>
+        <ul class="mt-6 space-y-4">
+          {covers.map((c) => (
+            <li class="flex gap-3 text-sm text-ink-2 dark:text-[#a9b4c2] font-light">
+              <Icon name="check-circle" class="text-accent dark:text-[#7fd1b3] text-lg mt-0.5" />
+              <span>{c}</span>
+            </li>
+          ))}
+        </ul>
+
+        <Shell radius="1.5rem" class="mt-10" coreClass="p-6">
+          <h3 class="font-medium">Prefer to call or write</h3>
+          <p class="mt-3 text-sm font-light">
+            <a class="block text-accent dark:text-[#7fd1b3] hover:underline" href={`tel:${site.phoneHref}`}>{site.phoneDisplay}</a>
+            <a class="block mt-1 text-accent dark:text-[#7fd1b3] hover:underline break-all" href={`mailto:${site.email}`}>{site.email}</a>
+          </p>
+        </Shell>
+
+        <Shell radius="1.5rem" class="mt-4" coreClass="p-6">
+          <h3 class="font-medium">If you are not ready to sell</h3>
+          <p class="mt-3 text-sm text-ink-2 dark:text-[#a9b4c2] font-light">
+            Most owners we speak to are twelve to twenty-four months out. That is the window where preparation still
+            changes the price, so it is the most useful time to call.
+          </p>
+        </Shell>
+      </div>
+    </div>
+  </section>
+
+  <script define:vars={{ bookingUrl: site.bookingUrl }}>
+    document.getElementById('cal-load')?.addEventListener('click', () => {
+      const slot = document.getElementById('cal-slot');
+      if (!slot) return;
+      const frame = document.createElement('iframe');
+      frame.src = bookingUrl;
+      frame.title = 'Booking calendar';
+      frame.loading = 'lazy';
+      frame.className = 'w-full rounded-[calc(2rem-0.5rem)]';
+      frame.style.height = '640px';
+      frame.style.border = '0';
+      slot.replaceWith(frame);
+    });
+  </script>
+</Base>

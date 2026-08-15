@@ -1,0 +1,72 @@
+---
+/**
+ * Pill button with the nested icon circle on the right, per the prototype.
+ * The circle translates and scales on hover; the whole pill scales down on
+ * press. Renders as <a> when href is given, otherwise <button>.
+ */
+import Icon from './Icon.astro';
+
+interface Props {
+  href?: string;
+  type?: 'button' | 'submit' | 'reset';
+  variant?: 'ink' | 'accent' | 'ring' | 'inverse' | 'onAccent';
+  icon?: string;
+  size?: 'md' | 'sm';
+  class?: string;
+  id?: string;
+  block?: boolean;
+  rel?: string;
+  target?: string;
+}
+
+const {
+  href,
+  type = 'button',
+  variant = 'ink',
+  icon = 'arrow-up-right',
+  size = 'md',
+  class: className = '',
+  id,
+  block = false,
+  rel,
+  target,
+} = Astro.props;
+
+const shell = {
+  ink: 'bg-ink text-paper dark:bg-paper-2 dark:text-night',
+  accent: 'bg-accent text-white',
+  ring: 'ring-1 ring-black/10 dark:ring-white/10 bg-white/50 dark:bg-white/[0.04]',
+  inverse: 'bg-paper text-ink',
+  onAccent: 'bg-white text-accent-2',
+}[variant];
+
+const circle = {
+  ink: 'bg-white/15 dark:bg-black/10',
+  accent: 'bg-white/15',
+  ring: 'bg-black/5 dark:bg-white/10',
+  inverse: 'bg-black/5',
+  onAccent: 'bg-accent/10',
+}[variant];
+
+const sizing = size === 'sm'
+  ? 'text-[13px] pl-4 pr-1.5 py-1.5'
+  : 'text-base pl-6 pr-1.5 py-1.5';
+const dot = size === 'sm' ? 'w-7 h-7 text-base' : 'w-9 h-9 text-lg';
+const inner = size === 'sm' ? '' : 'py-1.5';
+
+const base = `group inline-flex items-center ${block ? 'w-full justify-between' : 'justify-between'} gap-4 rounded-full font-medium transition-transform duration-500 ease active:scale-[0.98] ${shell} ${sizing} ${className}`;
+const Tag = href ? 'a' : 'button';
+---
+
+<Tag
+  class={base}
+  id={id}
+  {...href ? { href, rel, target } : { type }}
+>
+  <span class={inner}><slot /></span>
+  <span
+    class={`grid place-items-center rounded-full ${circle} ${dot} transition-transform duration-500 ease group-hover:translate-x-0.5 group-hover:-translate-y-px group-hover:scale-105`}
+  >
+    <Icon name={icon} />
+  </span>
+</Tag>

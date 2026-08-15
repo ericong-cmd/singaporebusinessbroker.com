@@ -1,0 +1,10 @@
+{
+  "note": "Generated photos, hosted temporarily on Higgsfield CDN. Download, convert to webp, place in public/images/. See assets/download.sh",
+  "images": [
+    {"file": "hero-owner.png", "use": "Homepage hero (5:4)", "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3HNpLbN69Fx4dro0Vj44SWm4eKA/hf_20260815_093925_ae1a4d5c-7461-497f-a0af-3cea9d95fc75.png"},
+    {"file": "deal-meeting.png", "use": "Why-us bento large cell (16:9)", "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3HNpLbN69Fx4dro0Vj44SWm4eKA/hf_20260815_093925_4c650d10-7fe8-4075-8fb0-fb0f471bcfe7.png"},
+    {"file": "industrial-estate.png", "use": "Why-us bento small image cell (4:3)", "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3HNpLbN69Fx4dro0Vj44SWm4eKA/hf_20260815_093925_01e15fb2-9ea4-4ec8-a0ab-2723bc2940e6.png"},
+    {"file": "logistics-warehouse.png", "use": "Featured case study (1:1)", "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3HNpLbN69Fx4dro0Vj44SWm4eKA/hf_20260815_093925_c90f253e-0d4b-4ef9-849e-cae2a5089151.png"},
+    {"file": "og-share.png", "use": "OpenGraph / social share (16:9)", "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3HNpLbN69Fx4dro0Vj44SWm4eKA/hf_20260815_093925_aef7741d-2e4b-4d0e-9700-3a06b9b6cea6.png"}
+  ]
+}

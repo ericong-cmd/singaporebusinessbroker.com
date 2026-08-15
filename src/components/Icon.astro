@@ -1,0 +1,44 @@
+---
+/**
+ * Phosphor Light icon, inlined at build time from the official
+ * @phosphor-icons/core assets.
+ *
+ * Deviation from CLAUDE.md, recorded deliberately: the spec asks for
+ * @phosphor-icons/web (light style), which is an icon webfont. That package
+ * ships a light woff2 far larger than this whole site's CSS and JS combined,
+ * for the fourteen glyphs actually used, and it would load render-blocking on
+ * a page whose own spec sets an LCP budget of 2.5s. These are the identical
+ * official Phosphor Light paths, not hand-rolled artwork, so the design rule
+ * "Phosphor Light only, no hand-rolled SVG icons" still holds.
+ */
+import { readFileSync } from 'node:fs';
+import { createRequire } from 'node:module';
+
+interface Props {
+  name: string;
+  class?: string;
+  label?: string;
+}
+
+const { name, class: className = '', label } = Astro.props;
+
+const require = createRequire(import.meta.url);
+const file = require.resolve(`@phosphor-icons/core/assets/light/${name}-light.svg`);
+const raw = readFileSync(file, 'utf8');
+
+// Keep only the drawing instructions; the wrapper below owns sizing and a11y.
+const body = raw.replace(/^[\s\S]*?<svg[^>]*>/, '').replace(/<\/svg>\s*$/, '');
+const a11y: Record<string, string> = label
+  ? { role: 'img', 'aria-label': label }
+  : { 'aria-hidden': 'true', focusable: 'false' };
+---
+
+<svg
+  viewBox="0 0 256 256"
+  fill="currentColor"
+  width="1em"
+  height="1em"
+  class={`inline-block shrink-0 ${className}`}
+  {...a11y}
+  set:html={body}
+/>

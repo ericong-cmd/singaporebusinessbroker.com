@@ -1,0 +1,24 @@
+---
+import multiples from '../../data/multiples.json';
+---
+
+<section class="max-w-wrap mx-auto px-5 lg:px-8 pb-28 lg:pb-40">
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+    <div class="lg:col-span-4 reveal">
+      <h2 class="text-3xl md:text-5xl font-medium tracking-[-0.03em] leading-[1.05]">Sectors we sell</h2>
+      <p class="mt-6 text-lg text-ink-2 dark:text-[#a9b4c2] font-light">
+        Each sector has its own buyers, multiples and pitfalls. See the guide for yours.
+      </p>
+    </div>
+    <div class="lg:col-span-8 flex flex-wrap gap-2.5 reveal" data-d="1">
+      {multiples.sectors.map((s) => (
+        <a
+          href={`/sell/${s.slug}`}
+          class="text-sm rounded-full ring-1 ring-black/10 dark:ring-white/[0.08] bg-white/60 dark:bg-white/[0.04] px-4 py-2.5 transition-all duration-500 ease hover:ring-accent hover:text-accent dark:hover:text-[#7fd1b3] hover:-translate-y-0.5"
+        >
+          {s.name}
+        </a>
+      ))}
+    </div>
+  </div>
+</section>

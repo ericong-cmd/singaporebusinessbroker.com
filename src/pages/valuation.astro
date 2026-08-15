@@ -1,0 +1,65 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHeader from '../components/PageHeader.astro';
+import Valuation from '../components/Valuation.astro';
+import Icon from '../components/Icon.astro';
+import Faq from '../components/Faq.astro';
+import FinalCta from '../components/home/FinalCta.astro';
+
+const trust = [
+  { icon: 'lock-key', title: 'Confidential', body: 'Your details go to us and nowhere else. We do not list businesses publicly and we do not share enquiries with buyers.' },
+  { icon: 'calculator', title: 'Based on real transaction multiples', body: 'Sector ranges from Singapore SME transactions, adjusted for owner dependency, size and track record.' },
+  { icon: 'user-focus', title: 'Reviewed by an advisor', body: 'The on-screen range is automated. The report that follows is checked by a person before it is sent.' },
+];
+
+const faq = [
+  { q: 'Is the estimate accurate?', a: 'It is an indicative range, not a valuation. It uses the same method a buyer would start with: normalised earnings times a sector multiple. What it cannot do is assess your contracts, your customer concentration or your management depth, which is what moves the number within the range.' },
+  { q: 'What happens after I submit?', a: 'You see a range immediately on screen. A fuller report follows by email. If your business is in the size range we advise on, we will offer a 30 minute confidential call. There is no obligation and no cost.' },
+  { q: 'Will you contact my company?', a: 'No. We contact you on the details you give us, and nothing goes to your office, your staff or anyone else.' },
+  { q: 'What if my business is loss-making?', a: 'Then earnings multiples do not apply, and the tool will say so. Loss-making businesses are valued on assets, contracts or strategic fit. An advisor will look at it and send you a view.' },
+];
+
+const schema = [{
+  '@type': 'FAQPage',
+  mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
+}];
+---
+
+<Base
+  title="Free business valuation Singapore | What is my business worth?"
+  description="Free, confidential business valuation estimate for Singapore SME owners. Two minutes, instant range on screen, full report by email. Based on current sector transaction multiples."
+  schema={schema}
+>
+  <PageHeader
+    eyebrow="Free valuation estimate"
+    title="How much is your business worth?"
+    intro="Two minutes. Instant range on screen, full report by email. Confidential, and no obligation to do anything afterwards."
+    crumbs={[{ href: '/valuation', label: 'Valuation' }]}
+  />
+
+  <section class="max-w-wrap mx-auto px-5 lg:px-8 pb-28 lg:pb-40">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+      <div class="lg:col-span-5 lg:sticky lg:top-28 reveal">
+        <div class="space-y-8">
+          {trust.map((t) => (
+            <div class="flex gap-4">
+              <Icon name={t.icon} class="text-2xl text-accent dark:text-[#7fd1b3] mt-0.5" />
+              <div>
+                <h2 class="font-medium">{t.title}</h2>
+                <p class="mt-2 text-sm text-ink-2 dark:text-[#a9b4c2] font-light leading-relaxed">{t.body}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+        <p class="mt-10 text-xs text-ink-3 dark:text-[#a9b4c2] font-light max-w-[42ch]">
+          We advise on Singapore businesses worth roughly S$1m to S$30m, with most work between S$3m and S$30m. Below
+          that the estimate and the preparation guide are still yours to keep.
+        </p>
+      </div>
+      <div class="lg:col-span-7 reveal" data-d="1"><Valuation /></div>
+    </div>
+  </section>
+
+  <Faq items={faq} heading="About the estimate" />
+  <FinalCta heading="Rather just talk it through?" body="A confidential 30 minute call, no fee and no obligation. Most owners we speak to are twelve to twenty-four months from selling." />
+</Base>

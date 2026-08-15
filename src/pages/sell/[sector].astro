@@ -1,0 +1,140 @@
+---
+import type { GetStaticPaths } from 'astro';
+import { getCollection, type CollectionEntry } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import Shell from '../../components/Shell.astro';
+import Button from '../../components/Button.astro';
+import Icon from '../../components/Icon.astro';
+import FinalCta from '../../components/home/FinalCta.astro';
+import multiples from '../../data/multiples.json';
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const entries = await getCollection('sectors', ({ data }) => !data.draft);
+  return entries.map((entry) => ({ params: { sector: entry.slug }, props: { entry } }));
+};
+
+interface Props { entry: CollectionEntry<'sectors'> }
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+const d = entry.data;
+const range = multiples.sectors.find((s) => s.slug === d.sector);
+const related = (await getCollection('guides', ({ data }) => !data.draft))
+  .sort((a, b) => a.data.order - b.data.order)
+  .slice(0, 4);
+
+const schema = [{
+  '@type': 'Article',
+  headline: d.heading,
+  description: d.description,
+  datePublished: d.updated.toISOString(),
+  dateModified: d.updated.toISOString(),
+  author: { '@id': `${Astro.site}#org` },
+  publisher: { '@id': `${Astro.site}#org` },
+  mainEntityOfPage: new URL(`/sell/${entry.slug}`, Astro.site).href,
+}];
+---
+
+<Base title={`${d.title} | Singapore Business Broker`} description={d.description} schema={schema}>
+  <PageHeader
+    eyebrow="Sector guide"
+    title={d.heading}
+    intro={d.intro}
+    crumbs={[{ href: '/sell-your-business', label: 'Sell' }, { href: `/sell/${entry.slug}`, label: range?.short ?? d.title }]}
+  >
+    <div class="flex flex-col sm:flex-row gap-3">
+      <Button href={`/valuation?sector=${entry.slug}`} variant="ink">Value my {range?.short.toLowerCase() ?? ''} business</Button>
+      <Button href="/book-a-call" variant="ring" icon="phone">Book a confidential call</Button>
+    </div>
+  </PageHeader>
+
+  <section class="max-w-wrap mx-auto px-5 lg:px-8 pb-20">
+    <Shell radius="2rem" class="reveal" coreClass="px-6 md:px-10 py-8 grid grid-cols-1 sm:grid-cols-3 gap-8 sm:divide-x divide-black/5 dark:divide-white/[0.08]">
+      <div>
+        <p class="text-[10px] uppercase tracking-[0.18em] text-ink-3 dark:text-[#a9b4c2]">Typical multiple <span class="font-mono normal-case tracking-normal">(sample)</span></p>
+        <p class="mt-2 font-mono text-2xl md:text-3xl tracking-tight">{range?.low}x to {range?.high}x</p>
+        <p class="mt-2 text-sm text-ink-3 dark:text-[#a9b4c2] font-light">Normalised EBITDA, {multiples.updated}</p>
+      </div>
+      <div class="sm:pl-8">
+        <p class="text-[10px] uppercase tracking-[0.18em] text-ink-3 dark:text-[#a9b4c2]">Typical process</p>
+        <p class="mt-2 font-mono text-2xl md:text-3xl tracking-tight">6 to 9 months</p>
+        <p class="mt-2 text-sm text-ink-3 dark:text-[#a9b4c2] font-light">Mandate to completion</p>
+      </div>
+      <div class="sm:pl-8">
+        <p class="text-[10px] uppercase tracking-[0.18em] text-ink-3 dark:text-[#a9b4c2]">Buyer types</p>
+        <p class="mt-2 font-mono text-2xl md:text-3xl tracking-tight">{d.buyers.length}</p>
+        <p class="mt-2 text-sm text-ink-3 dark:text-[#a9b4c2] font-light">Distinct buyer groups active in this sector</p>
+      </div>
+    </Shell>
+  </section>
+
+  <section class="max-w-wrap mx-auto px-5 lg:px-8 pb-20 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
+    <div class="reveal">
+      <h2 class="text-2xl md:text-3xl font-medium tracking-[-0.02em]">Why owners in this sector sell</h2>
+      <ul class="mt-6 space-y-4">
+        {d.whySell.map((w) => (
+          <li class="flex gap-3 text-ink-2 dark:text-[#a9b4c2] font-light">
+            <Icon name="arrow-right" class="text-accent dark:text-[#7fd1b3] mt-1.5 text-sm" />
+            <span>{w}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+    <div class="reveal" data-d="1">
+      <h2 class="text-2xl md:text-3xl font-medium tracking-[-0.02em]">Who buys</h2>
+      <div class="mt-6 grid gap-3">
+        {d.buyers.map((b) => (
+          <Shell radius="1.5rem" coreClass="p-6">
+            <p class="font-medium">{b.type}</p>
+            <p class="mt-2 text-sm text-ink-2 dark:text-[#a9b4c2] font-light">{b.wants}</p>
+          </Shell>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="max-w-wrap mx-auto px-5 lg:px-8 pb-20 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
+    <div class="reveal">
+      <h2 class="text-2xl md:text-3xl font-medium tracking-[-0.02em]">What moves you up the range</h2>
+      <ul class="mt-6 space-y-4">
+        {d.drivers.map((x) => (
+          <li class="flex gap-3 text-ink-2 dark:text-[#a9b4c2] font-light">
+            <Icon name="check-circle" class="text-accent dark:text-[#7fd1b3] mt-1 text-lg" />
+            <span>{x}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+    <div class="reveal" data-d="1">
+      <h2 class="text-2xl md:text-3xl font-medium tracking-[-0.02em]">What costs you money</h2>
+      <ul class="mt-6 space-y-4">
+        {d.pitfalls.map((x) => (
+          <li class="flex gap-3 text-ink-2 dark:text-[#a9b4c2] font-light">
+            <Icon name="warning-circle" class="text-accent dark:text-[#7fd1b3] mt-1 text-lg" />
+            <span>{x}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="max-w-wrap mx-auto px-5 lg:px-8 pb-20">
+    <div class="prose-sbb reveal"><Content /></div>
+  </section>
+
+  <section class="max-w-wrap mx-auto px-5 lg:px-8 pb-28 lg:pb-40">
+    <h2 class="text-2xl md:text-3xl font-medium tracking-[-0.02em] reveal">Read next</h2>
+    <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-3">
+      {related.map((g, i) => (
+        <a href={`/guides/${g.slug}`} class="reveal group rounded-[1.5rem] bg-black/5 dark:bg-white/[0.04] ring-1 ring-black/5 dark:ring-white/[0.08] p-1.5 transition-transform duration-700 ease hover:-translate-y-0.5" data-d={String((i % 2) + 1)}>
+          <div class="rounded-[calc(1.5rem-0.375rem)] bg-white dark:bg-night-core p-6 h-full">
+            <p class="font-medium group-hover:text-accent dark:group-hover:text-[#7fd1b3] transition-colors duration-500 ease">{g.data.title}</p>
+            <p class="mt-2 text-sm text-ink-2 dark:text-[#a9b4c2] font-light">{g.data.description}</p>
+          </div>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <FinalCta />
+</Base>

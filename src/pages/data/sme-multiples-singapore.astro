@@ -1,0 +1,94 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import Shell from '../../components/Shell.astro';
+import Button from '../../components/Button.astro';
+import FinalCta from '../../components/home/FinalCta.astro';
+import multiples from '../../data/multiples.json';
+
+const schema = [{
+  '@type': 'Dataset',
+  name: 'Singapore SME EBITDA multiples by sector',
+  description:
+    'Indicative enterprise value to normalised EBITDA multiple ranges for Singapore SME transactions, by sector, updated quarterly.',
+  creator: { '@id': `${Astro.site}#org` },
+  temporalCoverage: multiples.updated,
+  license: 'https://creativecommons.org/licenses/by/4.0/',
+  distribution: [{ '@type': 'DataDownload', encodingFormat: 'text/csv', contentUrl: new URL('/data/sme-multiples-singapore.csv', Astro.site).href }],
+}];
+---
+
+<Base
+  title="Singapore SME EBITDA multiples by sector | Data"
+  description="Indicative EV to EBITDA multiple ranges for Singapore SME transactions across 20 sectors, updated quarterly, with methodology and a downloadable CSV."
+  schema={schema}
+>
+  <PageHeader
+    eyebrow={`Data, ${multiples.updated}`}
+    title="Singapore SME transaction multiples by sector"
+    intro="Indicative enterprise value to normalised EBITDA ranges. Free to use and cite, attribution appreciated."
+    crumbs={[{ href: '/data/sme-multiples-singapore', label: 'SME multiples' }]}
+  >
+    <Button href="/data/sme-multiples-singapore.csv" variant="ink" icon="download-simple">Download CSV</Button>
+  </PageHeader>
+
+  <section class="max-w-wrap mx-auto px-5 lg:px-8 pb-16">
+    <Shell radius="2rem" class="reveal" coreClass="p-2 md:p-4 overflow-x-auto">
+      <table class="w-full text-sm min-w-[520px]">
+        <caption class="sr-only">Indicative EV to normalised EBITDA multiple ranges by sector</caption>
+        <thead>
+          <tr class="text-left text-[10px] uppercase tracking-[0.18em] text-ink-3 dark:text-[#a9b4c2]">
+            <th scope="col" class="px-4 py-4 font-medium">Sector</th>
+            <th scope="col" class="px-4 py-4 font-medium">Low</th>
+            <th scope="col" class="px-4 py-4 font-medium">High</th>
+            <th scope="col" class="px-4 py-4 font-medium">Sector guide</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-black/5 dark:divide-white/[0.08]">
+          {multiples.sectors.map((s) => (
+            <tr>
+              <td class="px-4 py-3.5 font-light">{s.name}</td>
+              <td class="px-4 py-3.5 font-mono">{s.low.toFixed(1)}x</td>
+              <td class="px-4 py-3.5 font-mono">{s.high.toFixed(1)}x</td>
+              <td class="px-4 py-3.5">
+                <a class="text-accent dark:text-[#7fd1b3] hover:underline" href={`/sell/${s.slug}`}>Read</a>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </Shell>
+  </section>
+
+  <section class="max-w-wrap mx-auto px-5 lg:px-8 pb-28 lg:pb-40">
+    <div class="prose-sbb reveal">
+      <h2>Methodology</h2>
+      <p>
+        Ranges describe enterprise value as a multiple of normalised EBITDA for Singapore SME transactions in the
+        S$1m to S$30m band. Normalised EBITDA means reported profit with interest, tax, depreciation and amortisation
+        added back, personal and one-off items removed, and owner remuneration restated to a market rate for the role.
+      </p>
+      <p>
+        Where a business sits inside its range is decided mostly by four factors: whether revenue is contracted or
+        recurring, customer concentration, whether there is management below the owner, and how quickly the financial
+        records can be verified. Moving up one turn of the multiple is usually worth more than a year of trading growth.
+      </p>
+      <h2>Limitations</h2>
+      <p>
+        These are indicative ranges for orientation, not valuations, and they are not a promise of price. Individual
+        transactions fall outside them in both directions. Enterprise value is also not what a seller receives: debt,
+        surplus cash, the working capital adjustment and deal structure all sit between the two.
+      </p>
+      <p class="font-mono text-xs">
+        (sample figures) These ranges are carried over from the approved design prototype and are pending replacement
+        with our own transaction data.
+      </p>
+      <h2>Citing this table</h2>
+      <p>
+        Free to reproduce with a link to this page. The CSV above contains the same figures with the period stamp.
+      </p>
+    </div>
+  </section>
+
+  <FinalCta heading="Want a range for your own business?" body="The estimator applies these multiples to your numbers and adjusts for owner dependency, size and track record." />
+</Base>

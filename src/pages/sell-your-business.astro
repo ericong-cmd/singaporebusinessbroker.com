@@ -1,0 +1,112 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHeader from '../components/PageHeader.astro';
+import Button from '../components/Button.astro';
+import Shell from '../components/Shell.astro';
+import Icon from '../components/Icon.astro';
+import Faq from '../components/Faq.astro';
+import FinalCta from '../components/home/FinalCta.astro';
+import process from '../data/process.json';
+import faq from '../data/faq.json';
+import site from '../data/site.json';
+
+const why = [
+  { icon: 'users-three', title: 'Competitive tension', body: 'We approach 30 to 80 qualified buyers under NDA and run parallel conversations. One buyer is a negotiation you lose slowly.' },
+  { icon: 'lock-key', title: 'Confidentiality by mechanism', body: 'Blind teaser, buyers screened before disclosure, NDA before your name, staged release, and a data room with per-document access.' },
+  { icon: 'chart-line-up', title: 'Priced on evidence', body: 'Sector multiples, normalised earnings and actual buyer appetite, not a hopeful number designed to win the mandate.' },
+  { icon: 'shield-check', title: 'Deals held together', body: 'Most SME deals die in diligence. We prepare the answers before the questions arrive and keep the timetable moving.' },
+];
+
+const fees = [
+  { title: 'Engagement fee', body: 'A modest fee at the start to prepare the valuation, the teaser and the information memorandum. This is the work that decides the price, and it is real work.' },
+  { title: 'Success fee', body: 'A percentage of the sale price, payable at completion. No sale, no success fee. The percentage is set out in writing before you commit to anything.' },
+  { title: 'No surprises', body: 'Third-party costs, meaning your lawyer, your accountant and stamp duty, are paid by you directly. We tell you what to budget at the outset rather than at completion.' },
+];
+
+const schema = [{
+  '@type': 'FAQPage',
+  mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
+}];
+---
+
+<Base
+  title="Sell your business in Singapore | Confidential sell-side M&A"
+  description="How to sell a Singapore business confidentially: the five-stage process, how confidentiality is protected mechanically, what it costs, and how long it takes."
+  schema={schema}
+>
+  <PageHeader
+    eyebrow="Sell-side M&A"
+    title="Sell your business confidentially, at the right price."
+    intro={`We run the whole sale for Singapore businesses worth ${site.dealRange}. Valuation, buyer search, negotiation and completion, while you keep running the business.`}
+    crumbs={[{ href: '/sell-your-business', label: 'Sell your business' }]}
+  >
+    <div class="flex flex-col sm:flex-row gap-3">
+      <Button href="/valuation" variant="ink">Get free valuation</Button>
+      <Button href="/book-a-call" variant="ring" icon="phone">Book a confidential call</Button>
+    </div>
+  </PageHeader>
+
+  <section class="max-w-wrap mx-auto px-5 lg:px-8 pb-28 lg:pb-40">
+    <div class="max-w-[60ch] reveal">
+      <h2 class="text-3xl md:text-5xl font-medium tracking-[-0.03em] leading-[1.05]">Most owners sell once. We do it every month.</h2>
+      <p class="mt-6 text-lg text-ink-2 dark:text-[#a9b4c2] leading-relaxed font-light">
+        An owner selling for the first time negotiates against a buyer who has done it many times. That gap rarely shows
+        up as a lower headline number. It shows up as a re-trade after diligence, an earn-out that never pays and a
+        transition nobody agreed in writing.
+      </p>
+    </div>
+    <div class="mt-16 grid grid-cols-1 md:grid-cols-2 gap-4">
+      {why.map((w, i) => (
+        <Shell radius="2rem" class="reveal" coreClass="p-8 h-full flex flex-col gap-8" data-d={String((i % 2) + 1)}>
+          <Icon name={w.icon} class="text-4xl text-accent dark:text-[#7fd1b3]" />
+          <div>
+            <h3 class="text-xl font-medium tracking-tight">{w.title}</h3>
+            <p class="mt-3 text-sm text-ink-2 dark:text-[#a9b4c2] font-light">{w.body}</p>
+          </div>
+        </Shell>
+      ))}
+    </div>
+  </section>
+
+  <section class="max-w-wrap mx-auto px-5 lg:px-8">
+    <div class="rounded-[2.5rem] bg-ink dark:bg-night-2 text-paper px-6 md:px-14 py-20 lg:py-28 relative overflow-hidden">
+      <div class="absolute -top-32 -right-32 w-[520px] h-[520px] rounded-full bg-accent/20 blur-3xl pointer-events-none" aria-hidden="true"></div>
+      <div class="relative max-w-[60ch] reveal">
+        <h2 class="text-3xl md:text-5xl font-medium tracking-[-0.03em] leading-[1.05]">The process, stage by stage</h2>
+        <p class="mt-6 text-lg text-paper/65 leading-relaxed font-light">Six to nine months from mandate to completion.</p>
+      </div>
+      <ol class="relative mt-16 grid grid-cols-1 md:grid-cols-5 gap-10 md:gap-6">
+        {process.map((s, i) => (
+          <li class="relative md:pt-8 md:border-t border-white/15 reveal" data-d={String(Math.min(i, 4))}>
+            <span class="hidden md:block step-dot absolute -top-[5px] left-0" aria-hidden="true"></span>
+            <p class="font-mono text-xs text-paper/50 mb-2">{s.n}</p>
+            <h3 class="font-medium">{s.title}</h3>
+            <p class="mt-2 text-sm text-paper/65 font-light">{s.body}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <section class="max-w-wrap mx-auto px-5 lg:px-8 py-28 lg:py-40">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+      <div class="lg:col-span-4 reveal">
+        <h2 class="text-3xl md:text-5xl font-medium tracking-[-0.03em] leading-[1.05]">What it costs</h2>
+        <p class="mt-6 text-lg text-ink-2 dark:text-[#a9b4c2] font-light">
+          Set out in writing before you commit. If it does not sell, there is no success fee.
+        </p>
+      </div>
+      <div class="lg:col-span-8 grid gap-4">
+        {fees.map((f, i) => (
+          <Shell radius="1.5rem" class="reveal" coreClass="p-7" data-d={String(i)}>
+            <h3 class="font-medium">{f.title}</h3>
+            <p class="mt-2 text-sm text-ink-2 dark:text-[#a9b4c2] font-light leading-relaxed">{f.body}</p>
+          </Shell>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <Faq items={faq} />
+  <FinalCta />
+</Base>

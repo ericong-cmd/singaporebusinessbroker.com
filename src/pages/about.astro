@@ -1,0 +1,89 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHeader from '../components/PageHeader.astro';
+import Shell from '../components/Shell.astro';
+import Button from '../components/Button.astro';
+import FinalCta from '../components/home/FinalCta.astro';
+import site from '../data/site.json';
+
+const commitments = [
+  { title: 'We tell you when not to sell', body: 'If a sale is premature, or the business is below the size where we add value, we say so in the first conversation rather than taking a mandate that will not complete.' },
+  { title: 'Fees in writing, before you commit', body: 'An engagement fee to prepare the materials and a success fee at completion. Both set out in writing, with a worked example on your own numbers, before you sign anything.' },
+  { title: 'We state the agency position unprompted', body: 'On a sale mandate we act for the seller. Where a buyer pays us for buy-side process work, that fee is disclosed to both sides. Nobody has to ask.' },
+  { title: 'No client is named without permission', body: 'Live mandates are described only in disguised terms. Completed transactions are named only where the client agreed in writing.' },
+];
+---
+
+<Base
+  title="About | Singapore Business Broker"
+  description="Singapore Business Broker is the sell-side M&A practice of The Funding Assembly, working with SME owners in the S$3m to S$30m range."
+>
+  <PageHeader
+    eyebrow="About"
+    title="Who you would actually be working with"
+    intro={`${site.name} is the sell-side M&A practice of ${site.parent}. We work with Singapore SME owners on transactions in the ${site.dealRange} range.`}
+    crumbs={[{ href: '/about', label: 'About' }]}
+  >
+    <Button href="/book-a-call" variant="ink" icon="phone">Book a confidential call</Button>
+  </PageHeader>
+
+  <section class="max-w-wrap mx-auto px-5 lg:px-8 pb-24">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
+      <div class="lg:col-span-7 reveal">
+        <div class="prose-sbb">
+          <h2>A boutique, and what that trade-off means</h2>
+          <p>
+            We are deliberately small. On your mandate you work with the people who run it, from the first
+            conversation to completion, rather than a business development person who signs you up and hands you on.
+          </p>
+          <p>
+            That is the advantage, and the corresponding disadvantage is worth stating honestly: a boutique does not
+            have the deal volume, research desk or international coverage of a large corporate finance house. If your
+            business needs a cross-border auction with twenty international bidders, engage a firm built for that.
+          </p>
+          <p>
+            What we are built for is the Singapore SME where the owner is the business, confidentiality is existential,
+            and the difference between a good outcome and a poor one is whether anyone ran a real process.
+          </p>
+          <h2>Why the exact-match name</h2>
+          <p>
+            Singapore Business Broker is a standalone brand under {site.parent}. The parent firm does the fulfilment,
+            and it is credited here and in the footer rather than hidden. Owners search for a business broker in
+            Singapore, and we would rather be findable than clever.
+          </p>
+        </div>
+      </div>
+      <div class="lg:col-span-5 reveal" data-d="1">
+        <Shell radius="1.5rem" coreClass="p-6">
+          <h2 class="font-medium">Check us before you reply</h2>
+          <p class="mt-3 text-sm text-ink-2 dark:text-[#a9b4c2] font-light">
+            You will, and you should. We are registered in Singapore under {site.parentLegal}. If there is something
+            you cannot verify from the outside, ask in the first call and we will answer it directly.
+          </p>
+          <p class="mt-3 text-sm"><a class="text-accent dark:text-[#7fd1b3] hover:underline" href={site.parentUrl} rel="noopener">{site.parent}</a></p>
+        </Shell>
+        <Shell radius="1.5rem" class="mt-4" coreClass="p-6">
+          <h2 class="font-medium">Talk to us</h2>
+          <p class="mt-3 text-sm font-light">
+            <a class="block text-accent dark:text-[#7fd1b3] hover:underline" href={`tel:${site.phoneHref}`}>{site.phoneDisplay}</a>
+            <a class="block mt-1 text-accent dark:text-[#7fd1b3] hover:underline break-all" href={`mailto:${site.email}`}>{site.email}</a>
+          </p>
+        </Shell>
+      </div>
+    </div>
+  </section>
+
+  <section class="max-w-wrap mx-auto px-5 lg:px-8 pb-28 lg:pb-40">
+    <h2 class="text-3xl md:text-4xl font-medium tracking-[-0.03em] reveal">Four commitments, each one checkable</h2>
+    <div class="mt-10 grid grid-cols-1 md:grid-cols-2 gap-3">
+      {commitments.map((c, i) => (
+        <Shell radius="2rem" class="reveal" coreClass="p-8 h-full" data-d={String((i % 2) + 1)}>
+          <h3 class="text-lg font-medium tracking-tight">{c.title}</h3>
+          <p class="mt-3 text-sm text-ink-2 dark:text-[#a9b4c2] font-light leading-relaxed">{c.body}</p>
+        </Shell>
+      ))}
+    </div>
+  </section>
+
+  <FinalCta />
+</Base>

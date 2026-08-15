@@ -1,0 +1,37 @@
+---
+import Icon from '../Icon.astro';
+import site from '../../data/site.json';
+
+interface Props {
+  heading?: string;
+  body?: string;
+}
+const {
+  heading = 'Thinking about selling in the next two years?',
+  body = 'A confidential 30 minute call. We tell you what your business is likely worth and what to fix first.',
+} = Astro.props;
+---
+
+<section id="book" class="max-w-wrap mx-auto px-5 lg:px-8 pb-28 lg:pb-40">
+  <div class="rounded-[2.5rem] bg-black/5 dark:bg-white/[0.04] ring-1 ring-black/5 dark:ring-white/[0.08] p-2 reveal">
+    <div class="relative overflow-hidden rounded-core-lg bg-accent text-white p-10 md:p-16 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+      <div class="absolute -top-40 -right-20 w-[520px] h-[520px] rounded-full bg-white/10 blur-3xl pointer-events-none" aria-hidden="true"></div>
+      <div class="relative lg:col-span-8">
+        <h2 class="text-3xl md:text-5xl font-medium tracking-[-0.03em] leading-[1.05]">{heading}</h2>
+        <p class="mt-5 text-white/80 max-w-[50ch] text-lg font-light">{body}</p>
+      </div>
+      <div class="relative lg:col-span-4 flex flex-col gap-3">
+        <a href="/book-a-call" class="group inline-flex items-center justify-between gap-4 rounded-full bg-white text-accent-2 font-medium pl-6 pr-1.5 py-1.5 transition-transform duration-500 ease active:scale-[0.98]">
+          <span class="py-1.5">Book a confidential call</span>
+          <span class="grid place-items-center w-9 h-9 rounded-full bg-accent/10 transition-transform duration-500 ease group-hover:translate-x-0.5 group-hover:-translate-y-px group-hover:scale-105">
+            <Icon name="calendar-blank" class="text-lg" />
+          </span>
+        </a>
+        <a href={`tel:${site.phoneHref}`} class="group inline-flex items-center justify-between gap-4 rounded-full ring-1 ring-white/40 text-white font-medium pl-6 pr-1.5 py-1.5 transition-colors duration-500 ease hover:bg-white/10">
+          <span class="py-1.5">{site.phoneDisplay}</span>
+          <span class="grid place-items-center w-9 h-9 rounded-full bg-white/15"><Icon name="phone" class="text-lg" /></span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

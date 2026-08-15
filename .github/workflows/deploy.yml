@@ -1,34 +1,41 @@
-name: Deploy to Vercel
+name: Build and deploy
 
 on:
   push:
     branches: [main]
+  pull_request:
   workflow_dispatch:
 
 concurrency:
-  group: deploy-production
+  group: deploy-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - name: Type check
+        run: npx astro check
+      - name: Build
+        run: npm run build
+      - name: Lint rendered copy
+        run: npm run lint:copy
 
+  deploy:
+    needs: build
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
-          python-version: "3.12"
-
-      - name: Rebuild the site and fail if the committed HTML is stale
-        run: |
-          python3 build.py
-          if ! git diff --quiet; then
-            echo "::error::Generated HTML differs from what build.py produces."
-            echo "Run 'python3 build.py' locally and commit the result."
-            git --no-pager diff --stat
-            exit 1
-          fi
-
+          python-version: '3.12'
       - name: Deploy to Vercel production
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}

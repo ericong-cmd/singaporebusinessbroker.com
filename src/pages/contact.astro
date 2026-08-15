@@ -1,0 +1,154 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHeader from '../components/PageHeader.astro';
+import Shell from '../components/Shell.astro';
+import Icon from '../components/Icon.astro';
+import site from '../data/site.json';
+
+const field =
+  'rounded-2xl border border-black/10 dark:border-white/10 bg-paper dark:bg-night dark:text-[#e9ecef] px-4 py-3.5 text-sm focus:outline-none focus:ring-2 focus:ring-accent/60 transition-shadow duration-500 ease';
+
+const schema = [{ '@type': 'ContactPage', url: new URL('/contact', Astro.site).href, mainEntity: { '@id': `${Astro.site}#org` } }];
+---
+
+<Base
+  title="Contact | Singapore Business Broker"
+  description="Contact Singapore Business Broker about selling your business, buying a business, or a referral. Confidential, no obligation."
+  schema={schema}
+>
+  <PageHeader
+    eyebrow="Contact"
+    title="Start a confidential conversation"
+    intro="You do not have to name your company to ask a question. Nothing leaves the conversation."
+    crumbs={[{ href: '/contact', label: 'Contact' }]}
+  />
+
+  <section class="max-w-wrap mx-auto px-5 lg:px-8 pb-28 lg:pb-40">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+      <div class="lg:col-span-7 reveal">
+        <Shell radius="2rem" pad="2" shadow="frame">
+          <form id="contactform" class="p-6 md:p-10 grid grid-cols-1 md:grid-cols-2 gap-6" novalidate>
+            <div class="md:col-span-2 grid gap-2">
+              <label for="enquiry" class="text-sm font-medium">I am</label>
+              <select id="enquiry" name="enquiry" required class={field}>
+                <option value="seller">An owner thinking about selling</option>
+                <option value="buyer">A buyer looking to acquire</option>
+                <option value="adviser">An adviser with a client</option>
+                <option value="other">Something else</option>
+              </select>
+            </div>
+            <div class="grid gap-2">
+              <label for="cname" class="text-sm font-medium">Your name</label>
+              <input id="cname" name="name" type="text" required autocomplete="name" class={field} />
+              <p class="err hidden text-xs text-red-700 dark:text-red-400">Enter your name.</p>
+            </div>
+            <div class="grid gap-2">
+              <label for="cphone" class="text-sm font-medium">Mobile</label>
+              <input id="cphone" name="phone" type="tel" autocomplete="tel" placeholder="+65" class={field} />
+            </div>
+            <div class="md:col-span-2 grid gap-2">
+              <label for="cemail" class="text-sm font-medium">Email</label>
+              <input id="cemail" name="email" type="email" required autocomplete="email" class={field} />
+              <p class="err hidden text-xs text-red-700 dark:text-red-400">Enter a valid email.</p>
+            </div>
+            <div class="md:col-span-2 grid gap-2">
+              <label for="message" class="text-sm font-medium">What would you like to discuss?</label>
+              <textarea id="message" name="message" rows="5" required class={field}></textarea>
+              <p class="err hidden text-xs text-red-700 dark:text-red-400">Tell us a little about it.</p>
+            </div>
+            <div class="md:col-span-2 grid gap-2">
+              <label class="flex gap-3 text-xs text-ink-3 dark:text-[#a9b4c2] leading-relaxed">
+                <input type="checkbox" name="consent" required class="mt-0.5 accent-accent" />
+                <span>I consent to {site.name} contacting me about this enquiry under the PDPA. See our <a class="underline" href="/privacy">privacy notice</a>.</span>
+              </label>
+              <p class="err hidden text-xs text-red-700 dark:text-red-400">Please tick to continue.</p>
+            </div>
+            <div class="md:col-span-2 flex flex-wrap items-center gap-4">
+              <button type="submit" id="csubmit" class="group inline-flex items-center gap-3 rounded-full bg-ink dark:bg-paper-2 text-paper dark:text-night font-medium pl-6 pr-1.5 py-1.5 transition-transform duration-500 ease active:scale-[0.98]">
+                <span class="py-1.5">Send</span>
+                <span class="grid place-items-center w-9 h-9 rounded-full bg-white/15 dark:bg-black/10 transition-transform duration-500 ease group-hover:translate-x-0.5"><Icon name="arrow-right" class="text-lg" /></span>
+              </button>
+              <p id="cstatus" class="text-sm font-light" role="status" aria-live="polite"></p>
+            </div>
+            <noscript>
+              <p class="md:col-span-2 text-sm font-light">
+                This form needs JavaScript. Email <a class="underline" href={`mailto:${site.email}`}>{site.email}</a> or call {site.phoneDisplay}.
+              </p>
+            </noscript>
+          </form>
+        </Shell>
+      </div>
+
+      <div class="lg:col-span-5 reveal" data-d="1">
+        <Shell radius="1.5rem" coreClass="p-6">
+          <h2 class="font-medium">Direct</h2>
+          <p class="mt-3 text-sm font-light">
+            <a class="block text-accent dark:text-[#7fd1b3] hover:underline" href={`tel:${site.phoneHref}`}>{site.phoneDisplay}</a>
+            <a class="block mt-1 text-accent dark:text-[#7fd1b3] hover:underline break-all" href={`mailto:${site.email}`}>{site.email}</a>
+          </p>
+        </Shell>
+        <Shell radius="1.5rem" class="mt-4" coreClass="p-6">
+          <h2 class="font-medium">Rather see a number first?</h2>
+          <p class="mt-3 text-sm text-ink-2 dark:text-[#a9b4c2] font-light">
+            The valuation estimator takes two minutes and gives you a range on screen.
+          </p>
+          <p class="mt-3 text-sm"><a class="text-accent dark:text-[#7fd1b3] hover:underline" href="/valuation">Open the estimator</a></p>
+        </Shell>
+        <Shell radius="1.5rem" class="mt-4" coreClass="p-6">
+          <h2 class="font-medium">Confidentiality</h2>
+          <p class="mt-3 text-sm text-ink-2 dark:text-[#a9b4c2] font-light">
+            Enquiries stay with us. We do not share enquirer details with buyers, partners or anyone else, and there is
+            no mailing list to be added to.
+          </p>
+        </Shell>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const form = document.getElementById('contactform') as HTMLFormElement | null;
+    const status = document.getElementById('cstatus');
+    const preset = new URLSearchParams(location.search).get('enquiry');
+    const select = document.getElementById('enquiry') as HTMLSelectElement | null;
+    if (preset && select && [...select.options].some((o) => o.value === preset)) select.value = preset;
+
+    form?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      let ok = true;
+      form.querySelectorAll<HTMLInputElement>('[required]').forEach((el) => {
+        const bad =
+          el.type === 'checkbox'
+            ? !el.checked
+            : !el.value || (el.type === 'email' && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(el.value));
+        el.classList.toggle('ring-2', bad);
+        el.classList.toggle('ring-red-500', bad);
+        el.setAttribute('aria-invalid', String(bad));
+        const err = el.closest('.grid')?.querySelector('.err');
+        if (err) err.classList.toggle('hidden', !bad);
+        if (bad) ok = false;
+      });
+      if (!ok || !status) return;
+
+      const btn = document.getElementById('csubmit') as HTMLButtonElement;
+      btn.disabled = true;
+      status.textContent = 'Sending...';
+      try {
+        const body = Object.fromEntries(new FormData(form).entries());
+        const res = await fetch('/api/contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ ...body, consent: true, page: location.pathname }),
+        });
+        if (!res.ok) throw new Error(String(res.status));
+        form.reset();
+        status.textContent = 'Thank you. We reply the same working day wherever possible.';
+      } catch {
+        status.innerHTML =
+          'Could not send just now. Please email <a class="underline" href="mailto:' +
+          'eric.ong@thefundingassembly.com">eric.ong@thefundingassembly.com</a> instead.';
+      } finally {
+        btn.disabled = false;
+      }
+    });
+  </script>
+</Base>

@@ -1,0 +1,21 @@
+---
+import Base from '../layouts/Base.astro';
+import Button from '../components/Button.astro';
+---
+
+<Base title="Page not found | Singapore Business Broker" description="That page does not exist." noindex>
+  <section class="max-w-wrap mx-auto px-5 lg:px-8 pt-40 pb-28 lg:pt-48 lg:pb-40 min-h-[70dvh]">
+    <p class="font-mono text-sm text-ink-3 dark:text-[#a9b4c2]">404</p>
+    <h1 class="mt-6 text-[2.3rem] md:text-5xl font-medium tracking-[-0.03em] leading-[1.05] max-w-[18ch]">
+      That page has moved, or never existed.
+    </h1>
+    <p class="mt-6 text-lg text-ink-2 dark:text-[#a9b4c2] font-light max-w-[46ch]">
+      Nothing is broken on your end. Try one of these instead.
+    </p>
+    <div class="mt-10 flex flex-col sm:flex-row gap-3">
+      <Button href="/valuation" variant="ink">Free valuation</Button>
+      <Button href="/sell-your-business" variant="ring">Selling a business</Button>
+      <Button href="/guides" variant="ring">Guides</Button>
+    </div>
+  </section>
+</Base>

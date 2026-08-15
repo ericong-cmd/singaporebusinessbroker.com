@@ -1,0 +1,132 @@
+---
+import '../styles/global.css';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import site from '../data/site.json';
+
+interface Props {
+  title: string;
+  description: string;
+  /** Extra JSON-LD nodes to merge into the @graph for this page. */
+  schema?: Record<string, unknown>[];
+  ogImage?: string;
+  noindex?: boolean;
+  bodyClass?: string;
+}
+
+const { title, description, schema = [], ogImage = '/images/og-share.jpg', noindex = false, bodyClass = '' } =
+  Astro.props;
+
+const canonical = new URL(Astro.url.pathname.replace(/\/+$/, '') || '/', Astro.site).href;
+const ogUrl = new URL(ogImage, Astro.site).href;
+
+const org = {
+  '@type': ['Organization', 'ProfessionalService'],
+  '@id': `${Astro.site}#org`,
+  name: site.name,
+  url: `${Astro.site}`,
+  description:
+    'Sell-side M&A advisory for Singapore SME owners. Confidential sale process, vetted buyer network, free valuation estimate.',
+  areaServed: { '@type': 'Country', name: 'Singapore' },
+  email: site.email,
+  telephone: site.phoneHref,
+  parentOrganization: { '@type': 'Organization', name: site.parent, url: site.parentUrl },
+  knowsAbout: [
+    'sell-side M&A',
+    'business valuation',
+    'SME succession planning',
+    'business broker Singapore',
+  ],
+};
+
+const website = {
+  '@type': 'WebSite',
+  '@id': `${Astro.site}#website`,
+  url: `${Astro.site}`,
+  name: site.name,
+  inLanguage: 'en-SG',
+  publisher: { '@id': `${Astro.site}#org` },
+};
+
+const graph = { '@context': 'https://schema.org', '@graph': [org, website, ...schema] };
+
+// Optional analytics: only emitted when the domain is configured at build time,
+// so the default build has no third-party origins at all.
+const plausible = import.meta.env.PUBLIC_PLAUSIBLE_DOMAIN;
+---
+
+<!doctype html>
+<html lang="en-SG" class="scroll-smooth">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    {noindex
+      ? <meta name="robots" content="noindex, follow" />
+      : <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large" />}
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogUrl} />
+    <meta property="og:locale" content="en_SG" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogUrl} />
+
+    <meta name="theme-color" content="#f6f7f4" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0b121c" media="(prefers-color-scheme: dark)" />
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="preload" href="/fonts/geist-var-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/geistmono-var-latin.woff2" as="font" type="font/woff2" crossorigin />
+
+    {/* Literal child, not set:html: set:html HTML-escapes the quotes and ships
+        a script that throws on every page. */}
+    <script is:inline>document.documentElement.classList.add("js")</script>
+    <script type="application/ld+json" set:html={JSON.stringify(graph)} />
+
+    {plausible && (
+      <script is:inline defer data-domain={plausible} src="https://plausible.io/js/script.outbound-links.js"></script>
+    )}
+  </head>
+
+  <body class={`font-sans antialiased ${bodyClass}`}>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div class="grain" aria-hidden="true"></div>
+
+    <Nav />
+
+    <main id="main">
+      <slot />
+    </main>
+
+    <Footer />
+
+    <script>
+      // Scroll reveal. IntersectionObserver only, never a scroll listener.
+      const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const nodes = document.querySelectorAll<HTMLElement>('.reveal');
+      if (reduce || !('IntersectionObserver' in window)) {
+        nodes.forEach((el) => el.classList.add('in'));
+      } else {
+        const io = new IntersectionObserver(
+          (entries) =>
+            entries.forEach((e) => {
+              if (!e.isIntersecting) return;
+              e.target.classList.add('in');
+              io.unobserve(e.target);
+            }),
+          { threshold: 0.12, rootMargin: '0px 0px -6% 0px' }
+        );
+        nodes.forEach((el) => io.observe(el));
+      }
+    </script>
+  </body>
+</html>

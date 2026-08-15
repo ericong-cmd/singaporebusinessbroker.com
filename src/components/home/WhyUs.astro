@@ -1,0 +1,99 @@
+---
+import Icon from '../Icon.astro';
+
+/**
+ * Asymmetric bento, ported from the prototype.
+ *
+ * One deviation, forced by the source assets: the prototype put a photograph
+ * in the small span-7 cell ("Singapore based, regional buyers"). The handoff
+ * shipped five images, two of which have hallucinated text baked in and are
+ * unusable (see assets/build-images.mjs). Of the three clean images, the hero
+ * and the featured case study both need one, which leaves a single photo for
+ * the two bento image cells. That cell therefore uses the icon-and-text card
+ * already established by the three cells beside it, rather than a fourth
+ * photo we do not have. Restore the photo when a clean render exists.
+ */
+const panels = [
+  {
+    icon: 'lock-key',
+    title: 'Staff and customers hear from you, not the market',
+    body: 'Blind teasers, staged disclosure, NDAs before any name is shared.',
+    tone: 'accent',
+    span: 'md:col-span-4',
+  },
+  {
+    icon: 'chart-line-up',
+    title: 'Priced on evidence',
+    body: 'Sector multiples, normalised earnings and buyer appetite, not a hopeful number.',
+    tone: 'white',
+    span: 'md:col-span-4',
+  },
+  {
+    icon: 'handshake',
+    title: 'Deal structure that protects you',
+    body: 'Earn-outs, vendor loans, handover terms. We negotiate the whole deal, not only the headline.',
+    tone: 'white',
+    span: 'md:col-span-5',
+  },
+  {
+    icon: 'globe-hemisphere-east',
+    title: 'Singapore based, regional buyers',
+    body: 'Buyers from Singapore, Malaysia, Indonesia, Japan and beyond.',
+    tone: 'accent',
+    span: 'md:col-span-7',
+  },
+];
+---
+
+<section id="sell" class="max-w-wrap mx-auto px-5 lg:px-8 py-28 lg:py-40">
+  <div class="max-w-[60ch] reveal">
+    <h2 class="text-3xl md:text-5xl font-medium tracking-[-0.03em] leading-[1.05]">
+      Most owners sell once. We do it every month.
+    </h2>
+    <p class="mt-6 text-lg text-ink-2 dark:text-[#a9b4c2] leading-relaxed font-light">
+      A well-run process brings more buyers, protects your confidentiality and closes at a better price than a direct
+      approach.
+    </p>
+  </div>
+
+  <div class="mt-16 grid grid-cols-1 md:grid-cols-12 gap-4">
+    <div class="md:col-span-8 md:row-span-2 rounded-[2rem] bg-black/5 dark:bg-white/[0.04] ring-1 ring-black/5 dark:ring-white/[0.08] p-1.5 reveal">
+      <div class="group relative rounded-core overflow-hidden min-h-[380px] h-full">
+        <img
+          src="/images/deal-meeting.webp"
+          srcset="/images/deal-meeting@800.webp 800w, /images/deal-meeting.webp 1400w"
+          sizes="(min-width: 768px) 62vw, 92vw"
+          width="1400" height="788"
+          alt=""
+          class="absolute inset-0 w-full h-full object-cover transition-transform duration-[1600ms] ease group-hover:scale-[1.04]"
+          loading="lazy" decoding="async"
+        />
+        <div class="absolute inset-0 bg-gradient-to-t from-ink/90 via-ink/30 to-transparent"></div>
+        <div class="relative p-8 md:p-10 flex flex-col justify-end h-full min-h-[380px] text-white">
+          <h3 class="text-2xl md:text-3xl font-medium tracking-tight">Competitive tension, not one buyer</h3>
+          <p class="mt-3 text-white/75 max-w-[48ch] font-light">
+            We approach 30 to 80 qualified buyers under NDA and run parallel conversations, so you negotiate from
+            strength.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    {panels.map((p, i) => (
+      <div class={`${p.span} rounded-[2rem] bg-black/5 dark:bg-white/[0.04] ring-1 ring-black/5 dark:ring-white/[0.08] p-1.5 reveal`} data-d={String((i % 2) + 1)}>
+        <div
+          class:list={[
+            'rounded-core shadow-bezel p-8 h-full flex flex-col justify-between gap-10',
+            p.tone === 'accent' ? 'bg-accent-soft dark:bg-night-soft' : 'bg-white dark:bg-night-core',
+          ]}
+        >
+          <Icon name={p.icon} class="text-4xl text-accent dark:text-[#7fd1b3]" />
+          <div>
+            <h3 class="text-xl font-medium tracking-tight">{p.title}</h3>
+            <p class="mt-3 text-sm text-ink-2 dark:text-[#a9b4c2] font-light">{p.body}</p>
+          </div>
+        </div>
+      </div>
+    ))}
+  </div>
+</section>

@@ -1,0 +1,36 @@
+---
+import Eyebrow from '../Eyebrow.astro';
+import Icon from '../Icon.astro';
+import Valuation from '../Valuation.astro';
+
+const points = [
+  'Based on current Singapore SME transaction multiples',
+  'Adjusted for owner dependency, size and track record',
+  'Reviewed by an advisor before your report is sent',
+];
+---
+
+<section id="valuation" class="max-w-wrap mx-auto px-5 lg:px-8 py-28 lg:py-40">
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+    <div class="lg:col-span-5 lg:sticky lg:top-28 reveal">
+      <Eyebrow>Free valuation estimate</Eyebrow>
+      <h2 class="mt-6 text-3xl md:text-5xl font-medium tracking-[-0.03em] leading-[1.05]">
+        How much is your business worth?
+      </h2>
+      <p class="mt-6 text-lg text-ink-2 dark:text-[#a9b4c2] leading-relaxed font-light">
+        Two minutes. Instant range on screen, full report by email. Confidential, no obligation.
+      </p>
+      <ul class="mt-10 space-y-4 text-sm text-ink-2 dark:text-[#a9b4c2] font-light">
+        {points.map((p) => (
+          <li class="flex gap-3">
+            <Icon name="check-circle" class="text-accent dark:text-[#7fd1b3] text-xl" />
+            <span>{p}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+    <div class="lg:col-span-7 reveal" data-d="1">
+      <Valuation />
+    </div>
+  </div>
+</section>

@@ -1,0 +1,11 @@
+{
+  "sample": true,
+  "rows": [
+    { "title": "Regional strategic seeks F&B group with 5+ outlets", "detail": "Central kitchen preferred. Singapore or Malaysia.", "range": "S$5m to S$15m" },
+    { "title": "PE platform seeks facilities, cleaning or security services", "detail": "Recurring contracts, government or MCST clients.", "range": "S$3m to S$20m" },
+    { "title": "Search fund seeks B2B services or distribution", "detail": "Owner willing to hand over within 12 months.", "range": "S$2m to S$8m" },
+    { "title": "Japanese acquirer seeks engineering or precision manufacturing", "detail": "ISO certified, existing MNC customers.", "range": "S$5m to S$30m" },
+    { "title": "Family office seeks childcare or enrichment centres", "detail": "Three or more centres, MOE registered.", "range": "S$4m to S$12m" },
+    { "title": "Listed group seeks marine or offshore services", "detail": "Own yard or long-term berth preferred.", "range": "S$8m to S$30m" }
+  ]
+}

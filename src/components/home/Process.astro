@@ -1,0 +1,25 @@
+---
+import steps from '../../data/process.json';
+---
+
+<section id="process" class="max-w-wrap mx-auto px-5 lg:px-8">
+  <div class="rounded-[2.5rem] bg-ink dark:bg-night-2 text-paper px-6 md:px-14 py-20 lg:py-28 relative overflow-hidden">
+    <div class="absolute -top-32 -right-32 w-[520px] h-[520px] rounded-full bg-accent/20 blur-3xl pointer-events-none" aria-hidden="true"></div>
+    <div class="relative max-w-[60ch] reveal">
+      <h2 class="text-3xl md:text-5xl font-medium tracking-[-0.03em] leading-[1.05]">How a sale runs</h2>
+      <p class="mt-6 text-lg text-paper/65 leading-relaxed font-light">
+        Six to nine months, start to close. You keep running the business. We run the process.
+      </p>
+    </div>
+    <ol class="relative mt-16 grid grid-cols-1 md:grid-cols-5 gap-10 md:gap-6">
+      {steps.map((s, i) => (
+        <li class="relative md:pt-8 md:border-t border-white/15 reveal" data-d={String(Math.min(i, 4))}>
+          <span class="hidden md:block step-dot absolute -top-[5px] left-0" aria-hidden="true"></span>
+          <p class="font-mono text-xs text-paper/50 mb-2">{s.n}</p>
+          <h3 class="font-medium">{s.title}</h3>
+          <p class="mt-2 text-sm text-paper/65 font-light">{s.body}</p>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>

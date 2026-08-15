@@ -1,0 +1,41 @@
+---
+import type { GetStaticPaths } from 'astro';
+import { getCollection, type CollectionEntry } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import FinalCta from '../../components/home/FinalCta.astro';
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const entries = await getCollection('insights', ({ data }) => !data.draft);
+  return entries.map((entry) => ({ params: { slug: entry.slug }, props: { entry } }));
+};
+
+interface Props { entry: CollectionEntry<'insights'> }
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+const d = entry.data;
+
+const schema = [{
+  '@type': 'Article',
+  headline: d.heading,
+  description: d.description,
+  datePublished: d.published.toISOString(),
+  dateModified: (d.updated ?? d.published).toISOString(),
+  author: { '@id': `${Astro.site}#org` },
+  publisher: { '@id': `${Astro.site}#org` },
+  mainEntityOfPage: new URL(`/insights/${entry.slug}`, Astro.site).href,
+}];
+---
+
+<Base title={`${d.title} | Singapore Business Broker`} description={d.description} schema={schema}>
+  <PageHeader
+    eyebrow={`${d.readingMinutes} min read`}
+    title={d.heading}
+    intro={d.description}
+    crumbs={[{ href: '/insights', label: 'Insights' }, { href: `/insights/${entry.slug}`, label: d.title }]}
+  />
+  <section class="max-w-wrap mx-auto px-5 lg:px-8 pb-28 lg:pb-40">
+    <div class="prose-sbb reveal"><Content /></div>
+  </section>
+  <FinalCta />
+</Base>
