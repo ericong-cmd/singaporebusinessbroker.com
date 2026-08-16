@@ -3,6 +3,7 @@ import Base from '../layouts/Base.astro';
 import PageHeader from '../components/PageHeader.astro';
 import Shell from '../components/Shell.astro';
 import Icon from '../components/Icon.astro';
+import Button from '../components/Button.astro';
 import site from '../data/site.json';
 
 const covers = [
@@ -11,11 +12,17 @@ const covers = [
   'What would change that number, and how long it would take',
   'Whether selling now actually serves you, including when it does not',
 ];
+
+const bring = [
+  'Roughly what the business turns over, and what it earned last year',
+  'How long you have been running it, and how much of it you own',
+  'When you would like to be out, even if the answer is "not sure yet"',
+];
 ---
 
 <Base
   title="Book a confidential call | Singapore Business Broker"
-  description="Book a confidential 30 minute call about selling your Singapore business. No fee, no obligation, and nothing leaves the conversation."
+  description="Request a confidential 30 minute call about selling your Singapore business. No fee, no obligation, and nothing leaves the conversation."
 >
   <PageHeader
     eyebrow="30 minutes, confidential"
@@ -27,30 +34,35 @@ const covers = [
   <section class="max-w-wrap mx-auto px-5 lg:px-8 pb-28 lg:pb-40">
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
       <div class="lg:col-span-7 reveal">
-        <Shell radius="2rem" pad="2" shadow="frame" coreClass="p-2">
-          <!--
-            Cal.com embed. The inline booker is loaded on click rather than on
-            page load: it is a third-party origin, and loading it eagerly would
-            put a script on every visit to a page most visitors only read.
-          -->
-          <div id="cal-slot" class="min-h-[560px] grid place-items-center p-8 text-center">
-            <div>
-              <Icon name="calendar-blank" class="text-4xl text-accent dark:text-[#7fd1b3]" />
-              <p class="mt-5 font-medium">Open the booking calendar</p>
-              <p class="mt-2 text-sm text-ink-2 dark:text-[#a9b4c2] font-light max-w-[38ch] mx-auto">
-                Loads our scheduling tool. If you would rather not, call or WhatsApp {site.phoneDisplay} instead.
-              </p>
-              <button
-                id="cal-load"
-                data-booking-url={site.bookingUrl}
-                class="group mt-7 inline-flex items-center gap-3 rounded-full bg-ink dark:bg-paper-2 text-paper dark:text-night font-medium pl-6 pr-1.5 py-1.5 transition-transform duration-500 ease active:scale-[0.98]"
-              >
-                <span class="py-1.5">Show available times</span>
-                <span class="grid place-items-center w-9 h-9 rounded-full bg-white/15 dark:bg-black/10 transition-transform duration-500 ease group-hover:translate-x-0.5">
-                  <Icon name="arrow-right" class="text-lg" />
-                </span>
-              </button>
-            </div>
+        <Shell radius="2rem" pad="2" shadow="frame" coreClass="p-8 md:p-12">
+          <Icon name="envelope-simple" class="text-4xl text-accent dark:text-[#7fd1b3]" />
+          <h2 class="mt-6 text-2xl md:text-3xl font-medium tracking-[-0.02em]">Email us to arrange a time</h2>
+          <p class="mt-4 text-ink-2 dark:text-[#a9b4c2] font-light leading-relaxed max-w-[52ch]">
+            The button opens a new email to us with the subject already filled in. Tell us roughly when suits you and
+            we will come back with a time, usually the same working day.
+          </p>
+
+          <div class="mt-8 flex flex-col sm:flex-row gap-3">
+            <Button href={site.bookingUrl} variant="ink" icon="envelope-simple">Email to arrange a call</Button>
+            <Button href={`tel:${site.phoneHref}`} variant="ring" icon="phone">{site.phoneDisplay}</Button>
+          </div>
+
+          <p class="mt-8 text-xs text-ink-3 dark:text-[#a9b4c2] font-light">
+            If your mail app does not open, write to
+            <a class="underline" href={`mailto:${site.email}`}>{site.email}</a> with the subject
+            "{site.enquirySubject}".
+          </p>
+
+          <div class="mt-10 pt-8 border-t border-black/5 dark:border-white/[0.08]">
+            <h3 class="text-sm font-medium">Useful to include</h3>
+            <ul class="mt-4 space-y-3">
+              {bring.map((b) => (
+                <li class="flex gap-3 text-sm text-ink-2 dark:text-[#a9b4c2] font-light">
+                  <Icon name="check-circle" class="text-accent dark:text-[#7fd1b3] text-lg mt-0.5" />
+                  <span>{b}</span>
+                </li>
+              ))}
+            </ul>
           </div>
         </Shell>
       </div>
@@ -67,11 +79,11 @@ const covers = [
         </ul>
 
         <Shell radius="1.5rem" class="mt-10" coreClass="p-6">
-          <h3 class="font-medium">Prefer to call or write</h3>
-          <p class="mt-3 text-sm font-light">
-            <a class="block text-accent dark:text-[#7fd1b3] hover:underline" href={`tel:${site.phoneHref}`}>{site.phoneDisplay}</a>
-            <a class="block mt-1 text-accent dark:text-[#7fd1b3] hover:underline break-all" href={`mailto:${site.email}`}>{site.email}</a>
+          <h3 class="font-medium">Rather see a number first?</h3>
+          <p class="mt-3 text-sm text-ink-2 dark:text-[#a9b4c2] font-light">
+            The estimator takes two minutes, shows a range on screen and sends the report to your email automatically.
           </p>
+          <p class="mt-3 text-sm"><a class="text-accent dark:text-[#7fd1b3] hover:underline" href="/valuation">Open the estimator</a></p>
         </Shell>
 
         <Shell radius="1.5rem" class="mt-4" coreClass="p-6">
@@ -84,21 +96,4 @@ const covers = [
       </div>
     </div>
   </section>
-
-  <script>
-    const btn = document.getElementById('cal-load');
-    btn?.addEventListener('click', () => {
-      const slot = document.getElementById('cal-slot');
-      const url = btn.dataset.bookingUrl;
-      if (!slot || !url) return;
-      const frame = document.createElement('iframe');
-      frame.src = url;
-      frame.title = 'Booking calendar';
-      frame.loading = 'lazy';
-      frame.className = 'w-full rounded-[calc(2rem-0.5rem)]';
-      frame.style.height = '640px';
-      frame.style.border = '0';
-      slot.replaceWith(frame);
-    });
-  </script>
 </Base>

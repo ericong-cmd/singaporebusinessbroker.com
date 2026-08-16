@@ -108,7 +108,7 @@ export default async function handler(req: ApiRequest, res: ApiResponse): Promis
             not a valuation: it cannot see your contracts, customer concentration or management depth, which are what
             actually decide where in the range a business lands.
           </p>
-          <p>An advisor will review your figures and follow up. If you would rather talk sooner, just reply to this email.</p>
+          <p>This report was sent to you automatically. If you would like an advisor to look at your figures properly, just reply to this email.</p>
           <p style="font-size:12px;color:#5b687a;margin-top:32px">
             Singapore Business Broker, a brand of The Funding Assembly Pte Ltd. You received this because you requested
             a valuation estimate. Reply with "unsubscribe" to be removed.

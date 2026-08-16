@@ -11,16 +11,29 @@ import faq from '../data/faq.json';
 import site from '../data/site.json';
 
 const why = [
-  { icon: 'users-three', title: 'Competitive tension', body: 'We approach 30 to 80 qualified buyers under NDA and run parallel conversations. One buyer is a negotiation you lose slowly.' },
+  { icon: 'users-three', title: 'You do not need more buyers. You only need the right one.', body: 'We have 20 buyers on hand looking to buy businesses in different industries. You just need 3 qualified buyers for your business. One buyer on its own is a negotiation you lose slowly.' },
   { icon: 'lock-key', title: 'Confidentiality by mechanism', body: 'Blind teaser, buyers screened before disclosure, NDA before your name, staged release, and a data room with per-document access.' },
   { icon: 'chart-line-up', title: 'Priced on evidence', body: 'Sector multiples, normalised earnings and actual buyer appetite, not a hopeful number designed to win the mandate.' },
   { icon: 'shield-check', title: 'Deals held together', body: 'Most SME deals die in diligence. We prepare the answers before the questions arrive and keep the timetable moving.' },
 ];
 
 const fees = [
-  { title: 'Engagement fee', body: 'A modest fee at the start to prepare the valuation, the teaser and the information memorandum. This is the work that decides the price, and it is real work.' },
-  { title: 'Success fee', body: 'A percentage of the sale price, payable at completion. No sale, no success fee. The percentage is set out in writing before you commit to anything.' },
-  { title: 'No surprises', body: 'Third-party costs, meaning your lawyer, your accountant and stamp duty, are paid by you directly. We tell you what to budget at the outset rather than at completion.' },
+  {
+    title: 'Success only, 1% to 5%',
+    body: 'Transparent engagement fee based on success only milestones. You pay a percentage of the transaction value when the deal completes, and nothing before that.',
+  },
+  {
+    title: 'No upfront fee',
+    body: 'No retainer, no listing fee, no charge for preparing the valuation, the teaser or the information memorandum. A business that does not sell costs you nothing but time.',
+  },
+  {
+    title: 'S$100,000 minimum',
+    body: 'Stated plainly because it matters: the minimum means the effective rate rises below about S$2m of transaction value. Under that we are poor value, and we will tell you so rather than take the mandate.',
+  },
+  {
+    title: 'Third-party costs are yours',
+    body: 'Your lawyer, your accountant and stamp duty are paid by you directly. We tell you what to budget at the outset rather than at completion.',
+  },
 ];
 
 const schema = [{
@@ -48,7 +61,7 @@ const schema = [{
 
   <section class="max-w-wrap mx-auto px-5 lg:px-8 pb-28 lg:pb-40">
     <div class="max-w-[60ch] reveal">
-      <h2 class="text-3xl md:text-5xl font-medium tracking-[-0.03em] leading-[1.05]">Most owners sell once. We do it every month.</h2>
+      <h2 class="text-3xl md:text-5xl font-medium tracking-[-0.03em] leading-[1.05]">Most owners sell once. Our team of advisors closes deals every year.</h2>
       <p class="mt-6 text-lg text-ink-2 dark:text-[#a9b4c2] leading-relaxed font-light">
         An owner selling for the first time negotiates against a buyer who has done it many times. That gap rarely shows
         up as a lower headline number. It shows up as a re-trade after diligence, an earn-out that never pays and a
@@ -93,7 +106,8 @@ const schema = [{
       <div class="lg:col-span-4 reveal">
         <h2 class="text-3xl md:text-5xl font-medium tracking-[-0.03em] leading-[1.05]">What it costs</h2>
         <p class="mt-6 text-lg text-ink-2 dark:text-[#a9b4c2] font-light">
-          Set out in writing before you commit. If it does not sell, there is no success fee.
+          Transparent engagement fee based on success only milestones. 1% to 5%, no upfront fee, S$100,000 minimum.
+          Set out in writing before you commit.
         </p>
       </div>
       <div class="lg:col-span-8 grid gap-4">

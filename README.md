@@ -55,7 +55,8 @@ docs/                design-spec.md, implementation-plan.md, build-notes.md
   pages, the sector pill list and the data page. Changing a number there
   changes all four. Regenerate the CSV after editing (it is a static file in
   `public/data/`).
-- **Contact details, deal range, booking URL**: `src/data/site.json`.
+- **Contact details, deal range, enquiry link**: `src/data/site.json`.
+  `bookingUrl` is a `mailto:` with a pre-filled subject, not a scheduler link.
 
 ## The valuation tool
 

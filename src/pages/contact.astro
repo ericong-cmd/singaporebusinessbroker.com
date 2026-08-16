@@ -84,7 +84,7 @@ const schema = [{ '@type': 'ContactPage', url: new URL('/contact', Astro.site).h
           <h2 class="font-medium">Direct</h2>
           <p class="mt-3 text-sm font-light">
             <a class="block text-accent dark:text-[#7fd1b3] hover:underline" href={`tel:${site.phoneHref}`}>{site.phoneDisplay}</a>
-            <a class="block mt-1 text-accent dark:text-[#7fd1b3] hover:underline break-all" href={`mailto:${site.email}`}>{site.email}</a>
+            <a id="cfallback" class="block mt-1 text-accent dark:text-[#7fd1b3] hover:underline break-all" href={`mailto:${site.email}`}>{site.email}</a>
           </p>
         </Shell>
         <Shell radius="1.5rem" class="mt-4" coreClass="p-6">
@@ -143,9 +143,8 @@ const schema = [{ '@type': 'ContactPage', url: new URL('/contact', Astro.site).h
         form.reset();
         status.textContent = 'Thank you. We reply the same working day wherever possible.';
       } catch {
-        status.innerHTML =
-          'Could not send just now. Please email <a class="underline" href="mailto:' +
-          'eric.ong@thefundingassembly.com">eric.ong@thefundingassembly.com</a> instead.';
+        const fallback = document.getElementById('cfallback')?.outerHTML ?? '';
+        status.innerHTML = 'Could not send just now. Please email ' + fallback + ' instead.';
       } finally {
         btn.disabled = false;
       }

@@ -79,7 +79,15 @@ test and replacing sample data with real TFA figures are all owner tasks.
    is pinned in `vercel.json`. Adding another inline script means adding
    another hash, so prefer a data attribute.
 
-6. **Reveal animations are gated on `html.js`.** An inline script sets the
+6. **There is no calendar embed.** The plan called for a Cal.com embed on
+   `/book-a-call`. The owner chose an email enquiry instead, so `bookingUrl`
+   in `site.json` is a `mailto:` with the subject `Enquiry on selling my
+   business` pre-filled, and the page offers that plus the phone number.
+   Nothing is framed any more, so `frame-src` in `vercel.json` is `'none'`.
+   To go back to a scheduler, set `bookingUrl` to its URL, restore the iframe
+   in `book-a-call.astro` and widen `frame-src` to that host.
+
+7. **Reveal animations are gated on `html.js`.** An inline script sets the
    class before first paint. Without it, a JavaScript error anywhere would
    leave every `.reveal` element at `opacity: 0` and the page would render
    blank. With the gate, a JS failure shows everything unanimated.
@@ -106,6 +114,26 @@ used as the manifest intended, resized to webp at two widths each.
 
 Regenerate everything with `npm run images` and `npm run og`.
 
+## Owner-confirmed copy
+
+These were reviewed and set by the owner, so do not "correct" them back:
+
+- "Most owners sell once. Our team of advisors closes deals every year."
+- "You do not need more buyers. You only need the right one. We have 20 buyers
+  on hand looking to buy businesses in different industries. You just need 3
+  qualified buyers for your business."
+- "Valuation report is automatically sent to your email." The emailed report
+  and the `/valuation` FAQ were reworded to match, because the earlier copy
+  promised an advisor review that the endpoint does not perform.
+- Fee: "Transparent engagement fee based on success only milestones. 1% to 5%,
+  no upfront fee, S$100,000 minimum." Published on `/sell-your-business`, in
+  the homepage FAQ and in the proof strip.
+
+One thing to watch: the proof strip still says the deal range is S$1m to S$30m
+while the fee minimum implies an effective 10% at S$1m. The fee cards on
+`/sell-your-business` state that consequence plainly. Consider raising the
+stated floor in `src/data/stats.json` to match.
+
 ## Sample data still to replace
 
 Everything marked `(sample)` on the site, plus:
@@ -115,10 +143,9 @@ Everything marked `(sample)` on the site, plus:
 - `src/data/stats.json`, `src/data/buyers.json` — proof strip and buyer board.
 - `src/content/cases/*.mdx` — four illustrative deals. Real anonymised
   transactions should replace them, keeping `sample: false`.
-- `src/data/site.json` — `bookingUrl` points at a placeholder Cal.com handle
-  (`cal.com/singaporebusinessbroker/30min`). Until it is a real booking link
-  the button on `/book-a-call` opens a dead calendar. `frame-src` in
-  `vercel.json` already allows cal.com; change it if you use another scheduler.
+- `src/data/site.json` is now owner-confirmed: contact address
+  `Contact-us@thefundingassembly.com`, phone `+65 8951 8821`, legal entity
+  `The Funding Assembly Pte Ltd`. Nothing in it is a placeholder.
 - All 20 sector files and 10 guides carry `reviewed: false` in frontmatter.
   They are drafts written to be publishable but they have not been read by a
   person who does these deals. Flip to `true` as they are reviewed.
