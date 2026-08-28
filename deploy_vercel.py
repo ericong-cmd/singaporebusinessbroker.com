@@ -13,8 +13,8 @@ import json
 import os
 import sys
 import time
-import urllib.error
-import urllib.request
+import subprocess
+import tempfile
 
 API = "https://api.vercel.com"
 PROJECT = "singaporebusinessbroker"
@@ -35,20 +35,65 @@ if not TOKEN:
 
 
 def api(method, path, body=None, ok_conflict=False):
-    req = urllib.request.Request(API + path, method=method)
-    req.add_header("Authorization", "Bearer " + TOKEN)
-    data = None
+    """Call the Vercel API.
+
+    Uses curl rather than urllib: in a proxied sandbox, urllib intermittently
+    dies with `SSL: UNEXPECTED_EOF_WHILE_READING` partway through the multi-MB
+    deployment POST, while curl handles the same proxy and CA bundle fine.
+    """
+    args = [
+        "curl", "-sS", "--max-time", "600",
+        "-o", "-", "-w", "\n%{http_code}",
+        "-X", method,
+        "-H", "Authorization: Bearer " + TOKEN,
+        API + path,
+    ]
+    payload = None
     if body is not None:
-        req.add_header("Content-Type", "application/json")
-        data = json.dumps(body).encode()
-    try:
-        with urllib.request.urlopen(req, data, timeout=300) as r:
-            return json.load(r)
-    except urllib.error.HTTPError as e:
-        detail = e.read().decode()
-        if ok_conflict and e.code in (400, 409) and "already" in detail.lower():
+        payload = tempfile.NamedTemporaryFile("w", suffix=".json", delete=False)
+        json.dump(body, payload)
+        payload.close()
+        args[-1:-1] = ["-H", "Content-Type: application/json", "--data-binary", "@" + payload.name]
+
+    # Transient TLS/connection failures to api.vercel.com are common from a
+    # proxied network, and they hit the multi-MB deployment POST hardest.
+    # 35/52/56/7/28 are curl's connect, empty-reply, recv-error, no-route and
+    # timeout codes: all worth retrying, unlike an auth or payload error.
+    RETRYABLE = {7, 28, 35, 52, 56}
+    proc = None
+    for attempt in range(6):
+        try:
+            proc = subprocess.run(args, capture_output=True, text=True, timeout=900)
+        except subprocess.TimeoutExpired:
+            proc = None
+        if proc is not None and proc.returncode == 0:
+            break
+        code = proc.returncode if proc is not None else "timeout"
+        if proc is not None and proc.returncode not in RETRYABLE:
+            break
+        if attempt < 5:
+            wait = 2 ** attempt * 5
+            print("  %s %s transient failure (%s), retrying in %ss" % (method, path, code, wait))
+            time.sleep(wait)
+
+    if payload:
+        os.unlink(payload.name)
+
+    if proc is None or proc.returncode != 0:
+        rc = proc.returncode if proc is not None else "timeout"
+        err = proc.stderr[:400] if proc is not None else ""
+        sys.exit("%s %s -> curl failed after retries (%s): %s" % (method, path, rc, err))
+
+    raw, _, status = proc.stdout.rpartition("\n")
+    code = int(status.strip() or 0)
+    if code >= 400:
+        if ok_conflict and code in (400, 409) and "already" in raw.lower():
             return {"conflict": True}
-        sys.exit("%s %s -> HTTP %s: %s" % (method, path, e.code, detail[:800]))
+        sys.exit("%s %s -> HTTP %s: %s" % (method, path, code, raw[:800]))
+    try:
+        return json.loads(raw) if raw.strip() else {}
+    except json.JSONDecodeError:
+        sys.exit("%s %s -> non-JSON response: %s" % (method, path, raw[:300]))
 
 
 user = api("GET", "/v2/user")["user"]
