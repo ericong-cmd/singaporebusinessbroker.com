@@ -185,7 +185,7 @@ each other:
    - Name: `Singapore Business Broker`
    - Phone: `+65 8951 8821`
    - Website: `https://www.singaporebusinessbroker.com`
-   The email on the site is `Contact-us@thefundingassembly.com`.
+   The email on the site is `singaporebusinessbroker@thefundingassembly.com`.
    The legal entity behind both is `The Funding Assembly Pte Ltd`.
 2. **The address has to be decided once and used in both places.** GBP requires
    a service-area or a street address. Whatever is registered there should also
@@ -207,7 +207,7 @@ Everything marked `(sample)` on the site, plus:
 - `src/content/cases/*.mdx` — four illustrative deals. Real anonymised
   transactions should replace them, keeping `sample: false`.
 - `src/data/site.json` is now owner-confirmed: contact address
-  `Contact-us@thefundingassembly.com`, phone `+65 8951 8821`, legal entity
+  `singaporebusinessbroker@thefundingassembly.com`, phone `+65 8951 8821`, legal entity
   `The Funding Assembly Pte Ltd`. Nothing in it is a placeholder.
 - `src/data/advisors.json` now names the founder, so the Advisors section on
   `/about` renders and Person schema is emitted, linked from Organization as
