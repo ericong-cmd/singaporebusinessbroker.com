@@ -1,5 +1,6 @@
 /**
- * Renders public/images/og-share.jpg (and .webp) plus the apple-touch-icon.
+ * Renders public/images/og-share.jpg (and .webp), public/images/logo.png (the
+ * Organization logo referenced by JSON-LD) and the apple-touch-icon.
  *
  * The handoff shipped a generated og-share.png with a split-screen artifact,
  * garbled lettering and a hallucinated "M&A" logo, so it is not used. This
@@ -78,12 +79,12 @@ const buf = await page.screenshot({ type: 'png' });
 const iconHtml = `<!doctype html><meta charset="utf-8"><style>
   @font-face{font-family:Geist;src:url('${font}') format('woff2');font-weight:300 600}
   *{margin:0;padding:0}
-  body{width:180px;height:180px;background:#0e1a2b;display:grid;place-items:center;
-       font-family:Geist,sans-serif;color:#f6f7f4;font-size:74px;font-weight:500;letter-spacing:-3px}
+  body{width:512px;height:512px;background:#0e1a2b;display:grid;place-items:center;
+       font-family:Geist,sans-serif;color:#f6f7f4;font-size:210px;font-weight:500;letter-spacing:-9px}
 </style><div>SB</div>`;
 const tmpIcon = join(ROOT, '.icon.html');
 writeFileSync(tmpIcon, iconHtml);
-await page.setViewportSize({ width: 180, height: 180 });
+await page.setViewportSize({ width: 512, height: 512 });
 await page.goto(pathToFileURL(tmpIcon).href, { waitUntil: 'networkidle' });
 await page.evaluate(() => document.fonts.ready);
 const iconBuf = await page.screenshot({ type: 'png' });
@@ -92,8 +93,11 @@ await browser.close();
 await sharp(buf).resize(1200, 630).jpeg({ quality: 86 }).toFile(join(OUT, 'og-share.jpg'));
 await sharp(buf).resize(1200, 630).webp({ quality: 84 }).toFile(join(OUT, 'og-share.webp'));
 await sharp(iconBuf).resize(180, 180).png().toFile(join(ROOT, 'public/apple-touch-icon.png'));
+// Organization logo for JSON-LD. Google wants at least 112px on the short side;
+// 512 gives room for rich results and social profiles.
+await sharp(iconBuf).resize(512, 512).png().toFile(join(ROOT, 'public/images/logo.png'));
 
 const { unlinkSync } = await import('node:fs');
 unlinkSync(tmp);
 unlinkSync(tmpIcon);
-console.log('wrote og-share.jpg, og-share.webp, apple-touch-icon.png');
+console.log('wrote og-share.jpg, og-share.webp, logo.png, apple-touch-icon.png');

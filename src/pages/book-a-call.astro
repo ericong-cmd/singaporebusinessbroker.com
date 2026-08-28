@@ -18,9 +18,12 @@ const bring = [
   'How long you have been running it, and how much of it you own',
   'When you would like to be out, even if the answer is "not sure yet"',
 ];
+
+const crumbs = [{ href: '/book-a-call', label: 'Book a call' }];
 ---
 
 <Base
+  crumbs={crumbs}
   title="Book a confidential call | Singapore Business Broker"
   description="Request a confidential 30 minute call about selling your Singapore business. No fee, no obligation, and nothing leaves the conversation."
 >
@@ -28,7 +31,7 @@ const bring = [
     eyebrow="30 minutes, confidential"
     title="Book a confidential call"
     intro="No fee and no obligation. You do not have to name your company to have the conversation."
-    crumbs={[{ href: '/book-a-call', label: 'Book a call' }]}
+    crumbs={crumbs}
   />
 
   <section class="max-w-wrap mx-auto px-5 lg:px-8 pb-28 lg:pb-40">

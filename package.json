@@ -10,7 +10,10 @@
     "images": "node assets/build-images.mjs",
     "og": "node tools/make-og.mjs",
     "check": "astro check",
-    "lint:copy": "node tools/lint-copy.mjs"
+    "lint:copy": "node tools/lint-copy.mjs",
+    "prebuild": "node tools/gen-lastmod.mjs && node tools/gen-multiples-csv.mjs",
+    "lastmod": "node tools/gen-lastmod.mjs",
+    "csv": "node tools/gen-multiples-csv.mjs"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.4",

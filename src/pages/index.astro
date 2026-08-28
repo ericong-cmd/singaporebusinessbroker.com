@@ -11,30 +11,16 @@ import BuyerDemand from '../components/home/BuyerDemand.astro';
 import Faq from '../components/Faq.astro';
 import FinalCta from '../components/home/FinalCta.astro';
 import faq from '../data/faq.json';
+import { service, faqPage } from '../lib/schema';
 
 const schema = [
-  {
-    '@type': 'Service',
-    name: 'Sell-side M&A advisory for Singapore SMEs',
-    serviceType: 'Business brokerage and sell-side M&A advisory',
-    provider: { '@id': `${Astro.site}#org` },
-    areaServed: { '@type': 'Country', name: 'Singapore' },
-    description:
-      'Confidential sale process for Singapore businesses worth S$3m to S$30m: valuation, buyer search, negotiation and completion.',
-  },
-  {
-    '@type': 'FAQPage',
-    mainEntity: faq.map((f) => ({
-      '@type': 'Question',
-      name: f.q,
-      acceptedAnswer: { '@type': 'Answer', text: f.a },
-    })),
-  },
+  service('Sell-side M&A advisory for Singapore SMEs'),
+  faqPage(faq),
 ];
 ---
 
 <Base
-  title="Singapore Business Broker | Sell your business confidentially, at the right price"
+  title="Business Broker Singapore | Sell Your Business Confidentially"
   description="Sell-side M&A advisors for Singapore SME owners with S$3m to S$30m businesses. Free valuation estimate, confidential process, vetted buyer network."
   schema={schema}
 >

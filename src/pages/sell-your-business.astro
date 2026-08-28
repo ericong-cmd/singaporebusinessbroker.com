@@ -9,6 +9,7 @@ import FinalCta from '../components/home/FinalCta.astro';
 import process from '../data/process.json';
 import faq from '../data/faq.json';
 import site from '../data/site.json';
+import { service, faqPage } from '../lib/schema';
 
 const why = [
   { icon: 'users-three', title: 'You do not need more buyers. You only need the right one.', body: 'We have 20 buyers on hand looking to buy businesses in different industries. You just need 3 qualified buyers for your business. One buyer on its own is a negotiation you lose slowly.' },
@@ -36,13 +37,16 @@ const fees = [
   },
 ];
 
-const schema = [{
-  '@type': 'FAQPage',
-  mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
-}];
+const schema = [
+  service('Sell-side M&A advisory for Singapore SMEs'),
+  faqPage(faq),
+];
+
+const crumbs = [{ href: '/sell-your-business', label: 'Sell your business' }];
 ---
 
 <Base
+  crumbs={crumbs}
   title="Sell your business in Singapore | Confidential sell-side M&A"
   description="How to sell a Singapore business confidentially: the five-stage process, how confidentiality is protected mechanically, what it costs, and how long it takes."
   schema={schema}
@@ -51,7 +55,7 @@ const schema = [{
     eyebrow="Sell-side M&A"
     title="Sell your business confidentially, at the right price."
     intro={`We run the whole sale for Singapore businesses worth ${site.dealRange}. Valuation, buyer search, negotiation and completion, while you keep running the business.`}
-    crumbs={[{ href: '/sell-your-business', label: 'Sell your business' }]}
+    crumbs={crumbs}
   >
     <div class="flex flex-col sm:flex-row gap-3">
       <Button href="/valuation" variant="ink">Get free valuation</Button>

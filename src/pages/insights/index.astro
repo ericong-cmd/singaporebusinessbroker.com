@@ -9,9 +9,12 @@ const posts = (await getCollection('insights', ({ data }) => !data.draft)).sort(
   (a, b) => b.data.published.valueOf() - a.data.published.valueOf()
 );
 const fmt = (d: Date) => d.toLocaleDateString('en-SG', { year: 'numeric', month: 'long', day: 'numeric' });
+
+const crumbs = [{ href: '/insights', label: 'Insights' }];
 ---
 
 <Base
+  crumbs={crumbs}
   title="Insights | Singapore Business Broker"
   description="Notes on selling a business in Singapore: what buyers pay for, market conditions and the mechanics of a sale process."
 >
@@ -19,7 +22,7 @@ const fmt = (d: Date) => d.toLocaleDateString('en-SG', { year: 'numeric', month:
     eyebrow="Insights"
     title="Notes on selling a Singapore business"
     intro="Short pieces on what we see in live processes."
-    crumbs={[{ href: '/insights', label: 'Insights' }]}
+    crumbs={crumbs}
   />
   <section class="max-w-wrap mx-auto px-5 lg:px-8 pb-28 lg:pb-40">
     <div class="grid grid-cols-1 md:grid-cols-2 gap-3">

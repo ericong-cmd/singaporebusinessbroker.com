@@ -3,52 +3,38 @@ import '../styles/global.css';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
 import site from '../data/site.json';
+import { organization, website, breadcrumbs } from '../lib/schema';
 
 interface Props {
   title: string;
   description: string;
   /** Extra JSON-LD nodes to merge into the @graph for this page. */
   schema?: Record<string, unknown>[];
+  /** Visible breadcrumb trail; also emitted as BreadcrumbList JSON-LD. */
+  crumbs?: { href: string; label: string }[];
   ogImage?: string;
   noindex?: boolean;
   bodyClass?: string;
 }
 
-const { title, description, schema = [], ogImage = '/images/og-share.jpg', noindex = false, bodyClass = '' } =
-  Astro.props;
+const {
+  title,
+  description,
+  schema = [],
+  crumbs = [],
+  ogImage = '/images/og-share.jpg',
+  noindex = false,
+  bodyClass = '',
+} = Astro.props;
 
 const canonical = new URL(Astro.url.pathname.replace(/\/+$/, '') || '/', Astro.site).href;
 const ogUrl = new URL(ogImage, Astro.site).href;
 
-const org = {
-  '@type': ['Organization', 'ProfessionalService'],
-  '@id': `${Astro.site}#org`,
-  name: site.name,
-  url: `${Astro.site}`,
-  description:
-    'Sell-side M&A advisory for Singapore SME owners. Confidential sale process, vetted buyer network, free valuation estimate.',
-  areaServed: { '@type': 'Country', name: 'Singapore' },
-  email: site.email,
-  telephone: site.phoneHref,
-  parentOrganization: { '@type': 'Organization', name: site.parent, url: site.parentUrl },
-  knowsAbout: [
-    'sell-side M&A',
-    'business valuation',
-    'SME succession planning',
-    'business broker Singapore',
-  ],
+const crumbSchema = crumbs.length ? [breadcrumbs(crumbs)] : [];
+const graph = {
+  '@context': 'https://schema.org',
+  '@graph': [organization(), website(), ...crumbSchema, ...schema],
 };
-
-const website = {
-  '@type': 'WebSite',
-  '@id': `${Astro.site}#website`,
-  url: `${Astro.site}`,
-  name: site.name,
-  inLanguage: 'en-SG',
-  publisher: { '@id': `${Astro.site}#org` },
-};
-
-const graph = { '@context': 'https://schema.org', '@graph': [org, website, ...schema] };
 
 // Optional analytics: only emitted when the domain is configured at build time,
 // so the default build has no third-party origins at all.

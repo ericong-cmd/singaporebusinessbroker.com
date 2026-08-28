@@ -7,9 +7,12 @@ import FinalCta from '../../components/home/FinalCta.astro';
 const guides = (await getCollection('guides', ({ data }) => !data.draft)).sort(
   (a, b) => a.data.order - b.data.order
 );
+
+const crumbs = [{ href: '/guides', label: 'Guides' }];
 ---
 
 <Base
+  crumbs={crumbs}
   title="Guides to selling a business in Singapore | Singapore Business Broker"
   description="Practical guides for Singapore SME owners: preparing to sell, valuation methods, succession planning, deal structures, tax and stamp duty, due diligence and more."
 >
@@ -17,7 +20,7 @@ const guides = (await getCollection('guides', ({ data }) => !data.draft)).sort(
     eyebrow="Guides"
     title="Everything an owner needs to know before selling"
     intro="Written for owners doing this once, not for advisors. No sign-up, no gate."
-    crumbs={[{ href: '/guides', label: 'Guides' }]}
+    crumbs={crumbs}
   />
 
   <section class="max-w-wrap mx-auto px-5 lg:px-8 pb-28 lg:pb-40">

@@ -134,6 +134,32 @@ while the fee minimum implies an effective 10% at S$1m. The fee cards on
 `/sell-your-business` state that consequence plainly. Consider raising the
 stated floor in `src/data/stats.json` to match.
 
+## SEO pass (28 Aug 2026)
+
+Implemented from `docs/seo-fix-plan.md`. Notes on where reality differed from
+the audit, and what is deliberately still open:
+
+- The audit said the site had "NO structured data except BreadcrumbList". That
+  was stale: the build already emitted Organization, WebSite, FAQPage, Article
+  and Service, and had no BreadcrumbList at all. The real gaps were the
+  Organization `logo`, Service on `/sell-your-business` and `/sell/*`,
+  BreadcrumbList everywhere, and Article on case studies. All now closed.
+- All JSON-LD moved into `src/lib/schema.ts` and is composed in `Base.astro`,
+  so there is one Organization node (`#organization`) that every other node
+  references by `@id`.
+- `/data/sme-multiples-singapore` is `noindex`, excluded from the sitemap, and
+  no longer carries Dataset schema. The invented `2026-Q3` stamp is gone from
+  `multiples.json` and from the sector pages. Reverse all four when the real
+  dataset ships; the TODO is at the top of the page source.
+- Sitemap now emits real `lastmod` from `src/data/lastmod.json`, generated at
+  prebuild by `tools/gen-lastmod.mjs`. Content routes take their date from
+  frontmatter, so the sitemap agrees with the visible "Updated" byline; static
+  routes take `siteUpdated` from `site.json`, which you bump when you edit
+  them. Git dates are not used because Vercel builds from an uploaded tree
+  with no history.
+- Canonicals and sitemap entries are both slash-free and were verified equal
+  character for character on every indexable page.
+
 ## Sample data still to replace
 
 Everything marked `(sample)` on the site, plus:
@@ -146,6 +172,11 @@ Everything marked `(sample)` on the site, plus:
 - `src/data/site.json` is now owner-confirmed: contact address
   `Contact-us@thefundingassembly.com`, phone `+65 8951 8821`, legal entity
   `The Funding Assembly Pte Ltd`. Nothing in it is a placeholder.
+- `src/data/advisors.json` is empty. The Advisors section on `/about` renders
+  nothing until it is filled, and the Article author stays as the Organization.
+  This is the gating item for E-E-A-T. ERIC-TODO.
+- No postal address is published. `src/lib/schema.ts` marks where a
+  PostalAddress goes; it is the largest remaining local-SEO win. ERIC-TODO.
 - All 20 sector files and 10 guides carry `reviewed: false` in frontmatter.
   They are drafts written to be publishable but they have not been read by a
   person who does these deals. Flip to `true` as they are reviewed.

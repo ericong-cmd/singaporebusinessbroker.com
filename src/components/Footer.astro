@@ -31,7 +31,12 @@ const year = new Date().getFullYear();
     <div class="md:col-span-2">
       <p class="font-medium">{site.name}</p>
       <p class="mt-3 text-ink-3 dark:text-[#a9b4c2] max-w-[40ch] font-light">
-        Sell-side M&amp;A advisory for Singapore SMEs. A brand of {site.parent}.
+        {site.name} is the sell-side M&amp;A practice of
+        <a
+          class="underline underline-offset-2 hover:text-ink dark:hover:text-paper transition-colors duration-500 ease"
+          href={site.parentUrl}
+          rel="noopener"
+        >{site.parentLegal}</a>, Singapore.
       </p>
       <p class="mt-5 space-y-1 text-ink-3 dark:text-[#a9b4c2] font-light">
         <a class="block hover:text-ink dark:hover:text-paper transition-colors duration-500 ease" href={`tel:${site.phoneHref}`}>{site.phoneDisplay}</a>

@@ -5,6 +5,7 @@ import Base from '../../layouts/Base.astro';
 import PageHeader from '../../components/PageHeader.astro';
 import Shell from '../../components/Shell.astro';
 import FinalCta from '../../components/home/FinalCta.astro';
+import { article } from '../../lib/schema';
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const entries = await getCollection('cases');
@@ -15,14 +16,30 @@ interface Props { entry: CollectionEntry<'cases'> }
 const { entry } = Astro.props;
 const { Content } = await entry.render();
 const d = entry.data;
+
+const schema = [
+  article({
+    headline: d.title,
+    description: d.description,
+    path: `/case-studies/${entry.slug}`,
+    published: d.updated,
+  }),
+];
+
+const crumbs = [{ href: '/case-studies', label: 'Transactions' }, { href: `/case-studies/${entry.slug}`, label: d.title }];
 ---
 
-<Base title={`${d.title} | Singapore Business Broker`} description={d.description}>
+<Base
+  crumbs={crumbs}
+  schema={schema}
+  title={`${d.title} | Singapore Business Broker`}
+  description={d.description}
+>
   <PageHeader
     eyebrow={d.sectorLabel}
     title={d.title}
     intro={d.description}
-    crumbs={[{ href: '/case-studies', label: 'Transactions' }, { href: `/case-studies/${entry.slug}`, label: d.title }]}
+    crumbs={crumbs}
   />
 
   <section class="max-w-wrap mx-auto px-5 lg:px-8 pb-16">

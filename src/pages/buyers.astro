@@ -12,9 +12,12 @@ const what = [
   { icon: 'file-text', title: 'Prepared information', body: 'Normalised earnings with the adjustments shown, three years of statements, and a memorandum written to be checked rather than admired.' },
   { icon: 'clock', title: 'A process that moves', body: 'Coordinated diligence, managed data room access and a timetable. Slow deals cost you more than expensive ones.' },
 ];
+
+const crumbs = [{ href: '/buyers', label: 'Buyers' }];
 ---
 
 <Base
+  crumbs={crumbs}
   title="Buyer mandates | Acquire a Singapore SME"
   description="Live buyer mandates and acquisition criteria registration. Screened sell-side opportunities from committed Singapore SME owners, prepared for investment committee review."
 >
@@ -22,7 +25,7 @@ const what = [
     eyebrow="For buyers"
     title="Buyers currently looking"
     intro="Live mandates from our buyer network. If you are acquiring, register your criteria and we will come to you when something fits. No mailing list."
-    crumbs={[{ href: '/buyers', label: 'Buyers' }]}
+    crumbs={crumbs}
   >
     <Button href="/contact?enquiry=buyer" variant="ink">Register your criteria</Button>
   </PageHeader>

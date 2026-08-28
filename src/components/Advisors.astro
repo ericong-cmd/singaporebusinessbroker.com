@@ -1,0 +1,70 @@
+---
+/**
+ * Advisors section for /about.
+ *
+ * Renders nothing while src/data/advisors.json is empty, which is deliberate:
+ * for a site asking owners to disclose a S$3m to S$30m business, an invented
+ * or placeholder advisor is worse than none. Fill the JSON and the section
+ * appears, with Person schema wired from the same data.
+ *
+ * ERIC-TODO: supply names, roles, bios, credentials, LinkedIn URLs and photos.
+ * This is the gating item for full E-E-A-T.
+ */
+import Shell from './Shell.astro';
+import advisorsData from '../data/advisors.json';
+
+type Advisor = {
+  name: string;
+  role: string;
+  bio: string;
+  credentials?: string[];
+  linkedin?: string;
+  photo?: string;
+};
+
+const advisors = advisorsData.advisors as Advisor[];
+---
+
+{advisors.length > 0 && (
+  <section class="max-w-wrap mx-auto px-5 lg:px-8 pb-24" aria-labelledby="advisors-h">
+    <h2 id="advisors-h" class="text-3xl md:text-4xl font-medium tracking-[-0.03em] reveal">Who you would work with</h2>
+    <div class="mt-10 grid grid-cols-1 md:grid-cols-2 gap-3">
+      {advisors.map((a, i) => (
+        <Shell radius="2rem" class="reveal" coreClass="p-8 h-full" data-d={String((i % 2) + 1)}>
+          <div class="flex items-start gap-5">
+            {a.photo && (
+              <img
+                src={a.photo}
+                width="88"
+                height="88"
+                alt={`${a.name}, ${a.role} at Singapore Business Broker`}
+                class="w-[88px] h-[88px] rounded-full object-cover shrink-0"
+                loading="lazy"
+                decoding="async"
+              />
+            )}
+            <div>
+              <h3 class="text-lg font-medium tracking-tight">{a.name}</h3>
+              <p class="text-sm text-accent dark:text-[#7fd1b3]">{a.role}</p>
+              <p class="mt-3 text-sm text-ink-2 dark:text-[#a9b4c2] font-light leading-relaxed">{a.bio}</p>
+              {a.credentials && a.credentials.length > 0 && (
+                <ul class="mt-3 flex flex-wrap gap-2">
+                  {a.credentials.map((c) => (
+                    <li class="text-xs rounded-full ring-1 ring-black/10 dark:ring-white/[0.08] px-3 py-1 text-ink-3 dark:text-[#a9b4c2]">
+                      {c}
+                    </li>
+                  ))}
+                </ul>
+              )}
+              {a.linkedin && (
+                <p class="mt-3 text-sm">
+                  <a class="text-accent dark:text-[#7fd1b3] hover:underline" href={a.linkedin} rel="noopener">LinkedIn</a>
+                </p>
+              )}
+            </div>
+          </div>
+        </Shell>
+      ))}
+    </div>
+  </section>
+)}

@@ -23,9 +23,12 @@ const schema = [{
   '@type': 'FAQPage',
   mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
 }];
+
+const crumbs = [{ href: '/valuation', label: 'Valuation' }];
 ---
 
 <Base
+  crumbs={crumbs}
   title="Free business valuation Singapore | What is my business worth?"
   description="Free, confidential business valuation estimate for Singapore SME owners. Two minutes, instant range on screen, full report by email. Based on current sector transaction multiples."
   schema={schema}
@@ -34,7 +37,7 @@ const schema = [{
     eyebrow="Free valuation estimate"
     title="How much is your business worth?"
     intro="Two minutes. Instant range on screen, full report by email. Confidential, and no obligation to do anything afterwards."
-    crumbs={[{ href: '/valuation', label: 'Valuation' }]}
+    crumbs={crumbs}
   />
 
   <section class="max-w-wrap mx-auto px-5 lg:px-8 pb-28 lg:pb-40">

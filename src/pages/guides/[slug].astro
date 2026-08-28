@@ -4,6 +4,8 @@ import { getCollection, type CollectionEntry } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import PageHeader from '../../components/PageHeader.astro';
 import FinalCta from '../../components/home/FinalCta.astro';
+import { article } from '../../lib/schema';
+import Byline from '../../components/Byline.astro';
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const entries = await getCollection('guides', ({ data }) => !data.draft);
@@ -20,27 +22,30 @@ const others = (await getCollection('guides', ({ data }) => !data.draft))
   .sort((a, b) => a.data.order - b.data.order)
   .slice(0, 3);
 
-const schema = [{
-  '@type': 'Article',
-  headline: d.heading,
-  description: d.description,
-  datePublished: d.updated.toISOString(),
-  dateModified: d.updated.toISOString(),
-  author: { '@id': `${Astro.site}#org` },
-  publisher: { '@id': `${Astro.site}#org` },
-  mainEntityOfPage: new URL(`/guides/${entry.slug}`, Astro.site).href,
-}];
+const schema = [
+  article({
+    headline: d.heading,
+    description: d.description,
+    path: `/guides/${entry.slug}`,
+    published: d.updated,
+    modified: d.updated,
+  }),
+];
+
+const crumbs = [{ href: '/guides', label: 'Guides' }, { href: `/guides/${entry.slug}`, label: d.title }];
 ---
 
-<Base title={`${d.title} | Singapore Business Broker`} description={d.description} schema={schema}>
+<Base
+  crumbs={crumbs} title={`${d.title} | Singapore Business Broker`} description={d.description} schema={schema}>
   <PageHeader
-    eyebrow={`Guide, ${d.readingMinutes} min read`}
+    eyebrow="Guide"
     title={d.heading}
     intro={d.description}
-    crumbs={[{ href: '/guides', label: 'Guides' }, { href: `/guides/${entry.slug}`, label: d.title }]}
+    crumbs={crumbs}
   />
 
   <section class="max-w-wrap mx-auto px-5 lg:px-8 pb-24">
+    <Byline published={d.updated} readingMinutes={d.readingMinutes} class="reveal mb-10" />
     <div class="prose-sbb reveal"><Content /></div>
   </section>
 

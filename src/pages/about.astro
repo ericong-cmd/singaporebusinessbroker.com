@@ -5,6 +5,9 @@ import Shell from '../components/Shell.astro';
 import Button from '../components/Button.astro';
 import FinalCta from '../components/home/FinalCta.astro';
 import site from '../data/site.json';
+import Advisors from '../components/Advisors.astro';
+import advisorsData from '../data/advisors.json';
+import { ORG_ID } from '../lib/schema';
 
 const commitments = [
   { title: 'We tell you when not to sell', body: 'If a sale is premature, or the business is below the size where we add value, we say so in the first conversation rather than taking a mandate that will not complete.' },
@@ -12,9 +15,26 @@ const commitments = [
   { title: 'We state the agency position unprompted', body: 'On a sale mandate we act for the seller. Where a buyer pays us for buy-side process work, that fee is disclosed to both sides. Nobody has to ask.' },
   { title: 'No client is named without permission', body: 'Live mandates are described only in disguised terms. Completed transactions are named only where the client agreed in writing.' },
 ];
+
+const crumbs = [{ href: '/about', label: 'About' }];
+
+const advisors = advisorsData.advisors as { name: string; role: string; linkedin?: string }[];
+const schema = [
+  { '@type': 'AboutPage', url: new URL('/about', Astro.site).href, mainEntity: { '@id': ORG_ID } },
+  // Populated automatically once src/data/advisors.json has entries.
+  ...advisors.map((a) => ({
+    '@type': 'Person',
+    name: a.name,
+    jobTitle: a.role,
+    worksFor: { '@id': ORG_ID },
+    ...(a.linkedin ? { sameAs: [a.linkedin] } : {}),
+  })),
+];
 ---
 
 <Base
+  crumbs={crumbs}
+  schema={schema}
   title="About | Singapore Business Broker"
   description="Singapore Business Broker is the sell-side M&A practice of The Funding Assembly, working with SME owners in the S$3m to S$30m range."
 >
@@ -22,7 +42,7 @@ const commitments = [
     eyebrow="About"
     title="Who you would actually be working with"
     intro={`${site.name} is the sell-side M&A practice of ${site.parent}. We work with Singapore SME owners on transactions in the ${site.dealRange} range.`}
-    crumbs={[{ href: '/about', label: 'About' }]}
+    crumbs={crumbs}
   >
     <Button href="/book-a-call" variant="ink" icon="phone">Book a confidential call</Button>
   </PageHeader>
@@ -55,6 +75,14 @@ const commitments = [
       </div>
       <div class="lg:col-span-5 reveal" data-d="1">
         <Shell radius="1.5rem" coreClass="p-6">
+          <h2 class="font-medium">The legal entity</h2>
+          <p class="mt-3 text-sm text-ink-2 dark:text-[#a9b4c2] font-light">
+            Singapore Business Broker is the sell-side M&amp;A practice of
+            <a class="text-accent dark:text-[#7fd1b3] hover:underline" href={site.parentUrl} rel="noopener">{site.parentLegal}</a>,
+            Singapore.
+          </p>
+        </Shell>
+        <Shell radius="1.5rem" class="mt-4" coreClass="p-6">
           <h2 class="font-medium">Check us before you reply</h2>
           <p class="mt-3 text-sm text-ink-2 dark:text-[#a9b4c2] font-light">
             You will, and you should. We are registered in Singapore under {site.parentLegal}. If there is something
@@ -72,6 +100,8 @@ const commitments = [
       </div>
     </div>
   </section>
+
+  <Advisors />
 
   <section class="max-w-wrap mx-auto px-5 lg:px-8 pb-28 lg:pb-40">
     <h2 class="text-3xl md:text-4xl font-medium tracking-[-0.03em] reveal">Four commitments, each one checkable</h2>

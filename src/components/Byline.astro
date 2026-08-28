@@ -1,0 +1,38 @@
+---
+/**
+ * Visible authorship and freshness line for editorial pages.
+ *
+ * Google expects a page's visible date to match its Article schema date, so
+ * this reads the same frontmatter field the schema does. Do not hardcode a
+ * date here.
+ *
+ * ERIC-TODO: once advisors are named on /about, pass their name through as
+ * `author` and switch the Article `author` in src/lib/schema.ts to a Person.
+ */
+import site from '../data/site.json';
+
+interface Props {
+  published: Date;
+  updated?: Date;
+  author?: string;
+  readingMinutes?: number;
+  class?: string;
+}
+
+const { published, updated, author = `the ${site.name} team`, readingMinutes, class: className = '' } = Astro.props;
+
+const shown = updated ?? published;
+const fmt = (d: Date) => d.toLocaleDateString('en-SG', { month: 'long', year: 'numeric' });
+---
+
+<p class={`flex flex-wrap items-center gap-x-2 gap-y-1 text-sm text-ink-3 dark:text-[#a9b4c2] font-light ${className}`}>
+  <span>By {author}</span>
+  <span aria-hidden="true" class="opacity-50">&middot;</span>
+  <span>Updated <time datetime={shown.toISOString().slice(0, 10)}>{fmt(shown)}</time></span>
+  {readingMinutes && (
+    <>
+      <span aria-hidden="true" class="opacity-50">&middot;</span>
+      <span>{readingMinutes} min read</span>
+    </>
+  )}
+</p>

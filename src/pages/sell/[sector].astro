@@ -8,6 +8,8 @@ import Button from '../../components/Button.astro';
 import Icon from '../../components/Icon.astro';
 import FinalCta from '../../components/home/FinalCta.astro';
 import multiples from '../../data/multiples.json';
+import { article, service } from '../../lib/schema';
+import Byline from '../../components/Byline.astro';
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const entries = await getCollection('sectors', ({ data }) => !data.draft);
@@ -23,24 +25,26 @@ const related = (await getCollection('guides', ({ data }) => !data.draft))
   .sort((a, b) => a.data.order - b.data.order)
   .slice(0, 4);
 
-const schema = [{
-  '@type': 'Article',
-  headline: d.heading,
-  description: d.description,
-  datePublished: d.updated.toISOString(),
-  dateModified: d.updated.toISOString(),
-  author: { '@id': `${Astro.site}#org` },
-  publisher: { '@id': `${Astro.site}#org` },
-  mainEntityOfPage: new URL(`/sell/${entry.slug}`, Astro.site).href,
-}];
+const schema = [
+  article({
+    headline: d.heading,
+    description: d.description,
+    path: `/sell/${entry.slug}`,
+    published: d.updated,
+  }),
+  service(`Sell-side M&A advisory for ${range?.short ?? 'Singapore SME'} businesses in Singapore`),
+];
+
+const crumbs = [{ href: '/sell-your-business', label: 'Sell' }, { href: `/sell/${entry.slug}`, label: range?.short ?? d.title }];
 ---
 
-<Base title={`${d.title} | Singapore Business Broker`} description={d.description} schema={schema}>
+<Base
+  crumbs={crumbs} title={`${d.title} | Singapore Business Broker`} description={d.description} schema={schema}>
   <PageHeader
     eyebrow="Sector guide"
     title={d.heading}
     intro={d.intro}
-    crumbs={[{ href: '/sell-your-business', label: 'Sell' }, { href: `/sell/${entry.slug}`, label: range?.short ?? d.title }]}
+    crumbs={crumbs}
   >
     <div class="flex flex-col sm:flex-row gap-3">
       <Button href={`/valuation?sector=${entry.slug}`} variant="ink">Value my {range?.short.toLowerCase() ?? ''} business</Button>
@@ -53,7 +57,7 @@ const schema = [{
       <div>
         <p class="text-[10px] uppercase tracking-[0.18em] text-ink-3 dark:text-[#a9b4c2]">Typical multiple <span class="font-mono normal-case tracking-normal">(sample)</span></p>
         <p class="mt-2 font-mono text-2xl md:text-3xl tracking-tight">{range?.low}x to {range?.high}x</p>
-        <p class="mt-2 text-sm text-ink-3 dark:text-[#a9b4c2] font-light">Normalised EBITDA, {multiples.updated}</p>
+        <p class="mt-2 text-sm text-ink-3 dark:text-[#a9b4c2] font-light">Normalised EBITDA, indicative range</p>
       </div>
       <div class="sm:pl-8">
         <p class="text-[10px] uppercase tracking-[0.18em] text-ink-3 dark:text-[#a9b4c2]">Typical process</p>
@@ -120,6 +124,7 @@ const schema = [{
 
   <section class="max-w-wrap mx-auto px-5 lg:px-8 pb-20">
     <div class="prose-sbb reveal"><Content /></div>
+    <Byline published={d.updated} class="reveal mt-10" />
   </section>
 
   <section class="max-w-wrap mx-auto px-5 lg:px-8 pb-28 lg:pb-40">

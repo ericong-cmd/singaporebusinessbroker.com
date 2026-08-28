@@ -9,9 +9,12 @@ const field =
   'rounded-2xl border border-black/10 dark:border-white/10 bg-paper dark:bg-night dark:text-[#e9ecef] px-4 py-3.5 text-sm focus:outline-none focus:ring-2 focus:ring-accent/60 transition-shadow duration-500 ease';
 
 const schema = [{ '@type': 'ContactPage', url: new URL('/contact', Astro.site).href, mainEntity: { '@id': `${Astro.site}#org` } }];
+
+const crumbs = [{ href: '/contact', label: 'Contact' }];
 ---
 
 <Base
+  crumbs={crumbs}
   title="Contact | Singapore Business Broker"
   description="Contact Singapore Business Broker about selling your business, buying a business, or a referral. Confidential, no obligation."
   schema={schema}
@@ -20,7 +23,7 @@ const schema = [{ '@type': 'ContactPage', url: new URL('/contact', Astro.site).h
     eyebrow="Contact"
     title="Start a confidential conversation"
     intro="You do not have to name your company to ask a question. Nothing leaves the conversation."
-    crumbs={[{ href: '/contact', label: 'Contact' }]}
+    crumbs={crumbs}
   />
 
   <section class="max-w-wrap mx-auto px-5 lg:px-8 pb-28 lg:pb-40">
