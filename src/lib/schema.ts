@@ -11,14 +11,34 @@
  *    repeating the firm's details, so there is one authoritative entity.
  */
 import site from '../data/site.json';
+import advisorsData from '../data/advisors.json';
 
 export const SITE_URL = 'https://www.singaporebusinessbroker.com';
+
+export type Advisor = {
+  name: string;
+  role: string;
+  bio: string;
+  founder?: boolean;
+  credentials?: string[];
+  linkedin?: string;
+  photo?: string;
+};
+
+export const advisors = advisorsData.advisors as Advisor[];
+export const personId = (name: string) => `${SITE_URL}/about#${name.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`;
 export const ORG_ID = `${SITE_URL}/#organization`;
 export const WEBSITE_ID = `${SITE_URL}/#website`;
 
 const abs = (path: string) => new URL(path, SITE_URL).href;
 
 export function organization() {
+  const founder = advisors.find((a) => a.founder) ?? advisors[0];
+  // sameAs is how Google ties this site to the Google Business Profile and any
+  // other public profile. Add each URL to site.json as it goes live.
+  const sameAs = Object.entries(site.profiles ?? {})
+    .filter(([k, v]) => !k.startsWith('_') && typeof v === 'string' && v.trim())
+    .map(([, v]) => v as string);
   return {
     '@type': 'ProfessionalService',
     '@id': ORG_ID,
@@ -44,9 +64,13 @@ export function organization() {
       'Business succession',
       'Singapore SME sales',
     ],
+    ...(sameAs.length ? { sameAs } : {}),
+    ...(founder
+      ? { founder: { '@id': personId(founder.name) }, employee: { '@id': personId(founder.name) } }
+      : {}),
     // ERIC-TODO: add a PostalAddress block here once a registered address may be
-    // published. It is the biggest single local-SEO win outstanding and is
-    // required for parity with a Google Business Profile.
+    // published. It must match the Google Business Profile listing exactly
+    // (same name, same address, same phone) or the two signals fight each other.
   };
 }
 
@@ -58,6 +82,21 @@ export function website() {
     name: site.name,
     inLanguage: 'en-SG',
     publisher: { '@id': ORG_ID },
+  };
+}
+
+/** Person node for a named advisor, referenced by @id from Organization and Article. */
+export function person(a: Advisor) {
+  return {
+    '@type': 'Person',
+    '@id': personId(a.name),
+    name: a.name,
+    jobTitle: a.role,
+    description: a.bio,
+    worksFor: { '@id': ORG_ID },
+    ...(a.credentials?.length ? { hasCredential: a.credentials } : {}),
+    ...(a.linkedin ? { sameAs: [a.linkedin] } : {}),
+    ...(a.photo ? { image: abs(a.photo) } : {}),
   };
 }
 
@@ -88,14 +127,18 @@ export function article(opts: {
   path: string;
   published: Date;
   modified?: Date;
+  /** Attribute to a named advisor only when a person has actually reviewed the
+   *  page. A named byline on unreviewed drafts is the E-E-A-T signal that
+   *  backfires the moment a reader finds an error in one. */
+  reviewedBy?: Advisor | null;
 }) {
   return {
     '@type': 'Article',
     headline: opts.headline,
     description: opts.description,
-    // ERIC-TODO: switch author to a Person referencing a named advisor once the
-    // Advisors section on /about is populated.
-    author: { '@type': 'Organization', name: site.name, '@id': ORG_ID },
+    author: opts.reviewedBy
+      ? { '@id': personId(opts.reviewedBy.name) }
+      : { '@type': 'Organization', name: site.name, '@id': ORG_ID },
     publisher: { '@id': ORG_ID },
     datePublished: opts.published.toISOString().slice(0, 10),
     dateModified: (opts.modified ?? opts.published).toISOString().slice(0, 10),

@@ -6,27 +6,31 @@
  * this reads the same frontmatter field the schema does. Do not hardcode a
  * date here.
  *
- * ERIC-TODO: once advisors are named on /about, pass their name through as
- * `author` and switch the Article `author` in src/lib/schema.ts to a Person.
+ * Pages carry a named byline only once `reviewed: true` is set in their
+ * frontmatter. Until then they read "By the Singapore Business Broker team",
+ * because attributing an unreviewed draft to a named person is the E-E-A-T
+ * signal that backfires when a reader finds an error in it.
  */
 import site from '../data/site.json';
 
 interface Props {
   published: Date;
   updated?: Date;
+  /** Omit for unreviewed pages; falls back to the team byline. */
   author?: string;
   readingMinutes?: number;
   class?: string;
 }
 
-const { published, updated, author = `the ${site.name} team`, readingMinutes, class: className = '' } = Astro.props;
+const { published, updated, author, readingMinutes, class: className = '' } = Astro.props;
+const byline = author && author.trim() ? author : `the ${site.name} team`;
 
 const shown = updated ?? published;
 const fmt = (d: Date) => d.toLocaleDateString('en-SG', { month: 'long', year: 'numeric' });
 ---
 
 <p class={`flex flex-wrap items-center gap-x-2 gap-y-1 text-sm text-ink-3 dark:text-[#a9b4c2] font-light ${className}`}>
-  <span>By {author}</span>
+  <span>By {byline}</span>
   <span aria-hidden="true" class="opacity-50">&middot;</span>
   <span>Updated <time datetime={shown.toISOString().slice(0, 10)}>{fmt(shown)}</time></span>
   {readingMinutes && (

@@ -8,7 +8,7 @@ import Button from '../../components/Button.astro';
 import Icon from '../../components/Icon.astro';
 import FinalCta from '../../components/home/FinalCta.astro';
 import multiples from '../../data/multiples.json';
-import { article, service } from '../../lib/schema';
+import { article, service, advisors } from '../../lib/schema';
 import Byline from '../../components/Byline.astro';
 
 export const getStaticPaths: GetStaticPaths = async () => {
@@ -20,6 +20,8 @@ interface Props { entry: CollectionEntry<'sectors'> }
 const { entry } = Astro.props;
 const { Content } = await entry.render();
 const d = entry.data;
+// Named attribution only once a person has actually reviewed the page.
+const reviewedBy = d.reviewed ? (advisors.find((a) => a.founder) ?? advisors[0] ?? null) : null;
 const range = multiples.sectors.find((s) => s.slug === d.sector);
 const related = (await getCollection('guides', ({ data }) => !data.draft))
   .sort((a, b) => a.data.order - b.data.order)
@@ -31,6 +33,7 @@ const schema = [
     description: d.description,
     path: `/sell/${entry.slug}`,
     published: d.updated,
+    reviewedBy,
   }),
   service(`Sell-side M&A advisory for ${range?.short ?? 'Singapore SME'} businesses in Singapore`),
 ];
@@ -124,7 +127,7 @@ const crumbs = [{ href: '/sell-your-business', label: 'Sell' }, { href: `/sell/$
 
   <section class="max-w-wrap mx-auto px-5 lg:px-8 pb-20">
     <div class="prose-sbb reveal"><Content /></div>
-    <Byline published={d.updated} class="reveal mt-10" />
+    <Byline published={d.updated} author={reviewedBy?.name} class="reveal mt-10" />
   </section>
 
   <section class="max-w-wrap mx-auto px-5 lg:px-8 pb-28 lg:pb-40">

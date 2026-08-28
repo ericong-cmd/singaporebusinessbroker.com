@@ -4,7 +4,7 @@ import { getCollection, type CollectionEntry } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import PageHeader from '../../components/PageHeader.astro';
 import FinalCta from '../../components/home/FinalCta.astro';
-import { article } from '../../lib/schema';
+import { article, advisors } from '../../lib/schema';
 import Byline from '../../components/Byline.astro';
 
 export const getStaticPaths: GetStaticPaths = async () => {
@@ -16,6 +16,8 @@ interface Props { entry: CollectionEntry<'guides'> }
 const { entry } = Astro.props;
 const { Content } = await entry.render();
 const d = entry.data;
+// Named attribution only once a person has actually reviewed the page.
+const reviewedBy = d.reviewed ? (advisors.find((a) => a.founder) ?? advisors[0] ?? null) : null;
 
 const others = (await getCollection('guides', ({ data }) => !data.draft))
   .filter((g) => g.slug !== entry.slug)
@@ -29,6 +31,7 @@ const schema = [
     path: `/guides/${entry.slug}`,
     published: d.updated,
     modified: d.updated,
+    reviewedBy,
   }),
 ];
 
@@ -45,7 +48,7 @@ const crumbs = [{ href: '/guides', label: 'Guides' }, { href: `/guides/${entry.s
   />
 
   <section class="max-w-wrap mx-auto px-5 lg:px-8 pb-24">
-    <Byline published={d.updated} readingMinutes={d.readingMinutes} class="reveal mb-10" />
+    <Byline published={d.updated} author={reviewedBy?.name} readingMinutes={d.readingMinutes} class="reveal mb-10" />
     <div class="prose-sbb reveal"><Content /></div>
   </section>
 

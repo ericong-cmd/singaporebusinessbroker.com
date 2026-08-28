@@ -160,6 +160,43 @@ the audit, and what is deliberately still open:
 - Canonicals and sitemap entries are both slash-free and were verified equal
   character for character on every indexable page.
 
+## Named attribution is gated on review
+
+A named byline appears on a page only when its frontmatter says `reviewed: true`.
+Until then the page reads "By the Singapore Business Broker team" and its
+Article schema attributes to the Organization, not to a Person.
+
+This is deliberate. All 30 sector and guide pages are drafts nobody has read
+line by line. Putting a named CFA's byline on 30 unreviewed pages is the
+E-E-A-T signal that reverses the moment a reader finds one error, and it puts
+a real person's professional reputation behind text they have not checked.
+
+To publish under his name: read the page, set `reviewed: true` in its
+frontmatter, rebuild. The visible byline and the schema author both switch
+together, because both read the same flag.
+
+## Google Business Profile
+
+A GBP is being created. Two things have to line up or the two signals fight
+each other:
+
+1. **NAP must match the site exactly.** Use these strings verbatim in the
+   profile, character for character, because they are what the site publishes:
+   - Name: `Singapore Business Broker`
+   - Phone: `+65 8951 8821`
+   - Website: `https://www.singaporebusinessbroker.com`
+   The email on the site is `Contact-us@thefundingassembly.com`.
+   The legal entity behind both is `The Funding Assembly Pte Ltd`.
+2. **The address has to be decided once and used in both places.** GBP requires
+   a service-area or a street address. Whatever is registered there should also
+   go into the PostalAddress slot in `src/lib/schema.ts`, or the site will keep
+   claiming less than the profile does.
+
+Once the profile is live, paste its share URL into
+`profiles.googleBusinessProfile` in `src/data/site.json`. Organization emits it
+as `sameAs` automatically, which is how Google ties the two records together.
+The same slot takes a LinkedIn company URL.
+
 ## Sample data still to replace
 
 Everything marked `(sample)` on the site, plus:
@@ -172,11 +209,13 @@ Everything marked `(sample)` on the site, plus:
 - `src/data/site.json` is now owner-confirmed: contact address
   `Contact-us@thefundingassembly.com`, phone `+65 8951 8821`, legal entity
   `The Funding Assembly Pte Ltd`. Nothing in it is a placeholder.
-- `src/data/advisors.json` is empty. The Advisors section on `/about` renders
-  nothing until it is filled, and the Article author stays as the Organization.
-  This is the gating item for E-E-A-T. ERIC-TODO.
+- `src/data/advisors.json` now names the founder, so the Advisors section on
+  `/about` renders and Person schema is emitted, linked from Organization as
+  `founder` and `employee`. Still missing and worth adding: a LinkedIn URL and
+  a photograph, which are the two things a prospect checks. ERIC-TODO.
 - No postal address is published. `src/lib/schema.ts` marks where a
-  PostalAddress goes; it is the largest remaining local-SEO win. ERIC-TODO.
+  PostalAddress goes. See the Google Business Profile section below, because
+  the two have to agree. ERIC-TODO.
 - All 20 sector files and 10 guides carry `reviewed: false` in frontmatter.
   They are drafts written to be publishable but they have not been read by a
   person who does these deals. Flip to `true` as they are reviewed.

@@ -1,4 +1,14 @@
 {
-  "_comment": "ERIC-TODO: supply the real advisors. The Advisors section on /about renders ONLY when this array is non-empty, so nothing is invented and nothing appears until you fill it in. Per person: name, role, bio (2 to 3 lines), credentials (array), linkedin (full URL), photo (path under /images/team/, square, at least 400x400). Once populated, also switch the Article author in src/lib/schema.ts from Organization to Person.",
-  "advisors": []
+  "_comment": "Real advisors. The Advisors section on /about, the Person schema and the named byline all read from here. Per person: name, role, bio, credentials[], founder (bool), linkedin (full URL), photo (path under /images/team/, square, at least 400x400). ERIC-TODO: a LinkedIn URL and a photograph are the two highest-value additions left; both are checked by prospects before they reply.",
+  "advisors": [
+    {
+      "name": "Ong Eric",
+      "role": "Founder",
+      "founder": true,
+      "bio": "A family business owner himself, running a business turning over S$30m a year. He has sold three F&B businesses across the retail, distribution and manufacturing sub-sectors, with revenues from S$3m to S$20m.",
+      "credentials": ["CFA", "Family business owner, S$30m revenue", "3 F&B businesses sold"],
+      "linkedin": "",
+      "photo": ""
+    }
+  ]
 }

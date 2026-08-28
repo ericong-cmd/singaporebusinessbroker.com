@@ -11,5 +11,10 @@
   "dealRange": "S$3m to S$30m",
   "bookingUrl": "mailto:Contact-us@thefundingassembly.com?subject=Enquiry%20on%20selling%20my%20business",
   "enquirySubject": "Enquiry on selling my business",
-  "siteUpdated": "2026-08-28"
+  "siteUpdated": "2026-08-28",
+  "profiles": {
+    "_comment": "Public profiles for Organization sameAs. Fill each in as it goes live; empty strings are skipped. The Google Business Profile URL is the share link from the GBP dashboard (https://maps.app.goo.gl/... or the full Maps place URL).",
+    "googleBusinessProfile": "",
+    "linkedin": ""
+  }
 }

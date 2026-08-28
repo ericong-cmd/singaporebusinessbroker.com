@@ -61,6 +61,7 @@ const insights = defineCollection({
     published: z.coerce.date(),
     updated: z.coerce.date().optional(),
     draft: z.boolean().default(false),
+    reviewed: z.boolean().default(false),
     readingMinutes: z.number().default(5),
   }),
 });
