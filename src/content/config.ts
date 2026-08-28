@@ -43,10 +43,16 @@ const cases = defineCollection({
     outcome: z.string(),
     timeToClose: z.string(),
     buyerType: z.string(),
+    /** Year the transaction completed. Always shown, so a closed deal can never
+     *  be mistaken for a live mandate. */
+    completedYear: z.number().int(),
+    /** Our capacity on the deal. Stated plainly because advisor and principal
+     *  are not the same claim. */
+    role: z.string().default('Sell-side advisor'),
     featured: z.boolean().default(false),
     image: z.string().optional(),
-    /** Every published case is anonymised; sample entries are clearly marked. */
-    sample: z.boolean().default(true),
+    /** Illustrative rather than a real transaction. Real deals set this false. */
+    sample: z.boolean().default(false),
     order: z.number().default(99),
     updated: z.coerce.date(),
   }),

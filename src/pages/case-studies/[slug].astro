@@ -47,17 +47,16 @@ const crumbs = [{ href: '/case-studies', label: 'Transactions' }, { href: `/case
       <div><p class="text-[10px] uppercase tracking-[0.18em] text-ink-3 dark:text-[#a9b4c2]">Size</p><p class="mt-2 font-mono text-lg">{d.revenue}</p></div>
       <div class="md:pl-8"><p class="text-[10px] uppercase tracking-[0.18em] text-ink-3 dark:text-[#a9b4c2]">Buyer</p><p class="mt-2 font-mono text-lg">{d.buyerType}</p></div>
       <div class="md:pl-8"><p class="text-[10px] uppercase tracking-[0.18em] text-ink-3 dark:text-[#a9b4c2]">Time to close</p><p class="mt-2 font-mono text-lg">{d.timeToClose}</p></div>
-      <div class="md:pl-8"><p class="text-[10px] uppercase tracking-[0.18em] text-ink-3 dark:text-[#a9b4c2]">Outcome</p><p class="mt-2 text-sm font-light">{d.outcome}</p></div>
+      <div class="md:pl-8"><p class="text-[10px] uppercase tracking-[0.18em] text-ink-3 dark:text-[#a9b4c2]">Completed</p><p class="mt-2 font-mono text-lg">{d.completedYear}</p></div>
     </Shell>
   </section>
 
   <section class="max-w-wrap mx-auto px-5 lg:px-8 pb-28 lg:pb-40">
     <div class="prose-sbb reveal"><Content /></div>
-    {d.sample && (
-      <p class="mt-10 font-mono text-xs text-ink-3 dark:text-[#a9b4c2] reveal">
-        (sample entry) Illustrative of the deals we work on, pending publication of live figures.
-      </p>
-    )}
+    <p class="mt-10 text-xs text-ink-3 dark:text-[#a9b4c2] font-light reveal">
+      {d.role}, completed {d.completedYear}. Anonymised: we do not name a client without written permission.
+      {d.sample && ' This entry is illustrative rather than a specific transaction.'}
+    </p>
   </section>
 
   <FinalCta />

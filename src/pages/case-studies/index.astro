@@ -13,17 +13,16 @@ const crumbs = [{ href: '/case-studies', label: 'Transactions' }];
 <Base
   crumbs={crumbs}
   title="Transactions | Singapore Business Broker"
-  description="Anonymised Singapore SME transactions: sector, size band, buyer type and outcome. Sample entries pending publication of live figures."
+  description="Completed Singapore SME transactions, anonymised: sector, size, buyer type and year. Three F&B businesses sold from S$3m to S$20m revenue."
 >
   <PageHeader
     eyebrow="Transactions"
     title="Recent transactions, anonymised"
-    intro="Sector, size and outcome only. We never name a client without written permission, which is why these entries describe the shape of a deal rather than the company."
+    intro="Completed transactions, anonymised. We never name a client without written permission, which is why these entries describe the shape of a deal rather than the company."
     crumbs={crumbs}
   />
 
   <section class="max-w-wrap mx-auto px-5 lg:px-8 pb-28 lg:pb-40">
-    <p class="mb-8 font-mono text-xs text-ink-3 dark:text-[#a9b4c2] reveal">(sample entries)</p>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
       {cases.map((c, i) => (
         <Shell radius="2rem" class="reveal" coreClass="p-8 h-full flex flex-col justify-between gap-8" data-d={String((i % 2) + 1)}>
@@ -37,7 +36,7 @@ const crumbs = [{ href: '/case-studies', label: 'Transactions' }];
           <dl class="grid grid-cols-3 gap-4 text-sm">
             <div><dt class="text-ink-3 dark:text-[#a9b4c2] text-xs">Size</dt><dd class="font-mono mt-1 text-[13px]">{c.data.revenue}</dd></div>
             <div><dt class="text-ink-3 dark:text-[#a9b4c2] text-xs">Buyer</dt><dd class="font-mono mt-1 text-[13px]">{c.data.buyerType}</dd></div>
-            <div><dt class="text-ink-3 dark:text-[#a9b4c2] text-xs">Close</dt><dd class="font-mono mt-1 text-[13px]">{c.data.timeToClose}</dd></div>
+            <div><dt class="text-ink-3 dark:text-[#a9b4c2] text-xs">Completed</dt><dd class="font-mono mt-1 text-[13px]">{c.data.completedYear}</dd></div>
           </dl>
         </Shell>
       ))}
