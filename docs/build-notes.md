@@ -214,7 +214,17 @@ Everything marked `(sample)` on the site, plus:
   `/about` renders and Person schema is emitted, linked from Organization as
   `founder` and `employee`. The LinkedIn URL is set, so it renders on `/about`
   and appears as `sameAs` on the Person node. A photograph is the one thing
-  still missing. ERIC-TODO.
+  still missing: the owner has supplied one but it has not reached the repo
+  as a file yet. Drop it at `public/images/team/eric-ong.jpg` and set
+  `photo` to `/images/team/eric-ong.jpg`. ERIC-TODO.
+
+Owner decisions applied 2026-08-30: the name is `Eric Ong`, matching the
+LinkedIn slug, so the Person `@id` anchor is now `#eric-ong`. The proof
+strip deal range reads `S$3m to S$30m`, reconciled with the S$100,000
+minimum fee, which the owner confirmed stands. All 31 content pages are
+`reviewed: true` and therefore carry the named byline; the single insights
+post had no `reviewed` key at all and was defaulting to false, which is why
+the count was 30 rather than 31.
 - No postal address is published. `src/lib/schema.ts` marks where a
   PostalAddress goes. See the Google Business Profile section below, because
   the two have to agree. ERIC-TODO.

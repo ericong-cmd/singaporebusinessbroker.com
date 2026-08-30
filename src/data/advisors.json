@@ -2,7 +2,7 @@
   "_comment": "Real advisors. The Advisors section on /about, the Person schema and the named byline all read from here. Per person: name, role, bio, credentials[], founder (bool), linkedin (full URL), photo (path under /images/team/, square, at least 400x400). ERIC-TODO: a photograph is the highest-value addition left; prospects check for a face before they reply.",
   "advisors": [
     {
-      "name": "Ong Eric",
+      "name": "Eric Ong",
       "role": "Founder",
       "founder": true,
       "bio": "A family business owner himself, running a business turning over S$30m a year. He has sold three F&B businesses across the retail, distribution and manufacturing sub-sectors, with revenues from S$3m to S$20m.",
