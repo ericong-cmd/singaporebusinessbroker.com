@@ -204,15 +204,17 @@ Everything marked `(sample)` on the site, plus:
 - `src/data/multiples.json` — sector ranges carried over from the prototype.
   Replace with TFA transaction data and update `updated` to the current quarter.
 - `src/data/stats.json`, `src/data/buyers.json` — proof strip and buyer board.
-- `src/content/cases/*.mdx` — four illustrative deals. Real anonymised
-  transactions should replace them, keeping `sample: false`.
+- `src/content/cases/*.mdx` — no longer placeholder. The four illustrative
+  deals were deleted and replaced with three real anonymised transactions,
+  all `sample: false`.
 - `src/data/site.json` is now owner-confirmed: contact address
   `singaporebusinessbroker@thefundingassembly.com`, phone `+65 8951 8821`, legal entity
   `The Funding Assembly Pte Ltd`. Nothing in it is a placeholder.
 - `src/data/advisors.json` now names the founder, so the Advisors section on
   `/about` renders and Person schema is emitted, linked from Organization as
-  `founder` and `employee`. Still missing and worth adding: a LinkedIn URL and
-  a photograph, which are the two things a prospect checks. ERIC-TODO.
+  `founder` and `employee`. The LinkedIn URL is set, so it renders on `/about`
+  and appears as `sameAs` on the Person node. A photograph is the one thing
+  still missing. ERIC-TODO.
 - No postal address is published. `src/lib/schema.ts` marks where a
   PostalAddress goes. See the Google Business Profile section below, because
   the two have to agree. ERIC-TODO.
