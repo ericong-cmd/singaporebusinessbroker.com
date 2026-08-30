@@ -251,6 +251,27 @@ Against the built output, not the dev server:
   lead scored `hot`, a cold lead scored `cold`, contact accepted. With no
   integration env vars set every delivery reports `skipped`, as designed.
 
+Transactional email is live as of 2026-08-30. `RESEND_API_KEY`, `MAIL_FROM`
+and `TEAM_EMAIL` are set in Vercel and the owner has confirmed a real
+submission both delivered the report and accepted a reply. Two decisions
+behind that setup are worth keeping:
+
+- The domain registered in Resend is the apex `singaporebusinessbroker.com`,
+  not a `send.` subdomain. Resend puts its own MX and SPF on a `send.` host
+  of whatever domain it is given, so the apex yields a clean
+  `reports@singaporebusinessbroker.com` From address while leaving the apex
+  MX alone. That mattered here: DNS is Namecheap BasicDNS and the apex still
+  carries Namecheap's `eforward1-5` email forwarding. Registering the
+  subdomain instead would have produced `send.send.` records and a worse
+  From address for no gain.
+- `TEAM_EMAIL` is both the Reply-To on the seller's report and the recipient
+  of the hot-lead alert. The alert fires only for the `hot` band, so a warm
+  or cold test submission proves the report path without proving the alert
+  path.
+
+`crmUpsert` and `alertSlack` still report `skipped`: Airtable and Slack are
+not configured, which is intentional and not a fault.
+
 Lighthouse itself was not run: no Chrome measurement harness is available in
 this environment. The proxies for it are the payload numbers above, the
 absence of third-party origins, and explicit `width`/`height` on every image
