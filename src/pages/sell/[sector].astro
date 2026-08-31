@@ -8,8 +8,10 @@ import Button from '../../components/Button.astro';
 import Icon from '../../components/Icon.astro';
 import FinalCta from '../../components/home/FinalCta.astro';
 import multiples from '../../data/multiples.json';
-import { article, service, advisors } from '../../lib/schema';
+import { article, service, faqPage, advisors } from '../../lib/schema';
 import Byline from '../../components/Byline.astro';
+import Faq from '../../components/Faq.astro';
+import SectorCta from '../../components/SectorCta.astro';
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const entries = await getCollection('sectors', ({ data }) => !data.draft);
@@ -23,9 +25,27 @@ const d = entry.data;
 // Named attribution only once a person has actually reviewed the page.
 const reviewedBy = d.reviewed ? (advisors.find((a) => a.founder) ?? advisors[0] ?? null) : null;
 const range = multiples.sectors.find((s) => s.slug === d.sector);
-const related = (await getCollection('guides', ({ data }) => !data.draft))
+const guides = (await getCollection('guides', ({ data }) => !data.draft))
   .sort((a, b) => a.data.order - b.data.order)
-  .slice(0, 4);
+  .slice(0, 2)
+  .map((g) => ({ href: `/guides/${g.slug}`, title: g.data.title, description: g.data.description }));
+
+// Two adjacent sectors rather than four guides. Adjacency is by neighbouring
+// multiple range: those are the sectors an owner is most likely to compare
+// against, and it spreads internal links across /sell/* instead of pooling
+// every sector page's outbound links onto the same two guides.
+const others = (await getCollection('sectors', ({ data }) => !data.draft)).filter(
+  (s) => s.slug !== entry.slug
+);
+const mid = (s?: { low: number; high: number }) => (s ? (s.low + s.high) / 2 : 0);
+const here = mid(range);
+const adjacent = others
+  .map((s) => ({ s, gap: Math.abs(mid(multiples.sectors.find((m) => m.slug === s.data.sector)) - here) }))
+  .sort((a, b) => a.gap - b.gap)
+  .slice(0, 2)
+  .map(({ s }) => ({ href: `/sell/${s.slug}`, title: s.data.title, description: s.data.description }));
+
+const related = [...guides, ...adjacent];
 
 const schema = [
   article({
@@ -36,6 +56,7 @@ const schema = [
     reviewedBy,
   }),
   service(`Sell-side M&A advisory for ${range?.short ?? 'Singapore SME'} businesses in Singapore`),
+  ...(d.faq.length ? [faqPage(d.faq)] : []),
 ];
 
 const crumbs = [{ href: '/sell-your-business', label: 'Sell' }, { href: `/sell/${entry.slug}`, label: range?.short ?? d.title }];
@@ -130,14 +151,22 @@ const crumbs = [{ href: '/sell-your-business', label: 'Sell' }, { href: `/sell/$
     <Byline published={d.updated} author={reviewedBy?.name} class="reveal mt-10" />
   </section>
 
+  <section class="max-w-wrap mx-auto px-5 lg:px-8 pb-8">
+    <SectorCta sector={entry.slug} label={range?.short} />
+  </section>
+
+  {d.faq.length > 0 && (
+    <Faq items={d.faq} heading={`Selling ${range?.short.toLowerCase() ?? 'a'} business: common questions`} class="!py-20" />
+  )}
+
   <section class="max-w-wrap mx-auto px-5 lg:px-8 pb-28 lg:pb-40">
     <h2 class="text-2xl md:text-3xl font-medium tracking-[-0.02em] reveal">Read next</h2>
     <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-3">
       {related.map((g, i) => (
-        <a href={`/guides/${g.slug}`} class="reveal group rounded-[1.5rem] bg-black/5 dark:bg-white/[0.04] ring-1 ring-black/5 dark:ring-white/[0.08] p-1.5 transition-transform duration-700 ease hover:-translate-y-0.5" data-d={String((i % 2) + 1)}>
+        <a href={g.href} class="reveal group rounded-[1.5rem] bg-black/5 dark:bg-white/[0.04] ring-1 ring-black/5 dark:ring-white/[0.08] p-1.5 transition-transform duration-700 ease hover:-translate-y-0.5" data-d={String((i % 2) + 1)}>
           <div class="rounded-[calc(1.5rem-0.375rem)] bg-white dark:bg-night-core p-6 h-full">
-            <p class="font-medium group-hover:text-accent dark:group-hover:text-[#7fd1b3] transition-colors duration-500 ease">{g.data.title}</p>
-            <p class="mt-2 text-sm text-ink-2 dark:text-[#a9b4c2] font-light">{g.data.description}</p>
+            <p class="font-medium group-hover:text-accent dark:group-hover:text-[#7fd1b3] transition-colors duration-500 ease">{g.title}</p>
+            <p class="mt-2 text-sm text-ink-2 dark:text-[#a9b4c2] font-light">{g.description}</p>
           </div>
         </a>
       ))}

@@ -13,6 +13,11 @@ const sectors = defineCollection({
     buyers: z.array(z.object({ type: z.string(), wants: z.string() })).min(2),
     drivers: z.array(z.string()).min(2),
     pitfalls: z.array(z.string()).min(2),
+    /** Rendered as an accordion and mirrored into FAQPage schema. The two must
+     *  stay identical, which is why they read from this one field. Optional so
+     *  sectors can be upgraded one at a time without breaking the build; a
+     *  sector with no FAQ simply emits neither the accordion nor the schema. */
+    faq: z.array(z.object({ q: z.string(), a: z.string() })).default([]),
     draft: z.boolean().default(false),
     reviewed: z.boolean().default(false),
     updated: z.coerce.date(),
