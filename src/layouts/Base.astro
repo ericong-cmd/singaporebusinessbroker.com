@@ -4,6 +4,7 @@ import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
 import site from '../data/site.json';
 import { organization, website, breadcrumbs } from '../lib/schema';
+import Analytics from '@vercel/analytics/astro';
 
 interface Props {
   title: string;
@@ -87,13 +88,8 @@ const onVercel = process.env.VERCEL === '1';
 
     {/* Speed Insights. Vercel proxies it under /_vercel on this origin, so
         `script-src 'self'` already covers it and the CSP needs no third-party
-        host. The beacon posts same-origin too.
-
-        Web Analytics belongs here as well, at /_vercel/insights/script.js, but
-        the project has it provisioned and not enabled, so that path 404s. There
-        is no public API to switch it on. Add the line once it is toggled on in
-        the dashboard under Project, Analytics; shipping it before then would
-        put a failing request on every page load. */}
+        host. The beacon posts same-origin too. Web Analytics is the <Analytics />
+        component at the end of <body>. */}
     {onVercel && <script is:inline defer src="/_vercel/speed-insights/script.js"></script>}
   </head>
 
@@ -128,5 +124,12 @@ const onVercel = process.env.VERCEL === '1';
         nodes.forEach((el) => io.observe(el));
       }
     </script>
+
+    {/* Web Analytics. The component rather than a bare script tag, because it
+        calls computeRoute, so /sell/childcare and the other 19 report as one
+        /sell/[sector] row instead of twenty. Astro bundles its script into
+        /_astro, and the beacon it injects is same-origin under /_vercel, so
+        `script-src 'self'` and `connect-src 'self'` already cover both. */}
+    {onVercel && <Analytics />}
   </body>
 </html>

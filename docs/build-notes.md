@@ -300,13 +300,27 @@ Four items were open. What each was and what was done:
 
 - **Speed Insights and Web Analytics receiving nothing.** Neither product had
   a script on the page, so `hasData` was false. `Base.astro` now emits Speed
-  Insights from Vercel's same-origin `/_vercel/...` path rather than a CDN
-  host. Web Analytics is left out: the project has an id for it but the
-  product is not actually enabled, so `/_vercel/insights/script.js` returns
-  404, and there is no public API to enable it (`PATCH` rejects the field,
-  the `web-analytics` endpoints 404). It needs the dashboard toggle under
-  Project, Analytics; add the one line afterwards. Shipping it early would
-  have put a failing request on every page load. That detail is the
+  Insights from Vercel's same-origin `/_vercel/...` path, and Web Analytics
+  through `@vercel/analytics/astro`'s `<Analytics />` at the end of `<body>`.
+
+  The component beats a bare `<script src="/_vercel/insights/script.js">`
+  here because it passes `Astro.params` to `computeRoute`, so the 20 sector
+  pages report as one `/sell/[sector]` row rather than 20, and likewise for
+  guides, cases and insights. Verified in the build output: a sector page
+  emits `data-params="{"sector":"childcare"}"`.
+
+  Three things were checked before shipping it, because the CSP is strict:
+  Astro bundles the component's script into `/_astro`, so nothing inline is
+  added and the single inline-script hash in `vercel.json` is unchanged; the
+  beacon it injects is same-origin under `/_vercel`, so `script-src 'self'`
+  and `connect-src 'self'` already cover it; and although the bundle contains
+  the string `va.vercel-scripts.com`, that branch is reached only when mode
+  is `development`, which the minified `k()` shows defaults to `production`
+  unless `window.vam` is set. No third-party origin is used at runtime.
+
+  Note that Web Analytics only starts serving once the product is enabled in
+  the dashboard AND a deployment is made afterwards: `/_vercel/insights/
+  script.js` 404s on deployments built before the toggle. That detail is the
   reason the CSP needed no change: `script-src 'self'` already covers them and
   the beacons post same-origin too, so no third-party origin enters the policy.
   They are gated on `process.env.VERCEL === '1'` so a local build does not
