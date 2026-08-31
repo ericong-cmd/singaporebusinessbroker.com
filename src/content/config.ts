@@ -32,6 +32,9 @@ const guides = defineCollection({
     heading: z.string(),
     order: z.number().default(99),
     readingMinutes: z.number().default(6),
+    /** Same contract as sectors: one field feeds the visible accordion and the
+     *  FAQPage schema, so the two cannot drift apart. */
+    faq: z.array(z.object({ q: z.string(), a: z.string() })).default([]),
     draft: z.boolean().default(false),
     reviewed: z.boolean().default(false),
     updated: z.coerce.date(),

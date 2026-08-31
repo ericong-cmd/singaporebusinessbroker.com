@@ -4,8 +4,10 @@ import { getCollection, type CollectionEntry } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import PageHeader from '../../components/PageHeader.astro';
 import FinalCta from '../../components/home/FinalCta.astro';
-import { article, advisors } from '../../lib/schema';
+import { article, faqPage, advisors } from '../../lib/schema';
 import Byline from '../../components/Byline.astro';
+import Faq from '../../components/Faq.astro';
+import SectorCta from '../../components/SectorCta.astro';
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const entries = await getCollection('guides', ({ data }) => !data.draft);
@@ -33,6 +35,7 @@ const schema = [
     modified: d.updated,
     reviewedBy,
   }),
+  ...(d.faq.length ? [faqPage(d.faq)] : []),
 ];
 
 const crumbs = [{ href: '/guides', label: 'Guides' }, { href: `/guides/${entry.slug}`, label: d.title }];
@@ -51,6 +54,12 @@ const crumbs = [{ href: '/guides', label: 'Guides' }, { href: `/guides/${entry.s
     <Byline published={d.updated} author={reviewedBy?.name} readingMinutes={d.readingMinutes} class="reveal mb-10" />
     <div class="prose-sbb reveal"><Content /></div>
   </section>
+
+  <section class="max-w-wrap mx-auto px-5 lg:px-8 pb-8">
+    <SectorCta />
+  </section>
+
+  {d.faq.length > 0 && <Faq items={d.faq} heading="Common questions" class="!py-20" />}
 
   <section class="max-w-wrap mx-auto px-5 lg:px-8 pb-28 lg:pb-40">
     <h2 class="text-2xl md:text-3xl font-medium tracking-[-0.02em] reveal">Read next</h2>
