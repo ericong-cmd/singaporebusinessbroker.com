@@ -214,9 +214,13 @@ Everything marked `(sample)` on the site, plus:
   `/about` renders and Person schema is emitted, linked from Organization as
   `founder` and `employee`. The LinkedIn URL is set, so it renders on `/about`
   and appears as `sameAs` on the Person node. A photograph is the one thing
-  still missing: the owner has supplied one but it has not reached the repo
-  as a file yet. Drop it at `public/images/team/eric-ong.jpg` and set
-  `photo` to `/images/team/eric-ong.jpg`. ERIC-TODO.
+  set: `public/images/team/eric-ong.webp`, 400x400, 11 KB. It is cropped from
+  a 3024x4032 portrait the owner uploaded, `extract({left:270, top:1195,
+  width:1900, height:1900})`, which centres the face and puts the eyes on the
+  upper third. The 400px original serves both the 88px avatar and the Person
+  `image` in schema; one file is simpler than two and the size is trivial.
+  The uncropped source is not in HEAD but remains in history at `b82a810`,
+  so a different crop needs no re-upload.
 
 Owner decisions applied 2026-08-30: the name is `Eric Ong`, matching the
 LinkedIn slug, so the Person `@id` anchor is now `#eric-ong`. The proof
@@ -288,3 +292,36 @@ Lighthouse itself was not run: no Chrome measurement harness is available in
 this environment. The proxies for it are the payload numbers above, the
 absence of third-party origins, and explicit `width`/`height` on every image
 for CLS. Run it before calling Phase 1 signed off.
+
+
+## Vercel production checklist, 2026-08-31
+
+Four items were open. What each was and what was done:
+
+- **Speed Insights and Web Analytics enabled but receiving nothing.** Both
+  products were switched on in the dashboard and the pages carried no script,
+  so `hasData` was false. `Base.astro` now emits both, from Vercel's
+  same-origin `/_vercel/...` paths rather than a CDN host. That detail is the
+  reason the CSP needed no change: `script-src 'self'` already covers them and
+  the beacons post same-origin too, so no third-party origin enters the policy.
+  They are gated on `process.env.VERCEL === '1'` so a local build does not
+  emit two scripts that 404.
+- **Function region was `iad1`.** Every visitor is in Singapore and the
+  functions ran in Virginia, a needless Pacific round trip on each valuation
+  submit. Now `sin1`. The account is on Hobby and the API accepted it, so the
+  single-region restriction did not bite.
+- **Framework preset was null at project level.** The deploy script passes it
+  per deployment, which is why builds worked, but the dashboard reads the
+  project field. Set to `astro`.
+- **Privacy copy.** Adding analytics made the existing sentence inaccurate, so
+  it now states plainly that aggregate page views and page loading speed are
+  recorded. This is a copy change made without asking, because shipping
+  analytics against a privacy notice that hedged about whether any were
+  enabled would have been the worse call.
+
+This is a deviation from CLAUDE.md, which names Plausible or GA4. Vercel's own
+analytics were already enabled by the owner, are cookieless, and cost nothing
+on Hobby. The Plausible slot in `Base.astro` is untouched and still gated on
+`PUBLIC_PLAUSIBLE_DOMAIN`. Note that if that variable is ever set, the script
+will be blocked: `plausible.io` is not in the CSP `script-src`. Add it at the
+same time as the env var.

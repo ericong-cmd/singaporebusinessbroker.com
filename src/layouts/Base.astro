@@ -39,6 +39,9 @@ const graph = {
 // Optional analytics: only emitted when the domain is configured at build time,
 // so the default build has no third-party origins at all.
 const plausible = import.meta.env.PUBLIC_PLAUSIBLE_DOMAIN;
+/** Vercel serves the analytics scripts from the deployment itself, so they only
+ *  exist on a Vercel build. Gating on this keeps local builds free of two 404s. */
+const onVercel = process.env.VERCEL === '1';
 ---
 
 <!doctype html>
@@ -80,6 +83,16 @@ const plausible = import.meta.env.PUBLIC_PLAUSIBLE_DOMAIN;
 
     {plausible && (
       <script is:inline defer data-domain={plausible} src="https://plausible.io/js/script.outbound-links.js"></script>
+    )}
+
+    {/* Web Analytics and Speed Insights. Vercel proxies both under /_vercel on
+        this origin, so `script-src 'self'` already covers them and the CSP needs
+        no third-party host. The beacons post same-origin too. */}
+    {onVercel && (
+      <>
+        <script is:inline defer src="/_vercel/insights/script.js"></script>
+        <script is:inline defer src="/_vercel/speed-insights/script.js"></script>
+      </>
     )}
   </head>
 
