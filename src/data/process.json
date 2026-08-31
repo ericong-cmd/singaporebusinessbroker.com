@@ -1,7 +1,52 @@
 [
-  { "n": "01", "title": "Valuation and readiness", "body": "Normalise financials, agree a price range, fix what buyers will flag." },
-  { "n": "02", "title": "Teaser and info memo", "body": "Anonymous teaser first, full memorandum after NDA." },
-  { "n": "03", "title": "Buyer outreach", "body": "Curated list of strategics, PE and private buyers, approached in parallel." },
-  { "n": "04", "title": "Offers and negotiation", "body": "Compare offers on price, structure and certainty. Sign a term sheet." },
-  { "n": "05", "title": "Due diligence and close", "body": "Manage the data room, lawyers and SPA through to completion." }
+  {
+    "n": "01",
+    "title": "Valuation and readiness",
+    "body": "Normalise financials, agree a price range, fix what buyers will flag.",
+    "duration": "3 to 6 weeks",
+    "detail": "We rebuild your last three years into normalised earnings: your salary adjusted to what the role would cost, one-off items removed, personal expenses identified line by line. That figure, not your reported profit, is what any buyer works from, so it is worth establishing before anyone else does it for you. We then agree a realistic range and list what a buyer will find.",
+    "you": "Provide financial statements, management accounts, the share register, leases and key contracts. Be candid about anything untidy.",
+    "us": "Normalisation, valuation range, a readiness list ranked by what costs you most, and a recommendation on whether to go now or prepare first.",
+    "watch": "This is the stage where sellers most often discover that the number in their head was the reported profit rather than the normalised one. Better here than at a term sheet."
+  },
+  {
+    "n": "02",
+    "title": "Teaser and info memo",
+    "body": "Anonymous teaser first, full memorandum after NDA.",
+    "duration": "2 to 3 weeks",
+    "detail": "Two documents. The teaser describes the business well enough to interest a buyer without identifying it: sector, scale, why it is attractive, no name and nothing that would let someone work it out. The information memorandum comes after an NDA and tells the full story, including the things you would rather not lead with, because a buyer who discovers them later reprices.",
+    "you": "Review and approve both documents. Nothing goes out that you have not read.",
+    "us": "Draft both, build the buyer list, and prepare the data room structure so diligence does not start from nothing.",
+    "watch": "Confidentiality is protected by sequencing rather than by paperwork alone. The teaser is the control: it goes to many, the memorandum goes to few."
+  },
+  {
+    "n": "03",
+    "title": "Buyer outreach",
+    "body": "Curated list of strategics, PE and private buyers, approached in parallel.",
+    "duration": "6 to 10 weeks",
+    "detail": "Buyers are approached in parallel rather than one at a time, which is the whole point of running a process. One buyer negotiating alone sets the price and has no reason to move. Several buyers working to the same timetable produce a market view of what your business is worth, which is usually a different number.",
+    "you": "Meet the buyers who qualify, usually a handful. Keep running the business, which matters more than it sounds: a dip in trading during the process is visible and expensive.",
+    "us": "Approach, screen, handle NDAs, manage information release, and run the timetable so offers arrive together rather than scattered.",
+    "watch": "Owners underestimate how much attention a process takes. That is the argument for having an advisor run it, not the fee."
+  },
+  {
+    "n": "04",
+    "title": "Offers and negotiation",
+    "body": "Compare offers on price, structure and certainty. Sign a term sheet.",
+    "duration": "3 to 5 weeks",
+    "detail": "Offers are compared on three axes, not one. Price is the obvious one. Structure decides how much you actually receive and when, since a high headline with half deferred against an earn-out may be worth less than a lower figure paid at completion. Certainty is whether the buyer can fund it and will still be there in three months.",
+    "you": "Decide what matters besides price: how long you will stay, whether staff continuity is a condition, how much risk you will carry in deferred consideration.",
+    "us": "Compare offers on a like-for-like basis, negotiate terms, and document the agreed position in a term sheet before lawyers are engaged.",
+    "watch": "The term sheet is where the deal is really decided. Points conceded here are very hard to recover once the legal drafting starts."
+  },
+  {
+    "n": "05",
+    "title": "Due diligence and close",
+    "body": "Manage the data room, lawyers and SPA through to completion.",
+    "duration": "8 to 12 weeks",
+    "detail": "The buyer's accountants and lawyers verify everything asserted so far. Financial, legal, tax and commercial workstreams run in parallel. This is the longest stage and the one most likely to overrun, almost always because a document does not exist yet rather than because anyone is slow.",
+    "you": "Answer questions promptly and keep trading well. Deal fatigue is real, and buyers notice when a seller disengages.",
+    "us": "Run the data room, coordinate advisers, keep the timetable moving, and handle the findings that would otherwise become price reductions.",
+    "watch": "Unstamped share transfers, missing landlord consents and change-of-control clauses in supplier agreements are the three findings that most often delay completion. All three are fixable in stage one."
+  }
 ]

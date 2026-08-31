@@ -1,0 +1,81 @@
+---
+/**
+ * Interactive sale timeline: the five stages as a tab interface.
+ *
+ * Progressive enhancement, done the safe way round. The panels are all visible
+ * in the HTML with their own headings, so with no JavaScript the section reads
+ * as ordinary sequential content and nothing is lost. The tab strip is marked
+ * js-only, so it is hidden until scripts have run; the script then adds the
+ * ARIA wiring and collapses all but the first panel.
+ *
+ * Building it the other way, hiding panels in markup and revealing them with
+ * JS, would mean a script failure hides most of the page's content from both
+ * readers and crawlers. Content is never hidden by default here.
+ */
+import steps from '../data/process.json';
+---
+
+<section id="process" class="max-w-wrap mx-auto px-5 lg:px-8">
+  <div class="rounded-[2.5rem] bg-ink dark:bg-night-2 text-paper px-6 md:px-14 py-20 lg:py-28 relative overflow-hidden">
+    <div class="absolute -top-32 -right-32 w-[520px] h-[520px] rounded-full bg-accent/20 blur-3xl pointer-events-none" aria-hidden="true"></div>
+
+    <div class="relative max-w-[60ch] reveal">
+      <h2 class="text-3xl md:text-5xl font-medium tracking-[-0.03em] leading-[1.05]">The process, stage by stage</h2>
+      <p class="mt-6 text-lg text-paper/65 leading-relaxed font-light">
+        Six to nine months from mandate to completion. Select a stage to see what happens, what we do and
+        what is needed from you.
+      </p>
+    </div>
+
+    <div class="relative mt-14" data-timeline>
+      <div class="js-only overflow-x-auto -mx-1 px-1 pb-1" data-tl="strip">
+        <div class="flex md:grid md:grid-cols-5 gap-2 min-w-max md:min-w-0" data-tl="tablist">
+          {steps.map((s, i) => (
+            <button
+              type="button"
+              data-tl="tab"
+              data-index={String(i)}
+              class="text-left rounded-2xl px-4 py-4 border border-white/15 hover:border-white/35 transition-colors duration-500 ease focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent min-w-[13rem] md:min-w-0"
+            >
+              <span class="font-mono text-xs text-paper/50 block">{s.n}</span>
+              <span class="mt-1.5 block font-medium text-sm">{s.title}</span>
+              <span class="mt-1 block text-xs text-paper/50 font-light">{s.duration}</span>
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <ol class="mt-8 space-y-8 md:space-y-10" data-tl="panels">
+        {steps.map((s, i) => (
+          <li data-tl="panel" data-index={String(i)} class="scroll-mt-28">
+            <div class="rounded-[1.75rem] border border-white/15 p-6 md:p-9">
+              <p class="font-mono text-xs text-paper/50">{s.n} <span class="ml-3">{s.duration}</span></p>
+              <h3 class="mt-2 text-xl md:text-2xl font-medium tracking-[-0.01em]">{s.title}</h3>
+              <p class="mt-4 text-paper/75 font-light leading-relaxed max-w-[68ch]">{s.detail}</p>
+
+              <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <p class="text-[10px] uppercase tracking-[0.18em] text-paper/45">What we do</p>
+                  <p class="mt-2 text-sm text-paper/75 font-light leading-relaxed">{s.us}</p>
+                </div>
+                <div>
+                  <p class="text-[10px] uppercase tracking-[0.18em] text-paper/45">What we need from you</p>
+                  <p class="mt-2 text-sm text-paper/75 font-light leading-relaxed">{s.you}</p>
+                </div>
+              </div>
+
+              <p class="mt-8 pt-6 border-t border-white/10 text-sm text-paper/65 font-light leading-relaxed max-w-[68ch]">
+                <span class="text-paper/45">Worth knowing. </span>{s.watch}
+              </p>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { initTimeline } from '../scripts/timeline';
+  document.querySelectorAll<HTMLElement>('[data-timeline]').forEach(initTimeline);
+</script>
