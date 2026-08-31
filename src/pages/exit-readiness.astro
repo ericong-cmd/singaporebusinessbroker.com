@@ -1,0 +1,200 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHeader from '../components/PageHeader.astro';
+import Shell from '../components/Shell.astro';
+import Button from '../components/Button.astro';
+import Faq from '../components/Faq.astro';
+import Byline from '../components/Byline.astro';
+import FinalCta from '../components/home/FinalCta.astro';
+import quiz from '../data/exitReadiness.json';
+import site from '../data/site.json';
+import { article, faqPage, advisors } from '../lib/schema';
+
+const questions = quiz.questions;
+const bands = quiz.bands;
+const total = questions.length;
+const updated = new Date(site.siteUpdated);
+const reviewedBy = advisors.find((a) => a.founder) ?? advisors[0] ?? null;
+
+const schema = [
+  article({
+    headline: 'Is my business ready to sell? A ten point readiness check',
+    description:
+      'Score your business against the ten things a buyer verifies before they price it. Instant result, no email required.',
+    path: '/exit-readiness',
+    published: updated,
+    reviewedBy,
+  }),
+  faqPage(quiz.faq),
+];
+
+const crumbs = [{ href: '/exit-readiness', label: 'Exit readiness' }];
+
+const opts = [
+  { v: 'yes', label: 'Yes' },
+  { v: 'partly', label: 'Partly' },
+  { v: 'no', label: 'No' },
+];
+const chip =
+  'block text-center text-sm rounded-2xl border border-black/10 dark:border-white/10 px-3 py-3 cursor-pointer transition-colors duration-500 ease peer-checked:border-accent peer-checked:bg-accent-soft peer-checked:text-accent-2 dark:peer-checked:bg-night-soft dark:peer-checked:text-[#7fd1b3] peer-focus-visible:ring-2 peer-focus-visible:ring-accent';
+---
+
+<Base
+  crumbs={crumbs}
+  title="Is My Business Ready to Sell? Free 10 Point Check"
+  description="Score your business against the ten things a buyer checks before pricing it: owner dependency, clean financials, lease, concentration. Instant result, no email needed."
+  schema={schema}
+>
+  <PageHeader
+    eyebrow="Free tool"
+    title="Is your business ready to sell?"
+    intro="Ten questions, about three minutes, and a score out of 100. These are the things a buyer's accountant and lawyer actually test before they put a number on your business. No email required to see your result."
+    crumbs={crumbs}
+  >
+    <div class="flex flex-col sm:flex-row gap-3">
+      <Button href="#check" variant="ink">Start the check</Button>
+      <Button href="/valuation" variant="ring" icon="calculator">Get a valuation range</Button>
+    </div>
+  </PageHeader>
+
+  <section class="max-w-wrap mx-auto px-5 lg:px-8 pb-16">
+    <div class="prose-sbb reveal max-w-[68ch]">
+      <p>
+        Owners usually ask what their business is worth. The more useful question first is how much of that
+        value a buyer can actually verify. A business earning S$1m that depends entirely on its owner, with
+        two years of messy accounts and one customer at half of revenue, will not fetch what the profit
+        suggests. The gap is not about the quality of what you built. It is about how much of it transfers.
+      </p>
+      <p>
+        Each question below is something that comes up in due diligence on a real transaction. Answer
+        honestly rather than optimistically: the point is to find the gaps before a buyer does, while you
+        still have time and leverage to close them.
+      </p>
+    </div>
+  </section>
+
+  <section id="check" class="max-w-wrap mx-auto px-5 lg:px-8 pb-20 scroll-mt-28">
+    <Shell radius="2rem" pad="2" shadow="frame">
+      <form id="exitform" class="p-6 md:p-10" novalidate>
+        <div class="flex items-center justify-between text-xs text-ink-3 dark:text-[#a9b4c2] mb-4">
+          <span>Answered</span>
+          <span class="font-mono" data-q="count">0 / {total}</span>
+        </div>
+        <div class="h-1 bg-black/5 dark:bg-white/10 rounded-full mb-10 overflow-hidden">
+          <div data-q="progress" class="h-1 bg-accent rounded-full transition-[width] duration-700 ease" style="width:0%"></div>
+        </div>
+
+        <ol class="space-y-10">
+          {questions.map((q, i) => (
+            <li>
+              <fieldset data-name={q.id}>
+                <legend class="font-medium text-base md:text-lg tracking-[-0.01em]">
+                  <span class="font-mono text-accent dark:text-[#7fd1b3] text-sm mr-2">{String(i + 1).padStart(2, '0')}</span>
+                  {q.q}
+                </legend>
+                <p class="mt-3 text-sm text-ink-2 dark:text-[#a9b4c2] font-light leading-relaxed max-w-[66ch]">{q.why}</p>
+                <div class="mt-5 grid grid-cols-3 gap-2 max-w-md">
+                  {opts.map((o) => (
+                    <div>
+                      <input class="sr-only peer" type="radio" id={`${q.id}-${o.v}`} name={q.id} value={o.v} />
+                      <label class={chip} for={`${q.id}-${o.v}`}>{o.label}</label>
+                    </div>
+                  ))}
+                </div>
+              </fieldset>
+            </li>
+          ))}
+        </ol>
+
+        <p data-q="incomplete" class="hidden mt-8 text-sm text-red-700 dark:text-red-400">
+          Answer all {total} questions to see your score.
+        </p>
+
+        <div class="mt-10 flex flex-col sm:flex-row items-start sm:items-center gap-4">
+          <Button type="button" id="exitsubmit" variant="accent" icon="arrow-right" class="js-only">Show my score</Button>
+          <p class="text-xs text-ink-3 dark:text-[#a9b4c2] font-light">
+            Nothing is sent anywhere. The score is worked out in your browser.
+          </p>
+        </div>
+
+        <noscript>
+          <p class="mt-8 text-sm text-ink-2 dark:text-[#a9b4c2] font-light">
+            Scoring needs JavaScript, but the checklist above works on its own. Count 10 for each yes and 5 for
+            each partly. Below 45 out of 100, prepare before going to market. Above 75, you are close to ready.
+            Or email <a class="underline" href={`mailto:${site.email}`}>{site.email}</a> and we will talk it through.
+          </p>
+        </noscript>
+      </form>
+    </Shell>
+
+    <div data-q="result" class="hidden mt-6 scroll-mt-28 focus:outline-none">
+      <Shell radius="2rem" pad="2" shadow="frame">
+        <div class="p-6 md:p-10">
+          <p class="text-[10px] uppercase tracking-[0.18em] text-ink-3 dark:text-[#a9b4c2]">Your readiness score</p>
+          <p class="mt-3 flex items-baseline gap-2">
+            <span data-q="score" class="font-mono text-5xl md:text-6xl tracking-tight">0</span>
+            <span class="font-mono text-xl text-ink-3 dark:text-[#a9b4c2]">/ 100</span>
+          </p>
+          <p data-q="label" class="mt-4 text-2xl md:text-3xl font-medium tracking-[-0.02em]"></p>
+          <p data-q="summary" class="mt-4 text-ink-2 dark:text-[#a9b4c2] font-light leading-relaxed max-w-[62ch]"></p>
+
+          <h2 class="mt-10 text-sm uppercase tracking-[0.14em] text-ink-3 dark:text-[#a9b4c2]">What to do next</h2>
+          <ul data-q="steps" class="mt-5 space-y-4 max-w-[62ch]"></ul>
+
+          <div class="mt-10 flex flex-col sm:flex-row gap-3">
+            <Button href="/valuation" variant="accent" icon="calculator">Get an indicative range</Button>
+            <Button href={site.bookingUrl} variant="ring" icon="envelope-simple">Email an advisor</Button>
+          </div>
+          <p class="mt-5 text-xs text-ink-3 dark:text-[#a9b4c2] font-light max-w-[62ch]">
+            This score is a preparation guide, not a valuation, and not financial advice. It weighs each of the
+            ten factors equally, which is a simplification: in practice owner dependency and clean financials
+            move the price further than the rest.
+          </p>
+        </div>
+      </Shell>
+    </div>
+  </section>
+
+  <section class="max-w-wrap mx-auto px-5 lg:px-8 pb-20">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+      {bands.map((b) => (
+        <Shell radius="1.5rem" coreClass="p-6 h-full">
+          <p class="font-mono text-sm text-accent dark:text-[#7fd1b3]">{b.min}+</p>
+          <p class="mt-2 font-medium">{b.label}</p>
+          <p class="mt-3 text-sm text-ink-2 dark:text-[#a9b4c2] font-light leading-relaxed">{b.summary}</p>
+        </Shell>
+      ))}
+    </div>
+    <Byline published={updated} author={reviewedBy?.name} class="reveal mt-10" />
+  </section>
+
+  <section class="max-w-wrap mx-auto px-5 lg:px-8 pb-4">
+    <h2 class="text-2xl md:text-3xl font-medium tracking-[-0.02em] reveal">Read next</h2>
+    <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-3">
+      {[
+        { href: '/guides/preparing-to-sell', t: 'Preparing your business for sale', d: 'The twelve month version of this checklist, in order of what moves the price most.' },
+        { href: '/valuation', t: 'What is my business worth?', d: 'An indicative range from your sector, revenue and normalised profit, in about two minutes.' },
+        { href: '/guides/valuation-methods', t: 'How SME valuation actually works', d: 'Why buyers price normalised EBITDA against a sector multiple, and what shifts the multiple.' },
+        { href: '/sell-your-business', t: 'How the sale process runs', d: 'The five stages from mandate to completion, and how long each one really takes.' },
+      ].map((l, i) => (
+        <a href={l.href} class="reveal group rounded-[1.5rem] bg-black/5 dark:bg-white/[0.04] ring-1 ring-black/5 dark:ring-white/[0.08] p-1.5 transition-transform duration-700 ease hover:-translate-y-0.5" data-d={String((i % 2) + 1)}>
+          <div class="rounded-[calc(1.5rem-0.375rem)] bg-white dark:bg-night-core p-6 h-full">
+            <p class="font-medium group-hover:text-accent dark:group-hover:text-[#7fd1b3] transition-colors duration-500 ease">{l.t}</p>
+            <p class="mt-2 text-sm text-ink-2 dark:text-[#a9b4c2] font-light">{l.d}</p>
+          </div>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <Faq items={quiz.faq} heading="Questions about selling readiness" />
+
+  <FinalCta />
+</Base>
+
+<script>
+  import { initQuiz } from '../scripts/exitQuiz';
+  import quiz from '../data/exitReadiness.json';
+  const form = document.getElementById('exitform');
+  if (form instanceof HTMLFormElement) initQuiz(form, quiz.bands, quiz.questions.length);
+</script>

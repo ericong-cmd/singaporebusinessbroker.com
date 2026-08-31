@@ -90,6 +90,12 @@ body {
   .grain { mix-blend-mode: screen; opacity: 0.05; }
 }
 
+/* ------------------------------------------------------------- js-only
+   Controls that do nothing without their script. Hidden by the absence of
+   html.js rather than by its presence, so the default is visible: a button
+   that fails to hide is a smaller fault than content that fails to show. */
+html:not(.js) .js-only { display: none; }
+
 /* ---------------------------------------------------------------- reveal
    Gated on html.js, set by an inline script before first paint. If that
    script never runs (JS disabled, blocked, or a runtime error earlier in the

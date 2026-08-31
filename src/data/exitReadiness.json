@@ -1,0 +1,109 @@
+{
+  "_comment": "Exit-readiness quiz. Ten questions, scored yes=10 / partly=5 / no=0, so the total is already a 0-100 score. The `why` lines are the real content of the page: they are what a buyer's diligence actually tests, and they are written to stand on their own if a reader never touches the quiz. Bands and questions are advisory judgement, not transaction data, so nothing here needs the indicative-data caveat.",
+  "questions": [
+    {
+      "id": "dependency",
+      "q": "Could the business run for three months without you?",
+      "why": "This is the single largest discount we see applied. If the customers call your mobile, the pricing lives in your head, and the key suppliers deal with you personally, then a buyer is not purchasing a business, they are purchasing a job that depends on the person leaving. Buyers price that risk into the multiple, and they price it hard."
+    },
+    {
+      "id": "financials",
+      "q": "Do you have three years of clean, reviewed financial statements?",
+      "why": "Three years is the standard look-back. A buyer needs to see a trend, not a snapshot, and their accountant needs figures that reconcile to bank statements and tax filings. Financials that need explaining are financials that get discounted, because every unexplained line becomes a negotiating point."
+    },
+    {
+      "id": "expenses",
+      "q": "Are personal expenses separated from the business accounts?",
+      "why": "Most owner-run Singapore SMEs carry some personal cost in the P&L: a car, a phone, family on payroll. These are legitimately added back to arrive at normalised earnings, but only if they can be identified line by line. Add-backs a buyer cannot verify do not get credited, and a P&L full of them raises a question about what else is mixed in."
+    },
+    {
+      "id": "concentration",
+      "q": "Does your largest customer account for less than 30 percent of revenue?",
+      "why": "Concentration is the risk buyers underwrite most carefully after owner dependency. If one customer is 40 percent of revenue, the buyer is really assessing whether that contract survives a change of ownership. Where the relationship sits with the departing owner, the two risks compound."
+    },
+    {
+      "id": "management",
+      "q": "Is there a second layer of management who would stay after a sale?",
+      "why": "A buyer is acquiring the capacity to keep operating on day one. A general manager, an operations lead or a finance person who knows the business and intends to remain is worth real money, because their presence is what turns a transition from a rebuild into a handover."
+    },
+    {
+      "id": "processes",
+      "q": "Are your core operating processes written down?",
+      "why": "Documented recipes, standard operating procedures, a maintained customer database, pricing rules. This is the difference between transferable knowledge and knowledge that leaves with the staff. It also makes due diligence faster, and a fast diligence is a deal that keeps its momentum."
+    },
+    {
+      "id": "recurring",
+      "q": "Do you have contracted or genuinely repeat revenue?",
+      "why": "Contracted revenue, subscriptions, service agreements and demonstrable repeat purchase all raise the multiple, because they shorten the period a buyer has to take on faith. One-off project revenue can still sell well, but it needs a longer track record to prove the pipeline replaces itself."
+    },
+    {
+      "id": "lease",
+      "q": "Do your premises have more than two years left, and is the lease assignable?",
+      "why": "For anything with a physical footprint, this stalls more Singapore deals at the final stage than any other single item. A short remaining term means the buyer inherits an immediate renegotiation. A landlord consent clause means a third party who is not in the deal can hold it up."
+    },
+    {
+      "id": "captable",
+      "q": "Is your shareholding clean, with all transfers properly documented and stamped?",
+      "why": "Share transfers that were never stamped, registers that were never updated, a silent partner with no paperwork, a shareholder who cannot be reached. These are fixable, but they are fixable slowly, and they surface during legal due diligence when the deal is already moving. Fixing them before going to market costs weeks; fixing them mid-deal costs leverage."
+    },
+    {
+      "id": "trend",
+      "q": "Has revenue been flat or growing over the last two years?",
+      "why": "A buyer prices the direction of travel as much as the level. Declining revenue does not stop a sale, but it changes the conversation from what the business earns to what it will earn, and that argument is much harder to win. If a decline has a clear cause that has been fixed, be ready to evidence the fix."
+    }
+  ],
+  "bands": [
+    {
+      "min": 75,
+      "label": "Close to market ready",
+      "summary": "On this checklist your business would survive buyer scrutiny. The remaining work is packaging and process, not repair.",
+      "steps": [
+        "Get an indicative valuation range so you know what you are negotiating towards before anyone approaches you.",
+        "Close out whichever questions you answered partly. At this level they are usually paperwork, and paperwork is cheap to fix before a buyer finds it.",
+        "Decide what you want from the exit besides price: how long you are willing to stay, whether staff continuity matters, whether a partial sale interests you. This shapes which buyers are right, not just which pay most."
+      ]
+    },
+    {
+      "min": 45,
+      "label": "Fixable gaps",
+      "summary": "There is a sellable business here, but two or three specific issues would be found in due diligence and used to reprice the deal. Found and fixed now, they cost you preparation time. Found by a buyer, they cost you money.",
+      "steps": [
+        "Take the two questions you scored lowest and treat them as a twelve month project. Owner dependency and clean financials are the two that move the price most, and both take time rather than money.",
+        "Get an indicative range now anyway. Knowing the gap between today's number and the number you want is what tells you whether preparing is worth the wait.",
+        "Do not start approaching buyers yet. A business that goes to market and comes back unsold is harder to sell the second time."
+      ]
+    },
+    {
+      "min": 0,
+      "label": "Prepare first",
+      "summary": "Going to market now would most likely produce either no offer or an offer well below what the business could be worth after preparation. That is a timing problem, not a verdict on the business.",
+      "steps": [
+        "Start with the financials. Three clean years is the entry requirement for most buyers, and the clock only starts when the first clean year does.",
+        "Work on removing yourself from daily operations. Every function that runs without you is a function a buyer does not have to replace.",
+        "Get an indicative range so you have a baseline to measure preparation against, then revisit this checklist in twelve months."
+      ]
+    }
+  ],
+  "faq": [
+    {
+      "q": "How long does it take to get a business ready to sell?",
+      "a": "For most Singapore SMEs, twelve to eighteen months of deliberate preparation. The two items that take the longest are a clean three-year financial record and reducing owner dependency, and neither can be rushed at the end. Businesses that are already close to market ready can move in a few months."
+    },
+    {
+      "q": "Is my business ready to sell?",
+      "a": "The practical test is whether a buyer's accountant and lawyer could verify what you claim, and whether the business keeps earning after you leave. That means three years of clean financials, earnings that do not depend on the owner personally, no single customer dominating revenue, secure premises, and a documented shareholding. The checklist on this page scores those ten factors."
+    },
+    {
+      "q": "Does a low readiness score mean my business is not worth much?",
+      "a": "No. It means the gap between what the business earns and what a buyer will pay for it is currently wide. Readiness is about how much of your earnings a buyer can verify and rely on, not about the quality of what you have built. Most of the gap is recoverable with preparation."
+    },
+    {
+      "q": "Should I fix everything before approaching a buyer?",
+      "a": "Not everything, but fix the expensive ones. Owner dependency, unclean financials and an unstamped share register are the three that either reduce the price or stall the deal late, when you have least leverage. Smaller items can be disclosed upfront and priced in without damage."
+    },
+    {
+      "q": "Can you help me prepare rather than sell immediately?",
+      "a": "Yes. Most of the owners we work with are twelve to twenty-four months from a sale when they first make contact. Knowing the target number and the specific gaps early is what makes the eventual sale process short."
+    }
+  ]
+}
