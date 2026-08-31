@@ -54,6 +54,8 @@ Vercel function logs independently of any analytics plan.
 | 2026-08-31 | S6.3 guides | Four-question FAQ and CTA band on all 10 guides |
 | 2026-08-31 | S6.2 timeline | Interactive five-stage tabs on `/sell-your-business` |
 | 2026-08-31 | Off-site | `docs/offsite-plan.md`: NAP block, directory sweep, TFA cross-link instructions |
+| 2026-08-31 | GBP | Profile live with a public street address; `PostalAddress` wired into Organization schema, awaiting the exact address and profile URL |
+| 2026-08-31 | Cross-domain | `docs/cross-domain-plan.md`: keyword overlap with TFA mapped, five TFA-to-SBB links specified, one SBB-to-TFA link shipped |
 
 ---
 
@@ -114,7 +116,11 @@ or depth, then rewrite or merge. List the decision, not just the observation.
   diagnosed and rewritten or merged. Log the decision here.
 - **Do not cannibalise.** TFA keeps informational intent (how, what, why). This
   site keeps transactional intent (sell, broker, valuation service). Two pages
-  competing for one query is worse than either alone.
+  competing for one query is worse than either alone. As of 2026-08-31 this
+  rule is being broken in two places, both on TFA: a second valuation
+  calculator at `/valuation-calculator/` competing with `/valuation` here, and
+  a `/buyers/` page competing with ours. See `docs/cross-domain-plan.md` Part 1.
+  Resolving that is worth more than any of the cross-links.
 - **Honesty constraint.** Every multiple on the site is labelled indicative
   until real transaction data ships. Nothing may imply proprietary data before
   then.
