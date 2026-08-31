@@ -85,15 +85,16 @@ const onVercel = process.env.VERCEL === '1';
       <script is:inline defer data-domain={plausible} src="https://plausible.io/js/script.outbound-links.js"></script>
     )}
 
-    {/* Web Analytics and Speed Insights. Vercel proxies both under /_vercel on
-        this origin, so `script-src 'self'` already covers them and the CSP needs
-        no third-party host. The beacons post same-origin too. */}
-    {onVercel && (
-      <>
-        <script is:inline defer src="/_vercel/insights/script.js"></script>
-        <script is:inline defer src="/_vercel/speed-insights/script.js"></script>
-      </>
-    )}
+    {/* Speed Insights. Vercel proxies it under /_vercel on this origin, so
+        `script-src 'self'` already covers it and the CSP needs no third-party
+        host. The beacon posts same-origin too.
+
+        Web Analytics belongs here as well, at /_vercel/insights/script.js, but
+        the project has it provisioned and not enabled, so that path 404s. There
+        is no public API to switch it on. Add the line once it is toggled on in
+        the dashboard under Project, Analytics; shipping it before then would
+        put a failing request on every page load. */}
+    {onVercel && <script is:inline defer src="/_vercel/speed-insights/script.js"></script>}
   </head>
 
   <body class={`font-sans antialiased ${bodyClass}`}>

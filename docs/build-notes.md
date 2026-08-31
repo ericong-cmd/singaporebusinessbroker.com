@@ -298,10 +298,15 @@ for CLS. Run it before calling Phase 1 signed off.
 
 Four items were open. What each was and what was done:
 
-- **Speed Insights and Web Analytics enabled but receiving nothing.** Both
-  products were switched on in the dashboard and the pages carried no script,
-  so `hasData` was false. `Base.astro` now emits both, from Vercel's
-  same-origin `/_vercel/...` paths rather than a CDN host. That detail is the
+- **Speed Insights and Web Analytics receiving nothing.** Neither product had
+  a script on the page, so `hasData` was false. `Base.astro` now emits Speed
+  Insights from Vercel's same-origin `/_vercel/...` path rather than a CDN
+  host. Web Analytics is left out: the project has an id for it but the
+  product is not actually enabled, so `/_vercel/insights/script.js` returns
+  404, and there is no public API to enable it (`PATCH` rejects the field,
+  the `web-analytics` endpoints 404). It needs the dashboard toggle under
+  Project, Analytics; add the one line afterwards. Shipping it early would
+  have put a failing request on every page load. That detail is the
   reason the CSP needed no change: `script-src 'self'` already covers them and
   the beacons post same-origin too, so no third-party origin enters the policy.
   They are gated on `process.env.VERCEL === '1'` so a local build does not
