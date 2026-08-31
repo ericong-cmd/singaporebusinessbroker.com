@@ -125,6 +125,14 @@ const onVercel = process.env.VERCEL === '1';
       }
     </script>
 
+    <script>
+      // Enquiries are the success metric, so every mailto, tel and book-a-call
+      // click is counted. One delegated listener, so links added later to any
+      // page are covered without touching this file again.
+      import { trackOutboundClicks } from '../scripts/analytics';
+      trackOutboundClicks();
+    </script>
+
     {/* Web Analytics. The component rather than a bare script tag, because it
         calls computeRoute, so /sell/childcare and the other 19 report as one
         /sell/[sector] row instead of twenty. Astro bundles its script into

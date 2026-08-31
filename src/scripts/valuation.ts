@@ -8,6 +8,7 @@
  *               warm = revenue S$1m to S$3m, or timeline > 18 months
  *               cold = revenue < S$1m
  */
+import { event } from './analytics';
 import multiples from '../data/multiples.json';
 
 type Band = { low: number; high: number };
@@ -199,6 +200,15 @@ export function initValuation(root: HTMLFormElement) {
     track('valuation_complete', { sector: lead.sector, score: est.score });
     result.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'center' });
 
+    // Fired here rather than after the fetch: the visitor has the number on
+    // screen at this point, which is the outcome worth counting. Whether the
+    // report email then goes out is a separate event.
+    event('valuation_instant_result', {
+      sector: lead.sector,
+      score: est.score,
+      page: location.pathname,
+    });
+
     // The estimate is already on screen; delivery of the report is the only
     // thing that depends on the network, so a failure here is reported quietly
     // rather than blocking the result the visitor came for.
@@ -220,6 +230,11 @@ export function initValuation(root: HTMLFormElement) {
         }),
       });
       if (!res.ok) throw new Error(String(res.status));
+      event('valuation_report_requested', {
+        sector: lead.sector,
+        score: est.score,
+        page: location.pathname,
+      });
     } catch {
       $('sendfail').classList.remove('hidden');
     }
