@@ -49,6 +49,11 @@ Vercel function logs independently of any analytics plan.
 | 2026-08-31 | Portrait, checklist | Founder photo; Vercel region `sin1`, framework preset, Speed Insights, Web Analytics |
 | 2026-08-31 | S2 BBIS redirects | 18 host-scoped 308s from `businessbrokerinsingapore.com`, code live, DNS pending |
 | 2026-08-31 | S9 measurement | Four conversion events, this log |
+| 2026-08-31 | S6.1 quiz | `/exit-readiness`, ten questions scored to 100, not email-gated |
+| 2026-08-31 | S4, S5, S6.3 sectors | All 20 sector pages to 1,176-1,774 words, five-question FAQ each, adjacent-sector internal links |
+| 2026-08-31 | S6.3 guides | Four-question FAQ and CTA band on all 10 guides |
+| 2026-08-31 | S6.2 timeline | Interactive five-stage tabs on `/sell-your-business` |
+| 2026-08-31 | Off-site | `docs/offsite-plan.md`: NAP block, directory sweep, TFA cross-link instructions |
 
 ---
 
@@ -75,6 +80,7 @@ Average position:             (prev: )
 | Keyword | Position | Prev | Page |
 |---|---|---|---|
 | sell F&B business singapore | | | /sell/fnb |
+| is my business ready to sell | | | /exit-readiness |
 | sell logistics business singapore | | | /sell/logistics |
 | sell manufacturing business singapore | | | /sell/manufacturing |
 | business valuation singapore | | | /valuation |
