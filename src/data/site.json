@@ -11,7 +11,15 @@
   "dealRange": "S$3m to S$30m",
   "bookingUrl": "mailto:singaporebusinessbroker@thefundingassembly.com?subject=Enquiry%20on%20selling%20my%20business",
   "enquirySubject": "Enquiry on selling my business",
-  "siteUpdated": "2026-08-28",
+  "siteUpdated": "2026-08-31",
+  "address": {
+    "_comment": "Must match the Google Business Profile listing character for character, since the profile now shows a street address publicly. Emitted as PostalAddress on the Organization node only when streetAddress and postalCode are both filled, so a partial entry publishes nothing rather than a half address that conflicts with GBP. ERIC-TODO: copy the address exactly as Google displays it.",
+    "streetAddress": "",
+    "unit": "",
+    "postalCode": "",
+    "locality": "Singapore",
+    "country": "SG"
+  },
   "profiles": {
     "_comment": "Public profiles for Organization sameAs. Fill each in as it goes live; empty strings are skipped. The Google Business Profile URL is the share link from the GBP dashboard (https://maps.app.goo.gl/... or the full Maps place URL).",
     "googleBusinessProfile": "",

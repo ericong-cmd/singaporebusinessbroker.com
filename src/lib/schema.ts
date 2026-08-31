@@ -68,9 +68,32 @@ export function organization() {
     ...(founder
       ? { founder: { '@id': personId(founder.name) }, employee: { '@id': personId(founder.name) } }
       : {}),
-    // ERIC-TODO: add a PostalAddress block here once a registered address may be
-    // published. It must match the Google Business Profile listing exactly
-    // (same name, same address, same phone) or the two signals fight each other.
+    ...postalAddress(),
+  };
+}
+
+/**
+ * PostalAddress for the Organization node, matching the Google Business Profile.
+ *
+ * Emitted only when both the street and the postal code are present. A partial
+ * address is worse than none: the whole purpose is to agree with the GBP
+ * listing character for character, and half an address disagrees with it. So
+ * this publishes nothing until the real values are in site.json.
+ */
+function postalAddress() {
+  const a = (site as { address?: Record<string, string> }).address;
+  if (!a?.streetAddress?.trim() || !a?.postalCode?.trim()) return {};
+  const street = a.unit?.trim()
+    ? `${a.streetAddress.trim()}, ${a.unit.trim()}`
+    : a.streetAddress.trim();
+  return {
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: street,
+      addressLocality: a.locality?.trim() || 'Singapore',
+      postalCode: a.postalCode.trim(),
+      addressCountry: a.country?.trim() || 'SG',
+    },
   };
 }
 

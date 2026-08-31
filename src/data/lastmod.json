@@ -1,13 +1,13 @@
 {
-  "/": "2026-08-28",
-  "/about": "2026-08-28",
-  "/book-a-call": "2026-08-28",
-  "/buyers": "2026-08-28",
+  "/": "2026-08-31",
+  "/about": "2026-08-31",
+  "/book-a-call": "2026-08-31",
+  "/buyers": "2026-08-31",
   "/case-studies": "2026-08-28",
   "/case-studies/institutional-food-distribution": "2026-08-28",
   "/case-studies/pastry-retail-family-conglomerate": "2026-08-28",
   "/case-studies/sauce-manufacturer-succession": "2026-08-28",
-  "/contact": "2026-08-28",
+  "/contact": "2026-08-31",
   "/guides": "2026-08-31",
   "/guides/choosing-an-advisor": "2026-08-31",
   "/guides/common-mistakes": "2026-08-31",
@@ -21,7 +21,7 @@
   "/guides/valuation-methods": "2026-08-31",
   "/insights": "2026-08-15",
   "/insights/what-buyers-pay-for": "2026-08-15",
-  "/sell-your-business": "2026-08-28",
+  "/sell-your-business": "2026-08-31",
   "/sell/automotive": "2026-08-31",
   "/sell/beauty-wellness": "2026-08-31",
   "/sell/childcare": "2026-08-31",
@@ -42,5 +42,5 @@
   "/sell/professional-services": "2026-08-31",
   "/sell/retail": "2026-08-31",
   "/sell/trading": "2026-08-31",
-  "/valuation": "2026-08-28"
+  "/valuation": "2026-08-31"
 }
