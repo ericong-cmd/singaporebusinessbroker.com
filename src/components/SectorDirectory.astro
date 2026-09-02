@@ -1,0 +1,62 @@
+---
+/**
+ * The 20 sector guides as a scannable directory.
+ *
+ * The home page lists them as a wrap of pill links, which reads as decoration
+ * and is easy to scroll past. This is the version for someone actually looking
+ * for their own sector: two columns, alphabetical, with the indicative multiple
+ * beside each name so the row carries information rather than just a label.
+ *
+ * Lives on /guides because that is the nav entry an owner reaches for when they
+ * are hunting for reading material.
+ */
+import multiples from '../data/multiples.json';
+
+interface Props {
+  heading?: string;
+  intro?: string;
+  class?: string;
+}
+const {
+  heading = 'Guides by sector',
+  intro = 'Every sector has its own buyers, its own multiple range and its own way of losing you money. Twenty guides, one for each.',
+  class: className = '',
+} = Astro.props;
+
+// Alphabetical, but "Other" belongs at the end: it is the catch-all, not a peer.
+const sectors = [...multiples.sectors].sort((a, b) => {
+  if (a.slug === 'other') return 1;
+  if (b.slug === 'other') return -1;
+  return a.name.localeCompare(b.name);
+});
+---
+
+<section id="sectors" class={`max-w-wrap mx-auto px-5 lg:px-8 pb-28 lg:pb-40 scroll-mt-28 ${className}`}>
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
+    <div class="lg:col-span-4 lg:sticky lg:top-28 reveal">
+      <h2 class="text-3xl md:text-5xl font-medium tracking-[-0.03em] leading-[1.05]">{heading}</h2>
+      <p class="mt-6 text-lg text-ink-2 dark:text-[#a9b4c2] font-light">{intro}</p>
+      <p class="mt-6 text-sm text-ink-3 dark:text-[#a9b4c2] font-light">
+        Ranges are indicative multiples of normalised EBITDA, not transaction data.
+      </p>
+    </div>
+
+    <ul class="lg:col-span-8 grid grid-cols-1 sm:grid-cols-2 gap-x-3 gap-y-0 reveal" data-d="1">
+      {sectors.map((s) => (
+        <li>
+          <a
+            href={`/sell/${s.slug}`}
+            class="group flex items-baseline justify-between gap-4 py-4 border-b border-black/5 dark:border-white/[0.08] transition-colors duration-500 ease hover:border-accent"
+          >
+            <span class="text-[15px] group-hover:text-accent dark:group-hover:text-[#7fd1b3] transition-colors duration-500 ease">
+              {s.name}
+            </span>
+            <span class="font-mono text-xs text-ink-3 dark:text-[#a9b4c2] shrink-0 tabular-nums">
+              {s.low}x to {s.high}x
+            </span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>

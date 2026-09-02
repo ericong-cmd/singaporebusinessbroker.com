@@ -1,5 +1,6 @@
 ---
 import multiples from '../../data/multiples.json';
+import Icon from '../Icon.astro';
 ---
 
 <section class="max-w-wrap mx-auto px-5 lg:px-8 pb-28 lg:pb-40">
@@ -9,6 +10,13 @@ import multiples from '../../data/multiples.json';
       <p class="mt-6 text-lg text-ink-2 dark:text-[#a9b4c2] font-light">
         Each sector has its own buyers, multiples and pitfalls. See the guide for yours.
       </p>
+      <a
+        class="mt-6 inline-flex items-center gap-2 text-sm text-accent dark:text-[#7fd1b3] hover:gap-3 transition-all duration-500 ease"
+        href="/guides#sectors"
+      >
+        All 20 sector guides, with multiple ranges
+        <Icon name="arrow-right" class="text-base" />
+      </a>
     </div>
     <div class="lg:col-span-8 flex flex-wrap gap-2.5 reveal" data-d="1">
       {multiples.sectors.map((s) => (

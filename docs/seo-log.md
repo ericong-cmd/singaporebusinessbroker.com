@@ -56,6 +56,7 @@ Vercel function logs independently of any analytics plan.
 | 2026-08-31 | Off-site | `docs/offsite-plan.md`: NAP block, directory sweep, TFA cross-link instructions |
 | 2026-08-31 | GBP | Profile live with a public street address; `PostalAddress` wired into Organization schema, awaiting the exact address and profile URL |
 | 2026-08-31 | Cross-domain | `docs/cross-domain-plan.md`: keyword overlap with TFA mapped, five TFA-to-SBB links specified, one SBB-to-TFA link shipped |
+| 2026-09-01 | Navigation | Sector directory added to `/guides` (20 links with ranges), exit-readiness CTA added to the home page after the estimator |
 
 ---
 
