@@ -11,9 +11,10 @@
 import { z } from 'zod';
 // .js extension required: Vercel compiles functions with moduleResolution nodenext
 import {
-  json, readBody, rateLimited, clientIp, esc, sendEmail, alertSlack, crmUpsert,
+  json, readBody, rateLimited, clientIp, sendEmail, alertSlack, crmUpsert,
   type ApiRequest, type ApiResponse,
 } from './_lib.js';
+import { sellerReportHtml, sellerReportText, teamAlertHtml, type ReportData } from './_report.js';
 
 const Body = z.object({
   sector: z.string().min(2).max(120),
@@ -66,6 +67,30 @@ export default async function handler(req: ApiRequest, res: ApiResponse): Promis
 
   const team = process.env.TEAM_EMAIL;
 
+  // One object feeds both templates, so the seller's report and the team alert
+  // can never describe the same lead differently.
+  const report: ReportData = {
+    name: lead.name,
+    email: lead.email,
+    phone: lead.phone,
+    sector: lead.sector,
+    revenue: lead.revenue,
+    ebitda: lead.ebitda,
+    years: lead.years,
+    ownership: lead.ownership,
+    dependency: lead.dependency,
+    timeline: lead.timeline,
+    evLow: lead.evLow,
+    evHigh: lead.evHigh,
+    range,
+    score: band,
+    page: lead.page,
+    referrer: lead.referrer,
+    utm_source: lead.utm_source,
+    utm_medium: lead.utm_medium,
+    utm_campaign: lead.utm_campaign,
+  };
+
   const results = await Promise.allSettled([
     crmUpsert(process.env.AIRTABLE_TABLE ?? 'Leads', {
       Name: lead.name,
@@ -91,29 +116,10 @@ export default async function handler(req: ApiRequest, res: ApiResponse): Promis
 
     sendEmail({
       to: lead.email,
-      subject: 'Your indicative business valuation',
+      subject: `Your indicative business valuation: ${range}`,
       replyTo: team,
-      html: `
-        <div style="font-family:-apple-system,Segoe UI,Arial,sans-serif;max-width:560px;color:#0e1a2b">
-          <p>Hello ${esc(lead.name)},</p>
-          <p>Thank you for using the estimator. Here is the indicative range for your business.</p>
-          <p style="font-size:24px;margin:24px 0"><strong>${esc(range)}</strong></p>
-          <p style="font-size:14px;color:#5b687a">
-            Sector: ${esc(lead.sector)}<br>
-            Years operating: ${esc(lead.years)}<br>
-            Owner dependency: ${esc(lead.dependency)}
-          </p>
-          <p>
-            This is an indicative range based on sector transaction multiples applied to the figures you gave us. It is
-            not a valuation: it cannot see your contracts, customer concentration or management depth, which are what
-            actually decide where in the range a business lands.
-          </p>
-          <p>This report was sent to you automatically. If you would like an advisor to look at your figures properly, just reply to this email.</p>
-          <p style="font-size:12px;color:#5b687a;margin-top:32px">
-            Singapore Business Broker, a brand of The Funding Assembly Pte Ltd. You received this because you requested
-            a valuation estimate. Reply with "unsubscribe" to be removed.
-          </p>
-        </div>`,
+      html: sellerReportHtml(report),
+      text: sellerReportText(report),
     }),
 
     band === 'hot' && team
@@ -121,9 +127,7 @@ export default async function handler(req: ApiRequest, res: ApiResponse): Promis
           to: team,
           subject: `Hot lead: ${lead.name}, ${lead.sector}, ${range}`,
           replyTo: lead.email,
-          html: `<pre style="font-family:ui-monospace,monospace;font-size:13px">${esc(
-            JSON.stringify({ ...lead, score: band, range }, null, 2)
-          )}</pre>`,
+          html: teamAlertHtml(report),
         })
       : Promise.resolve('skipped' as const),
 

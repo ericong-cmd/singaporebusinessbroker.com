@@ -78,6 +78,9 @@ export async function sendEmail(opts: {
   to: string | string[];
   subject: string;
   html: string;
+  /** Plain-text alternative. Worth sending: some clients prefer it, and a
+   *  multipart message scores better with spam filters than HTML alone. */
+  text?: string;
   replyTo?: string;
 }): Promise<'sent' | 'skipped' | 'failed'> {
   const key = process.env.RESEND_API_KEY;
@@ -92,6 +95,7 @@ export async function sendEmail(opts: {
         to: Array.isArray(opts.to) ? opts.to : [opts.to],
         subject: opts.subject,
         html: opts.html,
+        ...(opts.text ? { text: opts.text } : {}),
         ...(opts.replyTo ? { reply_to: opts.replyTo } : {}),
       }),
     });
