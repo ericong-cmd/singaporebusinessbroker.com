@@ -12,9 +12,15 @@
  * Written for email clients, not browsers. That means tables for layout rather
  * than flexbox or grid, every style inline because Gmail strips <style> blocks
  * in many contexts, a system font stack because self-hosted Geist cannot load
- * in an inbox, no images so nothing breaks when remote content is blocked by
- * default, and a hard 600px width. None of these are stylistic preferences;
+ * in an inbox, and a hard 600px width. None of these are stylistic preferences;
  * each one is a client that would otherwise render the report badly.
+ *
+ * Images are remote JPEG and PNG served from the site, never base64 data URIs,
+ * which Gmail and Outlook drop outright, and never webp, which Outlook cannot
+ * decode. Most clients block remote images until the reader allows them, so
+ * every image here is decorative or supporting: each has real alt text, an
+ * explicit width and height so the layout does not reflow when they load, and
+ * nothing the report has to say depends on one appearing.
  */
 import { esc } from './_lib.js';
 
@@ -52,6 +58,7 @@ export type ReportData = {
 };
 
 const SITE = 'https://www.singaporebusinessbroker.com';
+const IMG = `${SITE}/images/email`;
 const CONTACT = 'singaporebusinessbroker@thefundingassembly.com';
 const MAILTO = `mailto:${CONTACT}?subject=Enquiry%20on%20selling%20my%20business`;
 
@@ -139,12 +146,26 @@ export function sellerReportHtml(d: ReportData): string {
   const sectorNote = d.evLow != null && d.evHigh != null && d.ebitda > 0;
 
   return shell(`
-<tr><td style="padding:0 0 20px;">
-  <span style="font-size:15px;font-weight:600;color:${INK};letter-spacing:-0.01em;">Singapore Business Broker</span>
-  <span style="font-size:13px;color:${INK3};"> &middot; sell-side M&amp;A</span>
+<tr><td style="padding:0 0 18px;">
+  <table role="presentation" cellpadding="0" cellspacing="0" border="0"><tr>
+    <td width="36" style="padding-right:12px;">
+      <img src="${IMG}/logo.png" width="36" height="36" alt=""
+        style="display:block;width:36px;height:36px;border:0;border-radius:9px;">
+    </td>
+    <td>
+      <span style="font-size:15px;font-weight:600;color:${INK};letter-spacing:-0.01em;">Singapore Business Broker</span><br>
+      <span style="font-size:13px;color:${INK3};">Sell-side M&amp;A for Singapore SME owners</span>
+    </td>
+  </tr></table>
 </td></tr>
 
-<tr><td style="background:#ffffff;border-radius:20px;padding:36px 32px;">
+<tr><td style="font-size:0;line-height:0;">
+  <img src="${IMG}/banner.jpg" width="600" height="210"
+    alt="Two advisers and a business owner across a meeting table"
+    style="display:block;width:100%;max-width:600px;height:auto;border:0;border-radius:20px 20px 0 0;">
+</td></tr>
+
+<tr><td style="background:#ffffff;border-radius:0 0 20px 20px;padding:32px 32px 36px;">
   <p style="margin:0 0 18px;font-size:16px;color:${INK2};">Hello ${esc(d.name)},</p>
   <p style="margin:0 0 28px;font-size:16px;line-height:1.6;color:${INK2};">
     Here is the indicative range for your business, based on the figures you gave us.
@@ -187,6 +208,25 @@ export function sellerReportHtml(d: ReportData): string {
       <p style="margin:0 0 10px;font-size:18px;font-weight:600;color:${INK};">${esc(step.headline)}</p>
       <p style="margin:0 0 22px;font-size:15px;line-height:1.65;color:${INK2};">${esc(step.body)}</p>
       ${button(MAILTO, step.cta)}
+    </td></tr>
+  </table>
+
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:30px 0 0;border-top:1px solid ${LINE};">
+    <tr><td style="padding-top:24px;">
+      <table role="presentation" cellpadding="0" cellspacing="0" border="0"><tr>
+        <td width="64" valign="top" style="padding-right:16px;">
+          <img src="${IMG}/eric-ong.jpg" width="64" height="64" alt="Eric Ong"
+            style="display:block;width:64px;height:64px;border:0;border-radius:32px;">
+        </td>
+        <td valign="top">
+          <p style="margin:0;font-size:15px;font-weight:600;color:${INK};">Eric Ong, CFA</p>
+          <p style="margin:3px 0 0;font-size:13px;color:${INK3};">Founder, Singapore Business Broker</p>
+          <p style="margin:10px 0 0;font-size:14px;line-height:1.6;color:${INK2};">
+            A reply to this email comes to me directly. If you would rather talk it through than write,
+            say so and I will call you.
+          </p>
+        </td>
+      </tr></table>
     </td></tr>
   </table>
 </td></tr>
@@ -305,6 +345,7 @@ export function sellerReportText(d: ReportData): string {
     step.body,
     '',
     `Reply to this email, or write to ${CONTACT}`,
+    'A reply comes to Eric Ong, CFA, founder, directly.',
     '',
     'READ NEXT',
     `  Ten point readiness check: ${SITE}/exit-readiness`,
