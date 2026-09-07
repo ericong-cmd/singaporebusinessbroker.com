@@ -57,6 +57,7 @@ Vercel function logs independently of any analytics plan.
 | 2026-08-31 | GBP | Profile live with a public street address; `PostalAddress` wired into Organization schema, awaiting the exact address and profile URL |
 | 2026-08-31 | Cross-domain | `docs/cross-domain-plan.md`: keyword overlap with TFA mapped, five TFA-to-SBB links specified, one SBB-to-TFA link shipped |
 | 2026-09-01 | Navigation | Sector directory added to `/guides` (20 links with ranges), exit-readiness CTA added to the home page after the estimator |
+| 2026-09-01 | BBIS audit | Live audit of businessbrokerinsingapore.com; redirect map rebuilt to 50 host-scoped rules covering all 13 indexed URLs in both slash forms |
 
 ---
 
@@ -125,3 +126,64 @@ or depth, then rewrite or merge. List the decision, not just the observation.
 - **Honesty constraint.** Every multiple on the site is labelled indicative
   until real transaction data ships. Nothing may imply proprietary data before
   then.
+
+
+---
+
+## BBIS consolidation status, audited 2026-09-01
+
+**The consolidation has not happened yet.** `www.businessbrokerinsingapore.com`
+still returns 200 on every page, serves its own sitemap of 13 URLs, and its
+canonicals point at itself. The redirect rules in `vercel.json` are inert
+because the BBIS domains are not attached to this Vercel project and its DNS
+does not point here.
+
+What BBIS currently does, all of it normal:
+
+| Request | Result |
+|---|---|
+| `http://businessbrokerinsingapore.com/` | 308 to https, then 308 to www, then 200 |
+| `https://businessbrokerinsingapore.com/` | 308 to www, then 200 |
+| `/contact` (no trailing slash) | 308 to `/contact/` |
+
+Any "Page with redirect" entries in Search Console for BBIS today are these
+three internal normalisations. They are excluded-not-indexed by design, not
+errors, and there is nothing to fix on them.
+
+### What the audit did change
+
+The redirect map was written against the growth plan's page list, not against
+what BBIS actually publishes. Comparing it to the live sitemap found four
+indexed URLs with no rule, all falling through to the homepage catch-all:
+
+| BBIS URL | Was | Now |
+|---|---|---|
+| `/valuation-estimator/` | homepage | `/valuation` |
+| `/exit-readiness/` | homepage | `/exit-readiness` |
+| `/singapore-sme-valuation-multiples/` | homepage | `/guides/valuation-methods` |
+| `/about/` | homepage | `/about` |
+
+A catch-all to the homepage keeps the visitor but throws away the topical
+signal, and Google can treat an irrelevant redirect target as a soft 404. The
+`/valuation-estimator/` case was the expensive one: it is BBIS's own valuation
+tool, the closest thing it has to a ranking commercial page.
+
+`/singapore-sme-valuation-multiples/` deliberately does **not** point at
+`/data/sme-multiples-singapore`, which is still noindexed pending real data.
+Redirecting a ranking page into a noindexed one discards the equity. Repoint it
+there when Session 8 ships.
+
+### Trailing slashes
+
+Every URL in the BBIS sitemap ends in `/`, and this project sets
+`trailingSlash: false`, so a rule written as `/fees` risks a normalisation hop
+turning each redirect into a two-step chain. Every mapped path is now listed in
+both forms, slash first, so the indexed form matches directly. 50 host-scoped
+rules: 12 paths in 2 slash forms plus a catch-all, across the apex and www.
+
+### Still gated on the owner
+
+These rules cannot be tested until the BBIS domains are added to this Vercel
+project and DNS is repointed. Sequence: attach domains, move DNS, verify each
+of the 13 URLs returns a single 308 to the right destination, then run Change
+of Address on the BBIS Search Console property.

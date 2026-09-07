@@ -70,110 +70,552 @@
   ],
   "redirects": [
     {
+      "source": "/sell-your-business-singapore/",
+      "has": [
+        {
+          "type": "host",
+          "value": "businessbrokerinsingapore.com"
+        }
+      ],
+      "destination": "https://www.singaporebusinessbroker.com/sell-your-business",
+      "permanent": true
+    },
+    {
+      "source": "/business-valuation-singapore/",
+      "has": [
+        {
+          "type": "host",
+          "value": "businessbrokerinsingapore.com"
+        }
+      ],
+      "destination": "https://www.singaporebusinessbroker.com/valuation",
+      "permanent": true
+    },
+    {
+      "source": "/valuation-estimator/",
+      "has": [
+        {
+          "type": "host",
+          "value": "businessbrokerinsingapore.com"
+        }
+      ],
+      "destination": "https://www.singaporebusinessbroker.com/valuation",
+      "permanent": true
+    },
+    {
+      "source": "/singapore-sme-valuation-multiples/",
+      "has": [
+        {
+          "type": "host",
+          "value": "businessbrokerinsingapore.com"
+        }
+      ],
+      "destination": "https://www.singaporebusinessbroker.com/guides/valuation-methods",
+      "permanent": true
+    },
+    {
+      "source": "/exit-readiness/",
+      "has": [
+        {
+          "type": "host",
+          "value": "businessbrokerinsingapore.com"
+        }
+      ],
+      "destination": "https://www.singaporebusinessbroker.com/exit-readiness",
+      "permanent": true
+    },
+    {
+      "source": "/sell-your-fnb-business-singapore/",
+      "has": [
+        {
+          "type": "host",
+          "value": "businessbrokerinsingapore.com"
+        }
+      ],
+      "destination": "https://www.singaporebusinessbroker.com/sell/fnb",
+      "permanent": true
+    },
+    {
+      "source": "/buy-a-business-singapore/",
+      "has": [
+        {
+          "type": "host",
+          "value": "businessbrokerinsingapore.com"
+        }
+      ],
+      "destination": "https://www.singaporebusinessbroker.com/buyers",
+      "permanent": true
+    },
+    {
+      "source": "/how-it-works/",
+      "has": [
+        {
+          "type": "host",
+          "value": "businessbrokerinsingapore.com"
+        }
+      ],
+      "destination": "https://www.singaporebusinessbroker.com/sell-your-business",
+      "permanent": true
+    },
+    {
+      "source": "/fees/",
+      "has": [
+        {
+          "type": "host",
+          "value": "businessbrokerinsingapore.com"
+        }
+      ],
+      "destination": "https://www.singaporebusinessbroker.com/sell-your-business#fees",
+      "permanent": true
+    },
+    {
+      "source": "/faq/",
+      "has": [
+        {
+          "type": "host",
+          "value": "businessbrokerinsingapore.com"
+        }
+      ],
+      "destination": "https://www.singaporebusinessbroker.com/sell-your-business#faq",
+      "permanent": true
+    },
+    {
+      "source": "/about/",
+      "has": [
+        {
+          "type": "host",
+          "value": "businessbrokerinsingapore.com"
+        }
+      ],
+      "destination": "https://www.singaporebusinessbroker.com/about",
+      "permanent": true
+    },
+    {
+      "source": "/contact/",
+      "has": [
+        {
+          "type": "host",
+          "value": "businessbrokerinsingapore.com"
+        }
+      ],
+      "destination": "https://www.singaporebusinessbroker.com/contact",
+      "permanent": true
+    },
+    {
       "source": "/sell-your-business-singapore",
-      "has": [{ "type": "host", "value": "businessbrokerinsingapore.com" }],
+      "has": [
+        {
+          "type": "host",
+          "value": "businessbrokerinsingapore.com"
+        }
+      ],
       "destination": "https://www.singaporebusinessbroker.com/sell-your-business",
       "permanent": true
     },
     {
       "source": "/business-valuation-singapore",
-      "has": [{ "type": "host", "value": "businessbrokerinsingapore.com" }],
+      "has": [
+        {
+          "type": "host",
+          "value": "businessbrokerinsingapore.com"
+        }
+      ],
       "destination": "https://www.singaporebusinessbroker.com/valuation",
       "permanent": true
     },
     {
+      "source": "/valuation-estimator",
+      "has": [
+        {
+          "type": "host",
+          "value": "businessbrokerinsingapore.com"
+        }
+      ],
+      "destination": "https://www.singaporebusinessbroker.com/valuation",
+      "permanent": true
+    },
+    {
+      "source": "/singapore-sme-valuation-multiples",
+      "has": [
+        {
+          "type": "host",
+          "value": "businessbrokerinsingapore.com"
+        }
+      ],
+      "destination": "https://www.singaporebusinessbroker.com/guides/valuation-methods",
+      "permanent": true
+    },
+    {
+      "source": "/exit-readiness",
+      "has": [
+        {
+          "type": "host",
+          "value": "businessbrokerinsingapore.com"
+        }
+      ],
+      "destination": "https://www.singaporebusinessbroker.com/exit-readiness",
+      "permanent": true
+    },
+    {
       "source": "/sell-your-fnb-business-singapore",
-      "has": [{ "type": "host", "value": "businessbrokerinsingapore.com" }],
+      "has": [
+        {
+          "type": "host",
+          "value": "businessbrokerinsingapore.com"
+        }
+      ],
       "destination": "https://www.singaporebusinessbroker.com/sell/fnb",
       "permanent": true
     },
     {
       "source": "/buy-a-business-singapore",
-      "has": [{ "type": "host", "value": "businessbrokerinsingapore.com" }],
+      "has": [
+        {
+          "type": "host",
+          "value": "businessbrokerinsingapore.com"
+        }
+      ],
       "destination": "https://www.singaporebusinessbroker.com/buyers",
       "permanent": true
     },
     {
+      "source": "/how-it-works",
+      "has": [
+        {
+          "type": "host",
+          "value": "businessbrokerinsingapore.com"
+        }
+      ],
+      "destination": "https://www.singaporebusinessbroker.com/sell-your-business",
+      "permanent": true
+    },
+    {
       "source": "/fees",
-      "has": [{ "type": "host", "value": "businessbrokerinsingapore.com" }],
+      "has": [
+        {
+          "type": "host",
+          "value": "businessbrokerinsingapore.com"
+        }
+      ],
       "destination": "https://www.singaporebusinessbroker.com/sell-your-business#fees",
       "permanent": true
     },
     {
       "source": "/faq",
-      "has": [{ "type": "host", "value": "businessbrokerinsingapore.com" }],
+      "has": [
+        {
+          "type": "host",
+          "value": "businessbrokerinsingapore.com"
+        }
+      ],
       "destination": "https://www.singaporebusinessbroker.com/sell-your-business#faq",
       "permanent": true
     },
     {
-      "source": "/how-it-works",
-      "has": [{ "type": "host", "value": "businessbrokerinsingapore.com" }],
-      "destination": "https://www.singaporebusinessbroker.com/sell-your-business",
+      "source": "/about",
+      "has": [
+        {
+          "type": "host",
+          "value": "businessbrokerinsingapore.com"
+        }
+      ],
+      "destination": "https://www.singaporebusinessbroker.com/about",
       "permanent": true
     },
     {
       "source": "/contact",
-      "has": [{ "type": "host", "value": "businessbrokerinsingapore.com" }],
+      "has": [
+        {
+          "type": "host",
+          "value": "businessbrokerinsingapore.com"
+        }
+      ],
       "destination": "https://www.singaporebusinessbroker.com/contact",
       "permanent": true
     },
     {
       "source": "/:path*",
-      "has": [{ "type": "host", "value": "businessbrokerinsingapore.com" }],
+      "has": [
+        {
+          "type": "host",
+          "value": "businessbrokerinsingapore.com"
+        }
+      ],
       "destination": "https://www.singaporebusinessbroker.com/",
       "permanent": true
     },
     {
+      "source": "/sell-your-business-singapore/",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.businessbrokerinsingapore.com"
+        }
+      ],
+      "destination": "https://www.singaporebusinessbroker.com/sell-your-business",
+      "permanent": true
+    },
+    {
+      "source": "/business-valuation-singapore/",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.businessbrokerinsingapore.com"
+        }
+      ],
+      "destination": "https://www.singaporebusinessbroker.com/valuation",
+      "permanent": true
+    },
+    {
+      "source": "/valuation-estimator/",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.businessbrokerinsingapore.com"
+        }
+      ],
+      "destination": "https://www.singaporebusinessbroker.com/valuation",
+      "permanent": true
+    },
+    {
+      "source": "/singapore-sme-valuation-multiples/",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.businessbrokerinsingapore.com"
+        }
+      ],
+      "destination": "https://www.singaporebusinessbroker.com/guides/valuation-methods",
+      "permanent": true
+    },
+    {
+      "source": "/exit-readiness/",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.businessbrokerinsingapore.com"
+        }
+      ],
+      "destination": "https://www.singaporebusinessbroker.com/exit-readiness",
+      "permanent": true
+    },
+    {
+      "source": "/sell-your-fnb-business-singapore/",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.businessbrokerinsingapore.com"
+        }
+      ],
+      "destination": "https://www.singaporebusinessbroker.com/sell/fnb",
+      "permanent": true
+    },
+    {
+      "source": "/buy-a-business-singapore/",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.businessbrokerinsingapore.com"
+        }
+      ],
+      "destination": "https://www.singaporebusinessbroker.com/buyers",
+      "permanent": true
+    },
+    {
+      "source": "/how-it-works/",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.businessbrokerinsingapore.com"
+        }
+      ],
+      "destination": "https://www.singaporebusinessbroker.com/sell-your-business",
+      "permanent": true
+    },
+    {
+      "source": "/fees/",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.businessbrokerinsingapore.com"
+        }
+      ],
+      "destination": "https://www.singaporebusinessbroker.com/sell-your-business#fees",
+      "permanent": true
+    },
+    {
+      "source": "/faq/",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.businessbrokerinsingapore.com"
+        }
+      ],
+      "destination": "https://www.singaporebusinessbroker.com/sell-your-business#faq",
+      "permanent": true
+    },
+    {
+      "source": "/about/",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.businessbrokerinsingapore.com"
+        }
+      ],
+      "destination": "https://www.singaporebusinessbroker.com/about",
+      "permanent": true
+    },
+    {
+      "source": "/contact/",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.businessbrokerinsingapore.com"
+        }
+      ],
+      "destination": "https://www.singaporebusinessbroker.com/contact",
+      "permanent": true
+    },
+    {
       "source": "/sell-your-business-singapore",
-      "has": [{ "type": "host", "value": "www.businessbrokerinsingapore.com" }],
+      "has": [
+        {
+          "type": "host",
+          "value": "www.businessbrokerinsingapore.com"
+        }
+      ],
       "destination": "https://www.singaporebusinessbroker.com/sell-your-business",
       "permanent": true
     },
     {
       "source": "/business-valuation-singapore",
-      "has": [{ "type": "host", "value": "www.businessbrokerinsingapore.com" }],
+      "has": [
+        {
+          "type": "host",
+          "value": "www.businessbrokerinsingapore.com"
+        }
+      ],
       "destination": "https://www.singaporebusinessbroker.com/valuation",
       "permanent": true
     },
     {
+      "source": "/valuation-estimator",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.businessbrokerinsingapore.com"
+        }
+      ],
+      "destination": "https://www.singaporebusinessbroker.com/valuation",
+      "permanent": true
+    },
+    {
+      "source": "/singapore-sme-valuation-multiples",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.businessbrokerinsingapore.com"
+        }
+      ],
+      "destination": "https://www.singaporebusinessbroker.com/guides/valuation-methods",
+      "permanent": true
+    },
+    {
+      "source": "/exit-readiness",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.businessbrokerinsingapore.com"
+        }
+      ],
+      "destination": "https://www.singaporebusinessbroker.com/exit-readiness",
+      "permanent": true
+    },
+    {
       "source": "/sell-your-fnb-business-singapore",
-      "has": [{ "type": "host", "value": "www.businessbrokerinsingapore.com" }],
+      "has": [
+        {
+          "type": "host",
+          "value": "www.businessbrokerinsingapore.com"
+        }
+      ],
       "destination": "https://www.singaporebusinessbroker.com/sell/fnb",
       "permanent": true
     },
     {
       "source": "/buy-a-business-singapore",
-      "has": [{ "type": "host", "value": "www.businessbrokerinsingapore.com" }],
+      "has": [
+        {
+          "type": "host",
+          "value": "www.businessbrokerinsingapore.com"
+        }
+      ],
       "destination": "https://www.singaporebusinessbroker.com/buyers",
       "permanent": true
     },
     {
+      "source": "/how-it-works",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.businessbrokerinsingapore.com"
+        }
+      ],
+      "destination": "https://www.singaporebusinessbroker.com/sell-your-business",
+      "permanent": true
+    },
+    {
       "source": "/fees",
-      "has": [{ "type": "host", "value": "www.businessbrokerinsingapore.com" }],
+      "has": [
+        {
+          "type": "host",
+          "value": "www.businessbrokerinsingapore.com"
+        }
+      ],
       "destination": "https://www.singaporebusinessbroker.com/sell-your-business#fees",
       "permanent": true
     },
     {
       "source": "/faq",
-      "has": [{ "type": "host", "value": "www.businessbrokerinsingapore.com" }],
+      "has": [
+        {
+          "type": "host",
+          "value": "www.businessbrokerinsingapore.com"
+        }
+      ],
       "destination": "https://www.singaporebusinessbroker.com/sell-your-business#faq",
       "permanent": true
     },
     {
-      "source": "/how-it-works",
-      "has": [{ "type": "host", "value": "www.businessbrokerinsingapore.com" }],
-      "destination": "https://www.singaporebusinessbroker.com/sell-your-business",
+      "source": "/about",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.businessbrokerinsingapore.com"
+        }
+      ],
+      "destination": "https://www.singaporebusinessbroker.com/about",
       "permanent": true
     },
     {
       "source": "/contact",
-      "has": [{ "type": "host", "value": "www.businessbrokerinsingapore.com" }],
+      "has": [
+        {
+          "type": "host",
+          "value": "www.businessbrokerinsingapore.com"
+        }
+      ],
       "destination": "https://www.singaporebusinessbroker.com/contact",
       "permanent": true
     },
     {
       "source": "/:path*",
-      "has": [{ "type": "host", "value": "www.businessbrokerinsingapore.com" }],
+      "has": [
+        {
+          "type": "host",
+          "value": "www.businessbrokerinsingapore.com"
+        }
+      ],
       "destination": "https://www.singaporebusinessbroker.com/",
       "permanent": true
     },
