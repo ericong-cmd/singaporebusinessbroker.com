@@ -45,9 +45,10 @@ const crumbs = [{ href: '/book-a-call', label: 'Book a call' }];
             we will come back with a time, usually the same working day.
           </p>
 
-          <div class="mt-8 flex flex-col sm:flex-row gap-3">
+          <div class="mt-8 flex flex-col sm:flex-row sm:flex-wrap gap-3">
             <Button href={site.bookingUrl} variant="ink" icon="envelope-simple">Email to arrange a call</Button>
             <Button href={`tel:${site.phoneHref}`} variant="ring" icon="phone">{site.phoneDisplay}</Button>
+            <Button href={site.whatsappUrl} variant="ring" icon="whatsapp-logo" rel="noopener">WhatsApp</Button>
           </div>
 
           <p class="mt-8 text-xs text-ink-3 dark:text-[#a9b4c2] font-light">

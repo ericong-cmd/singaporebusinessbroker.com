@@ -87,6 +87,7 @@ const crumbs = [{ href: '/contact', label: 'Contact' }];
           <h2 class="font-medium">Direct</h2>
           <p class="mt-3 text-sm font-light">
             <a class="block text-accent dark:text-[#7fd1b3] hover:underline" href={`tel:${site.phoneHref}`}>{site.phoneDisplay}</a>
+            <a class="block mt-1 text-accent dark:text-[#7fd1b3] hover:underline" href={site.whatsappUrl} rel="noopener">WhatsApp {site.phoneDisplay}</a>
             <a id="cfallback" class="block mt-1 text-accent dark:text-[#7fd1b3] hover:underline break-all" href={`mailto:${site.email}`}>{site.email}</a>
           </p>
         </Shell>

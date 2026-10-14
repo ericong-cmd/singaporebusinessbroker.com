@@ -60,6 +60,13 @@ export type ReportData = {
 const SITE = 'https://www.singaporebusinessbroker.com';
 const IMG = `${SITE}/images/email`;
 const CONTACT = 'singaporebusinessbroker@thefundingassembly.com';
+// Mirrors src/data/site.json (phoneDisplay, phoneHref, whatsappUrl). The api/
+// folder is compiled separately from the Astro build and cannot import that
+// file cleanly, so the values are repeated here, and tools/lint-copy.mjs fails
+// the build if they ever disagree with site.json.
+const PHONE_DISPLAY = '+65 9093 7293';
+const PHONE_HREF = '+6590937293';
+const WHATSAPP = 'https://wa.me/6590937293?text=Enquiry%20on%20selling%20my%20business';
 const MAILTO = `mailto:${CONTACT}?subject=Enquiry%20on%20selling%20my%20business`;
 
 const money = (v: number) =>
@@ -266,7 +273,8 @@ export function sellerReportHtml(d: ReportData): string {
   </p>
   <p style="margin:0;font-size:13px;color:${INK3};">
     <a href="mailto:${CONTACT}" style="color:${INK3};">${CONTACT}</a> &middot;
-    <a href="tel:+6589518821" style="color:${INK3};">+65 8951 8821</a>
+    <a href="tel:${PHONE_HREF}" style="color:${INK3};">${PHONE_DISPLAY}</a> &middot;
+    <a href="${WHATSAPP}" style="color:${INK3};">WhatsApp</a>
   </p>
 </td></tr>
 `, `${d.range} indicative range for your ${d.sector} business`);
@@ -358,7 +366,7 @@ export function sellerReportText(d: ReportData): string {
     'where in the range a business actually lands. It is not financial advice.',
     '',
     'Singapore Business Broker, the sell-side M&A practice of The Funding Assembly',
-    `Pte Ltd, Singapore. ${CONTACT} | +65 8951 8821`,
+    `Pte Ltd, Singapore. ${CONTACT} | ${PHONE_DISPLAY} | WhatsApp: ${WHATSAPP}`,
     'Reply with the word unsubscribe and we will remove you.',
   ].join('\n');
 }

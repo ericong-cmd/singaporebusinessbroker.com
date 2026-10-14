@@ -183,7 +183,7 @@ each other:
 1. **NAP must match the site exactly.** Use these strings verbatim in the
    profile, character for character, because they are what the site publishes:
    - Name: `Singapore Business Broker`
-   - Phone: `+65 8951 8821`
+   - Phone: `+65 9093 7293`
    - Website: `https://www.singaporebusinessbroker.com`
    The email on the site is `singaporebusinessbroker@thefundingassembly.com`.
    The legal entity behind both is `The Funding Assembly Pte Ltd`.
@@ -208,7 +208,7 @@ Everything marked `(sample)` on the site, plus:
   deals were deleted and replaced with three real anonymised transactions,
   all `sample: false`.
 - `src/data/site.json` is now owner-confirmed: contact address
-  `singaporebusinessbroker@thefundingassembly.com`, phone `+65 8951 8821`, legal entity
+  `singaporebusinessbroker@thefundingassembly.com`, phone `+65 9093 7293`, legal entity
   `The Funding Assembly Pte Ltd`. Nothing in it is a placeholder.
 - `src/data/advisors.json` now names the founder, so the Advisors section on
   `/about` renders and Person schema is emitted, linked from Organization as
@@ -344,3 +344,32 @@ on Hobby. The Plausible slot in `Base.astro` is untouched and still gated on
 `PUBLIC_PLAUSIBLE_DOMAIN`. Note that if that variable is ever set, the script
 will be blocked: `plausible.io` is not in the CSP `script-src`. Add it at the
 same time as the env var.
+
+
+## Phone number change, 2026-10-14
+
+The owner changed the contact number from `+65 8951 8821` to `+65 9093 7293`.
+`src/data/site.json` is the single source for every page, the footer and the
+Organization schema, so the site itself was one edit. Two things were not:
+
+- The valuation email template in `api/_report.ts` repeated the number in two
+  places, because `api/` is compiled separately from the Astro build and cannot
+  import `site.json` cleanly. It now holds the values as constants, and
+  `tools/lint-copy.mjs` fails the build if they disagree with `site.json`, so
+  this class of miss cannot recur silently. Verified by breaking the constant
+  and confirming the lint exits 1.
+- `docs/seo-fix-plan.md` still shows the old number. It is archived exactly as
+  received and is deliberately left alone.
+
+The site had no WhatsApp contact before this change, so there was nothing to
+repoint. A `whatsappUrl` field was added to `site.json`
+(`https://wa.me/6590937293`, with the same prefilled message as the mailto
+subject) and surfaced as a link beside the phone number in the footer, on
+`/contact`, `/about` and `/book-a-call`, and in the valuation email. It is not
+in the home page `FinalCta` band, which is a layout decision for the owner.
+WhatsApp taps are counted as `email_enquiry_click` with `to: whatsapp`.
+
+**Off-site consequence:** the number is part of NAP. Google Business Profile,
+the LinkedIn company page and every directory listing must show the new number
+too, or the inconsistency undermines the citation work. See
+`docs/offsite-plan.md` section 1.

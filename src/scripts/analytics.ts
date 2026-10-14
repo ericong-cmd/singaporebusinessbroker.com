@@ -54,6 +54,8 @@ export function trackOutboundClicks(): void {
         event('book_call_click', { page: location.pathname });
       } else if (href.startsWith('tel:')) {
         event('email_enquiry_click', { page: location.pathname, to: 'phone' });
+      } else if (href.startsWith('https://wa.me/')) {
+        event('email_enquiry_click', { page: location.pathname, to: 'whatsapp' });
       }
     },
     { capture: true, passive: true }

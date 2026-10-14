@@ -58,6 +58,7 @@ Vercel function logs independently of any analytics plan.
 | 2026-08-31 | Cross-domain | `docs/cross-domain-plan.md`: keyword overlap with TFA mapped, five TFA-to-SBB links specified, one SBB-to-TFA link shipped |
 | 2026-09-01 | Navigation | Sector directory added to `/guides` (20 links with ranges), exit-readiness CTA added to the home page after the estimator |
 | 2026-09-01 | BBIS audit | Live audit of businessbrokerinsingapore.com; redirect map rebuilt to 50 host-scoped rules covering all 13 indexed URLs in both slash forms |
+| 2026-10-14 | Contact number | Changed to +65 9093 7293 site-wide; WhatsApp link added beside it; email template guarded against drift from `site.json`. GBP and directories need the same change |
 
 ---
 

@@ -65,6 +65,23 @@ for (const file of walk(DIST)) {
   }
 }
 
+// The email templates in api/ are compiled apart from the Astro build and repeat
+// the contact details instead of importing them. This is the guard that keeps
+// the two from drifting: a phone number changed in site.json but not in the
+// email would otherwise ship silently, and the email is what an owner forwards.
+const site = JSON.parse(readFileSync(join(ROOT, 'src/data/site.json'), 'utf8'));
+const report = readFileSync(join(ROOT, 'api/_report.ts'), 'utf8');
+for (const [label, value] of [
+  ['phoneDisplay', site.phoneDisplay],
+  ['phoneHref', site.phoneHref],
+  ['whatsappUrl', site.whatsappUrl],
+]) {
+  if (!report.includes(value)) {
+    failures += 1;
+    console.error(`api/_report.ts does not contain site.json ${label} (${value}); update the email template`);
+  }
+}
+
 console.log(`\nchecked ${files} rendered pages`);
 if (failures) {
   console.error(`FAIL: ${failures} copy violation(s)`);

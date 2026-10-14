@@ -35,7 +35,7 @@ fail to consolidate, and it is entirely self-inflicted.
 
 ```
 Name:     Singapore Business Broker
-Phone:    +65 8951 8821
+Phone:    +65 9093 7293
 Website:  https://www.singaporebusinessbroker.com
 Email:    singaporebusinessbroker@thefundingassembly.com
 Entity:   The Funding Assembly Pte Ltd
@@ -88,6 +88,10 @@ be claiming to be, which is the test that separates a citation from spam.
 Do not buy listings on general "top 10 companies in Singapore" sites. They are
 paid placements, they carry no weight, and the sites they sit on are frequently
 already discounted.
+
+**Phone changed 2026-10-14** from +65 8951 8821 to +65 9093 7293. Any listing
+already submitted with the old number must be corrected, starting with Google
+Business Profile, and the old number must not appear on any new one.
 
 **After each submission**, note the date and URL in the log below, because you
 will need to update all of them if the phone number or address ever changes.
